@@ -1,12 +1,8 @@
 package com.example.clientapp;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,14 +62,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        Log.i("ClientServiceReturn", "ClientVO 전달 성공!");
-//        // intent에서 데이터 추출해서 ListView에 출력하는 작업을 진행
-//        ClientVO vo = intent.getExtras().getParcelable("ClientVO");
-//
-//    }
 
 }
