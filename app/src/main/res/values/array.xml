@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="carName">
+        <item>BMW</item>
+        <item>롤스로이스</item>
+        <item>제네시스</item>
+        <item>아우디</item>
+        <item>소나타</item>
+        <item>람보르기니</item>
+    </string-array>
+</resources>
