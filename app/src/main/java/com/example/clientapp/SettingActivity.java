@@ -27,16 +27,17 @@ public class SettingActivity extends AppCompatActivity {
     private String client_id;
     private String tel;
 
-    ClientService cs; // 서비스
+    ClientService ms; // 서비스
     boolean isService = false; // 서비스 실행 확인
+    TextView mTvCallData;
 
     ServiceConnection conn = new ServiceConnection() {
         public void onServiceConnected(ComponentName name,
                                        IBinder service) {
             // 서비스와 연결되었을 때 호출되는 메서드
-            ClientService.ClientServiceBinder cb =
-                    (ClientService.ClientServiceBinder) service;
-            cs = cb.getService();
+            ClientService.MyBinder cb =
+                    (ClientService.MyBinder) service;
+            ms = cb.getService();
             isService = true; // 실행 여부를 판단
         }
         public void onServiceDisconnected(ComponentName name) {
@@ -57,6 +58,8 @@ public class SettingActivity extends AppCompatActivity {
         telTv = (TextView) findViewById(R.id.telTv);
         ctelBtn = (ToggleButton) findViewById(R.id.ctelBtn);
         cancelBtn = (Button) findViewById(R.id.cancelBtn);
+
+
 
         cnameBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,24 +18,6 @@ public class MainActivity extends AppCompatActivity {
     String client_id;
     String password;
 
-    ClientService cs; // 서비스
-    boolean isService = false; // 서비스 실행 확인
-    ServiceConnection conn = new ServiceConnection() {
-        public void onServiceConnected(ComponentName name,
-                                       IBinder service) {
-            // 서비스와 연결되었을 때 호출되는 메서드
-            ClientService.ClientServiceBinder cb =
-                    (ClientService.ClientServiceBinder) service;
-            cs = cb.getService();
-            isService = true; // 실행 여부를 판단
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            // 서비스와 연결이 끊기거나 종료되었을 때
-            isService = false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         ClientService.class);
                 i.putExtra("client_id", client_id);
                 i.putExtra("password", password);
-                bindService(i, conn, Context.BIND_AUTO_CREATE);
+                startService(i);
             }
         });
 
