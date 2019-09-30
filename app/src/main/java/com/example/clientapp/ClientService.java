@@ -22,9 +22,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ClientService extends Service {
-    private ClientVO vo = new ClientVO();
+    private ClientVO vo;
 
-    ExecutorService executorservice = Executors.newFixedThreadPool(2);
     Intent intent;
 
     private IBinder mBinder = new MyBinder();
@@ -87,6 +86,7 @@ public class ClientService extends Service {
                 ObjectMapper mapper = new ObjectMapper();
                 //jackson library를 이용하여 json 문자열을 String[] 형태로 변환
                 vo = mapper.readValue(jsonObject.toString(), ClientVO.class);
+
                 Intent resultIntent;
                 if (vo == null) {
                     resultIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -98,6 +98,7 @@ public class ClientService extends Service {
                 resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(resultIntent);
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

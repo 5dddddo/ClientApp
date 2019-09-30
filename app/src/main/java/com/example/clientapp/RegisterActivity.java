@@ -97,9 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         checkPwEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (clientPwEt.getText().toString().equals(checkPwEt.getText().toString()))
@@ -107,7 +105,6 @@ public class RegisterActivity extends AppCompatActivity {
                 else
                     checkPw.setImageResource(R.drawable.x);
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -115,20 +112,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 }
-
-//        carSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-//                carType = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(getApplicationContext(), carType, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-
-//        });
 
 
 
