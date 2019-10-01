@@ -2,6 +2,7 @@ package com.example.clientapp;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -22,28 +23,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ClientService extends Service {
-    private ClientVO vo;
 
-    Intent intent;
-
-    private IBinder mBinder = new MyBinder();
-
-    public class MyBinder extends Binder {
-        public ClientService getService() {
-            return ClientService.this;
-        }
-    }
+    SharedPreferences pref;
 
     public ClientService() {
-    }
-
-    public ClientVO getClientVO(){
-        return this.vo;
-    }
-    @Override
-    public IBinder onBind(Intent intent) {
-        this.intent = intent;
-        return mBinder;
     }
 
     public class ClientRunnable implements Runnable {
@@ -55,10 +38,6 @@ public class ClientService extends Service {
             this.pw = pw;
         }
 
-        //        private String keyword;
-//        private Socket socket;        // 소켓 객체
-//        private BufferedReader br;    // 서버로 부터 데이터를 읽는 객체
-//        private PrintWriter out;      // 서버로 데이터를 보내는 객체
         @Override
         public void run() {
             try {
@@ -66,6 +45,7 @@ public class ClientService extends Service {
                 URL url = new URL("http://70.12.115.57:9090/TestProject/login?id=" + id + "&pw=" + pw);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestProperty("charset", "utf-8");
+
                 Log.i("ClientService", "Http connection 됐다!!");
                 con.setRequestMethod("GET");
                 con.setDoInput(true);
@@ -85,7 +65,7 @@ public class ClientService extends Service {
 
                 ObjectMapper mapper = new ObjectMapper();
                 //jackson library를 이용하여 json 문자열을 String[] 형태로 변환
-                vo = mapper.readValue(jsonObject.toString(), ClientVO.class);
+                ClientVO vo = mapper.readValue(jsonObject.toString(), ClientVO.class);
 
                 Intent resultIntent;
                 if (vo == null) {
@@ -108,12 +88,7 @@ public class ClientService extends Service {
             }
         }
     }
-//
-//    ClientRunnable clientRunnable = new ClientRunnable(keyword);
-//
-//    public void connectServer() {
-//        executorservice.execute(clientRunnable);
-//    }
+
 
     @Override
     public void onCreate() {
@@ -138,7 +113,6 @@ public class ClientService extends Service {
             Thread t = new Thread(runnable);
             t.start();
         }
-
         // 강제 종료되면 자동적으로 재시작함
         return Service.START_STICKY;
 
@@ -149,5 +123,10 @@ public class ClientService extends Service {
         // 서비스 객체가 메모리상에서 삭제될 때 1번 호출
         // 사용한 resource를 정리하는 과정
         super.onDestroy();
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
