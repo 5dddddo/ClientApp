@@ -34,25 +34,6 @@ public class SettingActivity extends AppCompatActivity {
     private String client_id;
     private String tel;
 
-    ClientService clientService; // 서비스
-    boolean isService = false; // 서비스 실행 확인
-
-    ServiceConnection conn = new ServiceConnection() {
-        public void onServiceConnected(ComponentName name,
-                                       IBinder service) {
-            // 서비스와 연결되었을 때 호출되는 메서드
-            ClientService.MyBinder clientBinder =
-                    (ClientService.MyBinder) service;
-            clientService = clientBinder.getService();
-            isService = true; // 실행 여부를 판단
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            // 서비스와 연결이 끊기거나 종료되었을 때
-            isService = false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,22 +49,14 @@ public class SettingActivity extends AppCompatActivity {
         cancelBtn = (Button) findViewById(R.id.cancelBtn);
         carSp = (Spinner) findViewById(R.id.carSp);
 
-        Intent intent = new Intent(
-                SettingActivity.this, // 현재 화면
-                ClientService.class); // 다음넘어갈 컴퍼넌트
-
-        bindService(intent, // intent 객체
-                conn, // 서비스와 연결에 대한 정의
-                Context.BIND_AUTO_CREATE);
-
 
         IdTv.setText(clientService.getClientVO().getCLIENT_ID());
         nameTv.setText(clientService.getClientVO().getCLIENT_NAME());
         telTv.setText(clientService.getClientVO().getTEL());
 //        carSp.setSelection(Integer.parseInt(clientService.getClientVO().getCAR_TYPE()));
         carSp.setSelection(1);
-
         carIdEt.setText(clientService.getClientVO().getCAR_ID());
+
         cnameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

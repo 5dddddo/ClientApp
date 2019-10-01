@@ -7,6 +7,9 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;
@@ -19,6 +22,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -66,13 +72,14 @@ public class ClientService extends Service {
                 ObjectMapper mapper = new ObjectMapper();
                 //jackson library를 이용하여 json 문자열을 String[] 형태로 변환
                 ClientVO vo = mapper.readValue(jsonObject.toString(), ClientVO.class);
-
+                Set<String> set = new
                 Intent resultIntent;
                 if (vo == null) {
                     resultIntent = new Intent(getApplicationContext(), MainActivity.class);
                 } else {
                     resultIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                    resultIntent.putExtra("ClientVO", vo);
+
+                    savePreferences(id, );
                 }
                 resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -89,6 +96,35 @@ public class ClientService extends Service {
         }
     }
 
+    // 값 불러오기
+    private void getPreferences(String id, ClientVO vo){
+        SharedPreferences pref = getSharedPreferences(id, MODE_PRIVATE);
+        pref.getString("id", "");
+    }
+
+    // 값 저장하기
+    private void savePreferences(String id, Set<String> vo){
+        SharedPreferences pref = getSharedPreferences(id, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putStringSet("vo",vo);
+        editor.commit();
+    }
+
+    // 값(Key Data) 삭제하기
+    private void removePreferences(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove("hi");
+        editor.commit();
+    }
+
+    // 값(ALL Data) 삭제하기
+    private void removeAllPreferences(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+    }
 
     @Override
     public void onCreate() {
