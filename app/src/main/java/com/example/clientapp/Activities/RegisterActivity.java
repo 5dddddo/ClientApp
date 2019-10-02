@@ -1,4 +1,4 @@
-package com.example.clientapp;
+package com.example.clientapp.Activities;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,10 +13,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clientapp.VO.MemberVO;
+import com.example.clientapp.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,23 +1,24 @@
-package com.example.clientapp;
+package com.example.clientapp.fragments;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+
 import android.os.Bundle;
-import android.os.IBinder;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import java.util.Set;
 
-public class SettingActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class SettingFragment extends Fragment {
+
     private TextView IdTv;
     private EditText nameEt;
     private TextView nameTv;
@@ -34,20 +35,25 @@ public class SettingActivity extends AppCompatActivity {
     private String client_id;
     private String tel;
 
+    public SettingFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        IdTv = (TextView) findViewById(R.id.IdTv);
-        nameEt = (EditText) findViewById(R.id.nameEt);
-        nameTv = (TextView) findViewById(R.id.nameTv);
-        cnameBtn = (ToggleButton) findViewById(R.id.cnameBtn);
-        telEt = (EditText) findViewById(R.id.telEt);
-        telTv = (TextView) findViewById(R.id.telTv);
-        carIdEt = (EditText) findViewById(R.id.carIdEt);
-        ctelBtn = (ToggleButton) findViewById(R.id.ctelBtn);
-        cancelBtn = (Button) findViewById(R.id.cancelBtn);
-        carSp = (Spinner) findViewById(R.id.carSp);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
+        IdTv = (TextView) rootView.findViewById(R.id.IdTv);
+        nameEt = (EditText) rootView.findViewById(R.id.nameEt);
+        nameTv = (TextView) rootView.findViewById(R.id.nameTv);
+        cnameBtn = (ToggleButton) rootView.findViewById(R.id.cnameBtn);
+        telEt = (EditText) rootView.findViewById(R.id.telEt);
+        telTv = (TextView) rootView.findViewById(R.id.telTv);
+        carIdEt = (EditText) rootView.findViewById(R.id.carIdEt);
+        ctelBtn = (ToggleButton) rootView.findViewById(R.id.ctelBtn);
+        cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
+        carSp = (Spinner) rootView.findViewById(R.id.carSp);
 
 
 //        IdTv.setText(clientService.getClientVO().getCLIENT_ID());
@@ -88,14 +94,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
-
-//        cancelBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent backIntent = new Intent(getApplicationContext(), Hom.class);
-//                backIntent.putExtra("client_id", client_id);
-//                startActivity(backIntent);
-//            }
-//        });
+        return rootView;
     }
+
 }

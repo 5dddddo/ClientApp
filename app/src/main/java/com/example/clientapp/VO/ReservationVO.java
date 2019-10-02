@@ -1,4 +1,4 @@
-package com.example.clientapp;
+package com.example.clientapp.VO;
 
 import android.os.Parcel;
 import android.os.Parcelable;
