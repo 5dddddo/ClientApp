@@ -87,36 +87,6 @@ public class ClientService extends Service {
         }
     }
 
-    // 값 불러오기
-    private void getPreferences(String id, MemberVO vo){
-        SharedPreferences pref = getSharedPreferences(id, MODE_PRIVATE);
-        pref.getString("id", "");
-    }
-
-    // 값 저장하기
-    private void savePreferences(String id, Set<String> vo){
-        SharedPreferences pref = getSharedPreferences(id, MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putStringSet("vo",vo);
-        editor.commit();
-    }
-
-    // 값(Key Data) 삭제하기
-    private void removePreferences(){
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.remove("hi");
-        editor.commit();
-    }
-
-    // 값(ALL Data) 삭제하기
-    private void removeAllPreferences(){
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
-    }
-
     @Override
     public void onCreate() {
         // 서비스 객체가 만들어지는 시점에 1번 호출

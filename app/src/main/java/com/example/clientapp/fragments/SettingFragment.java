@@ -13,6 +13,8 @@ import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.clientapp.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

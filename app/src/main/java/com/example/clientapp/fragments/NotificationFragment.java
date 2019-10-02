@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.clientapp.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

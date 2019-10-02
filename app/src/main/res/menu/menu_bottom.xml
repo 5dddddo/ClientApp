@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/car"
+        android:icon="@drawable/icon_car"
+        android:title="Car"/>
+
+    <item
+        android:id="@+id/reservation"
+        android:icon="@drawable/icon_reservation"
+        android:title="Reservation"/>
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/icon_setting"
+        android:title="Setting"/>
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/icon_notification"
+        android:title="Notification"/>
+</menu>
