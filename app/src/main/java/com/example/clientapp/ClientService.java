@@ -48,7 +48,7 @@ public class ClientService extends Service {
         public void run() {
             try {
                 Log.i("login", id + "  " + pw);
-                URL url = new URL("http://70.12.115.57:9090/TestProject/login?id=" + id + "&pw=" + pw);
+                URL url = new URL("http://70.12.115.57:9090/TestProject/clogin.do?id=" + id + "&pw=" + pw);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestProperty("charset", "utf-8");
 
@@ -71,15 +71,14 @@ public class ClientService extends Service {
 
                 ObjectMapper mapper = new ObjectMapper();
                 //jackson library를 이용하여 json 문자열을 String[] 형태로 변환
-                ClientVO vo = mapper.readValue(jsonObject.toString(), ClientVO.class);
-                Set<String> set = new
+                MemberVO vo = mapper.readValue(jsonObject.toString(), MemberVO.class);
                 Intent resultIntent;
                 if (vo == null) {
                     resultIntent = new Intent(getApplicationContext(), MainActivity.class);
                 } else {
                     resultIntent = new Intent(getApplicationContext(), HomeActivity.class);
-
-                    savePreferences(id, );
+                    resultIntent.putExtra("vo",vo);
+//                    savePreferences(id, );
                 }
                 resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -97,7 +96,7 @@ public class ClientService extends Service {
     }
 
     // 값 불러오기
-    private void getPreferences(String id, ClientVO vo){
+    private void getPreferences(String id, MemberVO vo){
         SharedPreferences pref = getSharedPreferences(id, MODE_PRIVATE);
         pref.getString("id", "");
     }
@@ -136,8 +135,8 @@ public class ClientService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("ClientService", "onStartCommand 호출됐어요!!");
-        String client_id = intent.getExtras().getString("client_id");
-        String password = intent.getExtras().getString("password");
+        String Member_id = intent.getExtras().getString("Member_id");
+        String Member_pw = intent.getExtras().getString("Member_pw");
         if (intent == null) {
             Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
             resultIntent.putExtra("ClientServiceError", "서비스 에러!");
@@ -145,7 +144,7 @@ public class ClientService extends Service {
             // 생성되어 있는 Activity 가져옴
             startActivity(resultIntent);
         } else {
-            ClientRunnable runnable = new ClientRunnable(client_id, password);
+            ClientRunnable runnable = new ClientRunnable(Member_id, Member_pw);
             Thread t = new Thread(runnable);
             t.start();
         }

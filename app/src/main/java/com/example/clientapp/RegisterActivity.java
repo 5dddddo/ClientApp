@@ -1,9 +1,9 @@
 package com.example.clientapp;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +13,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
     private Boolean flag = true;
@@ -39,7 +44,57 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Button registerBtn;
     private Spinner carSp;
-    private ClientVO vo = new ClientVO();
+    private MemberVO vo = new MemberVO();
+
+    class RegisterRunnable implements Runnable {
+        Boolean status = false;
+        MemberVO vo;
+
+        public RegisterRunnable(MemberVO vo) {
+            this.vo = vo;
+        }
+
+        @Override
+        public void run() {
+            try {
+                URL url = new URL("http://70.12.115.57:9090/TestProject/register.do");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("POST");
+                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                con.setRequestProperty("Connection", "Keep-Alive");
+                con.setRequestProperty("charset", "utf-8");
+                con.setDoInput(true);
+                con.setDoOutput(true);
+
+                Log.i("ClientService", "Http connection 됐다!!");
+
+                OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+
+                ObjectMapper mapper = new ObjectMapper();
+                String sendMsg = mapper.writeValueAsString(vo);
+
+                osw.write(sendMsg);
+                osw.flush();
+
+                String input ;
+                StringBuffer sb = new StringBuffer();
+                // stream을 통해 data 읽어오기
+                while ((input = br.readLine()) != null) {
+                    sb.append(input);
+                }
+                Log.i("ClientReceiveData", sb.toString());
+                br.close();
+                con.disconnect();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerBtn = (Button) findViewById(R.id.registerBtn);
         carSp = (Spinner) findViewById(R.id.carSp);
+
+
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,28 +166,18 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 if (flag) {
-                    vo.setCAR_ID(carIdEt.getText().toString());
-                    vo.setCAR_TYPE(carSp.getSelectedItem().toString());
-                    vo.setCLIENT_ID(clientIdEt.getText().toString());
-                    vo.setCLIENT_NAME(clientNameEt.getText().toString());
-                    vo.setCLIENT_NUM("2");
-                    vo.setPASSWORD(clientPwEt.getText().toString());
-                    vo.setTEL(telEt.getText().toString());
+//                    vo.setCAR_ID     (carIdEt.getText().toString());
+//                    vo.setCAR_TYPE       (carSp.getSelectedItem().toString());
+//                    vo.setCLIENT_ID(clientIdEt.getText().toString());
+//                    vo.setCLIENT_NAME(clientNameEt.getText().toString());
+//                    vo.setCLIENT_NUM("2");
+//                    vo.setPASSWORD(clientPwEt.getText().toString());
+//                    vo.setTEL(telEt.getText().toString());
 
 
-                    JSONObject informationObject = new JSONObject();
-                    try {
-                        informationObject.put("vo",vo);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-//                    ObjectMapper objectMapper = new ObjectMapper();
-//                    try {
-//                        String res = objectMapper.writeValueAsString(vo);
-//                    } catch (JsonProcessingException e) {
-//                        e.printStackTrace();
-//                    }
+                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
+                    Thread t = new Thread(registerRunnable);
+                    t.start();
                 }
             }
         });
@@ -154,6 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 
 

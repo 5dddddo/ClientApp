@@ -50,12 +50,12 @@ public class SettingActivity extends AppCompatActivity {
         carSp = (Spinner) findViewById(R.id.carSp);
 
 
-        IdTv.setText(clientService.getClientVO().getCLIENT_ID());
-        nameTv.setText(clientService.getClientVO().getCLIENT_NAME());
-        telTv.setText(clientService.getClientVO().getTEL());
-//        carSp.setSelection(Integer.parseInt(clientService.getClientVO().getCAR_TYPE()));
-        carSp.setSelection(1);
-        carIdEt.setText(clientService.getClientVO().getCAR_ID());
+//        IdTv.setText(clientService.getClientVO().getCLIENT_ID());
+//        nameTv.setText(clientService.getClientVO().getCLIENT_NAME());
+//        telTv.setText(clientService.getClientVO().getTEL());
+////        carSp.setSelection(Integer.parseInt(clientService.getClientVO().getCAR_TYPE()));
+//        carSp.setSelection(1);
+//        carIdEt.setText(clientService.getClientVO().getCAR_ID());
 
         cnameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +89,13 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent backIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                backIntent.putExtra("client_id", client_id);
-                startActivity(backIntent);
-            }
-        });
+//        cancelBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent backIntent = new Intent(getApplicationContext(), Hom.class);
+//                backIntent.putExtra("client_id", client_id);
+//                startActivity(backIntent);
+//            }
+//        });
     }
 }

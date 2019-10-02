@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    String client_id;
-    String password;
+    String Member_id;
+    String Member_pw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                client_id = idEditView.getText().toString();
-                password = pwEditView.getText().toString();
+                Member_id = idEditView.getText().toString();
+                Member_pw = pwEditView.getText().toString();
                 Intent i = new Intent(
                         getApplicationContext(),// Activiey Context
                         ClientService.class);
-                i.putExtra("client_id", client_id);
-                i.putExtra("password", password);
+                i.putExtra("Member_id", Member_id);
+                i.putExtra("Member_pw", Member_pw);
                 startService(i);
             }
         });

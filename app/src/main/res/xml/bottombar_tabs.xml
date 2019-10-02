@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <tabs>
+        <tab
+            android:icon="@drawable/icon_car"
+            android:id="@+id/tab_car"
+            android:title="Car" />
+        <tab
+            android:icon="@drawable/icon_reservation"
+            android:id="@+id/tab_reservation"
+            android:title="Reservation" />
+        <tab
+            android:icon="@drawable/icon_setting"
+            android:id="@+id/tab_setting"
+            android:title="Setting" />
+        <tab
+            android:icon="@drawable/icon_notification"
+            android:id="@+id/tab_notification"
+            android:title="Alarm" />
+
+    </tabs>
+</PreferenceScreen>
