@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.clientapp.VO.MemberVO;
 import com.example.clientapp.R;
+import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
@@ -24,26 +24,227 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Pattern;
+
+import static android.graphics.Color.GREEN;
 
 public class RegisterActivity extends AppCompatActivity {
-    private Boolean flag = true;
-    private EditText clientIdEt;
-    private EditText clientPwEt;
-    private EditText checkPwEt;
-    private EditText clientNameEt;
-    private EditText telEt;
-    private EditText carIdEt;
+    boolean isMember_noValid = false;
+    boolean isMember_idValid = false;
+    boolean isMember_pwValid = false;
+    boolean isMember_pwchkValid = false;
+    boolean isMember_nameValid = false;
+    boolean isMember_telValid = false;
+    boolean isMember_cartypeValid = false;
+    boolean isMember_caridValid = false;
+
+    private EditText mIdEt;
+    private EditText mPwEt;
+    private EditText mPwCheckEt;
+    private EditText mNameEt;
+    private EditText mTelEt;
+    private EditText mCarTypeEt;
+    private EditText mCarIdEt;
     private ImageView checkPw;
+
     private TextView validid;
     private TextView validpw;
     private TextView validpwch;
     private TextView validname;
     private TextView validtel;
+    private TextView validcartype;
     private TextView validcarid;
 
     private Button registerBtn;
-    private Spinner carSp;
+
+    private String mId;
+    private String mPw;
+    private String mName;
+    private String mTel;
+    private String mCarType;
+    private String mCarId;
+
     private MemberVO vo = new MemberVO();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+
+        mIdEt = (EditText) findViewById(R.id.mIdEt);
+        mPwEt = (EditText) findViewById(R.id.mPwEt);
+        mPwCheckEt = (EditText) findViewById(R.id.mPwCheckEt);
+        mNameEt = (EditText) findViewById(R.id.mNameEt);
+        mTelEt = (EditText) findViewById(R.id.mTelEt);
+        mCarTypeEt = (EditText) findViewById(R.id.mCarTypeEt);
+        mCarIdEt = (EditText) findViewById(R.id.mCarIdEt);
+        checkPw = (ImageView) findViewById(R.id.checkPw);
+
+        validid = (TextView) findViewById(R.id.validid);
+        validpw = (TextView) findViewById(R.id.validpw);
+        validpwch = (TextView) findViewById(R.id.validpwch);
+        validname = (TextView) findViewById(R.id.validname);
+        validtel = (TextView) findViewById(R.id.validtel);
+        validcartype = (TextView) findViewById(R.id.validcartype);
+        validcarid = (TextView) findViewById(R.id.validcarid);
+
+        registerBtn = (Button) findViewById(R.id.registerBtn);
+
+        mIdEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = mIdEt.getText().toString();
+
+                    if (isMember_idValid && input.equals(mId)) return;
+
+                    if (input.equals("공학수학마스터")) {
+                        isMember_idValid = false;
+                        mId = "";
+                        validid.setText("이미 존재하는 닉네임 입니다.");
+                    } else if (!isIdValid(input)) {
+                        isMember_idValid = false;
+                    } else {
+                        isMember_idValid = true;
+                        mId = input;
+                        validid.setText("사용 가능한 아이디입니다.");
+                        validid.setTextColor(GREEN);
+                    }
+                }
+            }
+        });
+        mPwEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = mPwEt.getText().toString();
+                    if (isMember_pwValid && input.equals(mPw)) return;
+                    else if (!isPwVaild(input)) {
+                        isMember_pwValid = false;
+                    } else {
+                        isMember_pwValid = true;
+                        mPw = input;
+                        validpw.setText("사용 가능합니다.");
+                        validpw.setTextColor(GREEN);
+                    }
+                }
+            }
+        });
+        mNameEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = mNameEt.getText().toString();
+
+                    if (isMember_nameValid && input.equals(mName)) return;
+
+                    if (!isNameVaild(input)) {
+                        isMember_nameValid = false;
+                    } else {
+                        isMember_nameValid = true;
+                        mName = input;
+                        validname.setText("사용 가능합니다.");
+                        validname.setTextColor(GREEN);
+                    }
+                }
+            }
+        });
+        mTelEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = mTelEt.getText().toString();
+
+                    if (isMember_telValid && input.equals(mTel)) return;
+
+                    if (!isTelVaild(input)) {
+                        isMember_telValid = false;
+                    } else {
+                        isMember_telValid = true;
+                        mTel = input;
+                        validtel.setText("사용 가능합니다.");
+                        validtel.setTextColor(GREEN);
+                    }
+                }
+            }
+        });
+        mCarTypeEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = mCarTypeEt.getText().toString();
+
+                    if (isMember_cartypeValid && input.equals(mCarType)) return;
+
+                    if (!isCarTypeVaild(input)) {
+                        isMember_cartypeValid = false;
+                    } else {
+                        isMember_cartypeValid = true;
+                        mCarType = input;
+                        validcartype.setText("사용 가능합니다.");
+                        validcartype.setTextColor(GREEN);
+                    }
+                }
+            }
+        });
+        mCarIdEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String input = mCarIdEt.getText().toString();
+
+                    if (isMember_caridValid && input.equals(mCarId)) return;
+
+                    if (!isCarIdVaild(input)) {
+                        isMember_caridValid = false;
+                    } else {
+                        isMember_caridValid = true;
+                        mCarId = input;
+                        validcarid.setText("사용 가능합니다.");
+                        validcarid.setTextColor(GREEN);
+                    }
+                }
+            }
+        });
+
+        mPwCheckEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (mPw.equals(mPwCheckEt.getText().toString())) {
+                    checkPw.setImageResource(R.drawable.o);
+                    isMember_pwchkValid = true;
+                } else {
+                    checkPw.setImageResource(R.drawable.x);
+                    isMember_pwchkValid = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isInputComplete()) {
+
+                    Toast.makeText(getApplicationContext(),"회원가입 성공",Toast.LENGTH_SHORT).show();
+//                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
+//                    Thread t = new Thread(registerRunnable);
+//                    t.start();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"회원가입 실패",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
 
     class RegisterRunnable implements Runnable {
         Boolean status = false;
@@ -77,7 +278,7 @@ public class RegisterActivity extends AppCompatActivity {
                 osw.write(sendMsg);
                 osw.flush();
 
-                String input ;
+                String input;
                 StringBuffer sb = new StringBuffer();
                 // stream을 통해 data 읽어오기
                 while ((input = br.readLine()) != null) {
@@ -95,110 +296,85 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    public boolean isIdValid(String input) {
+        if (input.length() == 0) {
+            validid.setText("아이디를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^[a-zA-Z0-9]{5,10}$", input)) {
+            validid.setText("5~10자의 영문 대/소문자, 숫자만 사용 가능합니다.");
+            return false;
+        }
+        return true;
+    }
 
-        clientIdEt = (EditText) findViewById(R.id.clientIdEt);
-        clientPwEt = (EditText) findViewById(R.id.clientPwEt);
-        checkPwEt = (EditText) findViewById(R.id.checkPwEt);
-        clientNameEt = (EditText) findViewById(R.id.clientNameEt);
-        telEt = (EditText) findViewById(R.id.telEt);
-        carIdEt = (EditText) findViewById(R.id.carIdEt);
-        carSp = (Spinner) findViewById(R.id.carSp);
-        checkPw = (ImageView) findViewById(R.id.checkPw);
-        validid = (TextView) findViewById(R.id.validid);
-        validpw = (TextView) findViewById(R.id.validpw);
-        validpwch = (TextView) findViewById(R.id.validpwch);
-        validname = (TextView) findViewById(R.id.validname);
-        validtel = (TextView) findViewById(R.id.validtel);
-        validcarid = (TextView) findViewById(R.id.validcarid);
+    public boolean isPwVaild(String input) {
+        if (input.length() == 0) {
+            validpw.setText("비밀번호를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$", input)) {
+            validpw.setText("8~15자의 영문 대/소문자, 숫자만 사용 가능합니다.");
+            return false;
+        }
+        return true;
+    }
 
-        registerBtn = (Button) findViewById(R.id.registerBtn);
-        carSp = (Spinner) findViewById(R.id.carSp);
+    public boolean isNameVaild(String input) {
+        if (input.length() == 0) {
+            validname.setText("이름을 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^[가-힣]{2,10}$", input)) {
+            validname.setText("2글자 이상의 한글만 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
 
+    public boolean isTelVaild(String input) {
+        if (input.length() == 0) {
+            validtel.setText("핸드폰 번호를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", input)) {
+            validtel.setText("올바른 번호가 아닙니다.");
+            return false;
+        }
+        return true;
+    }
 
+    public boolean isCarTypeVaild(String input) {
+        if (input.length() == 0) {
+            validcartype.setText("차종을 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
+            validcartype.setText("특수문자는 사용할 수 없습니다.");
+            return false;
+        }
+        return true;
+    }
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (clientIdEt.getText().toString().length() < 5 || clientIdEt.getText().toString().length() > 10) {
-                    if (clientIdEt.getText().toString().length() == 0)
-                        validid.setText("필수 정보입니다.");
-                    else
-                        validid.setText("5~10자의 영문 소문자, 숫자만 사용 가능합니다.");
-                    flag = false;
-                }
+    public boolean isCarIdVaild(String input) {
+        if (input.length() == 0) {
+            validcarid.setText("차 번호를 입력하세요.");
+            return false;
+        }
+        if (!(Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)
+                || !Pattern.matches("^[가-힣]{2}\\d{2}[가-힣]{1}\\d{4}$", input))) {
+            validcarid.setText("올바른 차 번호가 아닙니다.");
+            return false;
+        }
+        return true;
+    }
 
-                if (clientPwEt.getText().toString().length() < 8 || clientPwEt.getText().toString().length() > 15) {
-                    if (clientPwEt.getText().toString().length() == 0)
-                        validpw.setText("필수 정보입니다.");
-                    else
-                        validpw.setText("8~15자의 영문 대/소문자, 숫자를 사용하세요.");
-                    flag = false;
-                }
-                if (clientPwEt.getText().toString().length() != 0 && clientPwEt.getText().toString().equals(checkPwEt.getText().toString())) {
-                    validpwch.setText("일치합니다.");
-                    flag = true;
-                } else {
-                    validpwch.setText("비밀번호를 확인하세요.");
-                    flag = false;
-                }
-                if (clientNameEt.getText().toString().length() == 0) {
-                    validname.setText("필수 정보입니다.");
-                    flag = false;
-                }
-                if (telEt.getText().toString().length() < 10) {
-                    if (telEt.getText().toString().length() == 0)
-                        validtel.setText("필수 정보입니다.");
-                    else
-                        validtel.setText("형식에 맞지 않는 번호입니다.");
-                    flag = false;
-                }
-                if (carIdEt.getText().toString().length() < 5) {
-                    if (carIdEt.getText().toString().length() == 0)
-                        validcarid.setText("필수 정보입니다.");
-                    else
-                        validcarid.setText("형식에 맞지 않는 번호입니다.");
-                    flag = false;
-                }
-
-                if (flag) {
-//                    vo.setCAR_ID     (carIdEt.getText().toString());
-//                    vo.setCAR_TYPE       (carSp.getSelectedItem().toString());
-//                    vo.setCLIENT_ID(clientIdEt.getText().toString());
-//                    vo.setCLIENT_NAME(clientNameEt.getText().toString());
-//                    vo.setCLIENT_NUM("2");
-//                    vo.setPASSWORD(clientPwEt.getText().toString());
-//                    vo.setTEL(telEt.getText().toString());
-
-
-                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
-                    Thread t = new Thread(registerRunnable);
-                    t.start();
-                }
-            }
-        });
-
-        checkPwEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (clientPwEt.getText().toString().equals(checkPwEt.getText().toString()))
-                    checkPw.setImageResource(R.drawable.o);
-                else
-                    checkPw.setImageResource(R.drawable.x);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+    public boolean isInputComplete() {
+        if (isMember_caridValid && isMember_cartypeValid && isMember_idValid &&
+                isMember_nameValid && isMember_pwchkValid && isMember_pwValid && isMember_telValid)
+            return true;
+        else
+            return false;
     }
 
 }
