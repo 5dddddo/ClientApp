@@ -1,5 +1,6 @@
 package com.example.clientapp.Activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -90,119 +91,156 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerBtn = (Button) findViewById(R.id.registerBtn);
 
-        mIdEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mIdEt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String input = mIdEt.getText().toString();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                    if (isMember_idValid && input.equals(mId)) return;
+            @Override
+            public void afterTextChanged(Editable editable) {
 
-                    if (input.equals("공학수학마스터")) {
-                        isMember_idValid = false;
-                        mId = "";
-                        validid.setText("이미 존재하는 닉네임 입니다.");
-                    } else if (!isIdValid(input)) {
-                        isMember_idValid = false;
-                    } else {
-                        isMember_idValid = true;
-                        mId = input;
-                        validid.setText("사용 가능한 아이디입니다.");
-                        validid.setTextColor(GREEN);
-                    }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mIdEt.getText().toString();
+
+                if (isMember_idValid && input.equals(mId)) return;
+
+                if (input.equals("공학수학마스터")) {
+                    isMember_idValid = false;
+                    mId = "";
+                    validid.setText("이미 존재하는 닉네임 입니다.");
+                } else if (!isIdValid(input)) {
+                    isMember_idValid = false;
+                } else {
+                    isMember_idValid = true;
+                    mId = input;
+                    validid.setText("사용 가능한 아이디입니다.");
+                    validid.setTextColor(GREEN);
+                }
+            }
+
+        });
+        mPwEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mPwEt.getText().toString();
+                if (isMember_pwValid && input.equals(mPw)) return;
+                else if (!isPwVaild(input)) {
+                    isMember_pwValid = false;
+                } else {
+                    isMember_pwValid = true;
+                    mPw = input;
+                    validpw.setText("사용 가능합니다.");
+                    validpw.setTextColor(GREEN);
                 }
             }
         });
-        mPwEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mNameEt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String input = mPwEt.getText().toString();
-                    if (isMember_pwValid && input.equals(mPw)) return;
-                    else if (!isPwVaild(input)) {
-                        isMember_pwValid = false;
-                    } else {
-                        isMember_pwValid = true;
-                        mPw = input;
-                        validpw.setText("사용 가능합니다.");
-                        validpw.setTextColor(GREEN);
-                    }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mNameEt.getText().toString();
+                if (isMember_nameValid && input.equals(mName)) return;
+                if (!isNameVaild(input)) {
+                    isMember_nameValid = false;
+                } else {
+                    isMember_nameValid = true;
+                    mName = input;
+                    validname.setText("사용 가능합니다.");
+                    validname.setTextColor(GREEN);
                 }
             }
         });
-        mNameEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mNameEt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String input = mNameEt.getText().toString();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                    if (isMember_nameValid && input.equals(mName)) return;
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
 
-                    if (!isNameVaild(input)) {
-                        isMember_nameValid = false;
-                    } else {
-                        isMember_nameValid = true;
-                        mName = input;
-                        validname.setText("사용 가능합니다.");
-                        validname.setTextColor(GREEN);
-                    }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mTelEt.getText().toString();
+                if (isMember_telValid && input.equals(mTel)) return;
+
+                if (!isTelVaild(input)) {
+                    isMember_telValid = false;
+                } else {
+                    isMember_telValid = true;
+                    mTel = input;
+                    validtel.setText("사용 가능합니다.");
+                    validtel.setTextColor(GREEN);
                 }
+
             }
         });
-        mTelEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mCarTypeEt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String input = mTelEt.getText().toString();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                    if (isMember_telValid && input.equals(mTel)) return;
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
 
-                    if (!isTelVaild(input)) {
-                        isMember_telValid = false;
-                    } else {
-                        isMember_telValid = true;
-                        mTel = input;
-                        validtel.setText("사용 가능합니다.");
-                        validtel.setTextColor(GREEN);
-                    }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mCarTypeEt.getText().toString();
+
+                if (isMember_cartypeValid && input.equals(mCarType)) return;
+
+                if (!isCarTypeVaild(input)) {
+                    isMember_cartypeValid = false;
+                } else {
+                    isMember_cartypeValid = true;
+                    mCarType = input;
+                    validcartype.setText("사용 가능합니다.");
+                    validcartype.setTextColor(Color.RED);
                 }
             }
+
         });
-        mCarTypeEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mCarIdEt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String input = mCarTypeEt.getText().toString();
-
-                    if (isMember_cartypeValid && input.equals(mCarType)) return;
-
-                    if (!isCarTypeVaild(input)) {
-                        isMember_cartypeValid = false;
-                    } else {
-                        isMember_cartypeValid = true;
-                        mCarType = input;
-                        validcartype.setText("사용 가능합니다.");
-                        validcartype.setTextColor(GREEN);
-                    }
-                }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-        });
-        mCarIdEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    String input = mCarIdEt.getText().toString();
+            public void afterTextChanged(Editable editable) {
+            }
 
-                    if (isMember_caridValid && input.equals(mCarId)) return;
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mCarIdEt.getText().toString();
 
-                    if (!isCarIdVaild(input)) {
-                        isMember_caridValid = false;
-                    } else {
-                        isMember_caridValid = true;
-                        mCarId = input;
-                        validcarid.setText("사용 가능합니다.");
-                        validcarid.setTextColor(GREEN);
-                    }
+                if (isMember_caridValid && input.equals(mCarId)) return;
+                if (!isCarIdVaild(input)) {
+                    isMember_caridValid = false;
+                } else {
+                    isMember_caridValid = true;
+                    mCarId = input;
+                    validcarid.setText("사용 가능합니다.");
+                    validcarid.setTextColor(GREEN);
                 }
             }
         });
@@ -210,6 +248,11 @@ public class RegisterActivity extends AppCompatActivity {
         mPwCheckEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
 
             @Override
@@ -223,23 +266,19 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
 
-            }
         });
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isInputComplete()) {
 
-                    Toast.makeText(getApplicationContext(),"회원가입 성공",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
 //                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
 //                    Thread t = new Thread(registerRunnable);
 //                    t.start();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"회원가입 실패",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -294,14 +333,18 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
     }
 
     public boolean isIdValid(String input) {
         if (input.length() == 0) {
+
+            validid.setTextColor(Color.RED);
             validid.setText("아이디를 입력하세요.");
             return false;
         }
         if (!Pattern.matches("^[a-zA-Z0-9]{5,10}$", input)) {
+            validid.setTextColor(Color.RED);
             validid.setText("5~10자의 영문 대/소문자, 숫자만 사용 가능합니다.");
             return false;
         }
@@ -310,10 +353,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean isPwVaild(String input) {
         if (input.length() == 0) {
+            validpw.setTextColor(Color.RED);
             validpw.setText("비밀번호를 입력하세요.");
             return false;
         }
         if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$", input)) {
+            validpw.setTextColor(Color.RED);
             validpw.setText("8~15자의 영문 대/소문자, 숫자만 사용 가능합니다.");
             return false;
         }
@@ -326,7 +371,8 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
         if (!Pattern.matches("^[가-힣]{2,10}$", input)) {
-            validname.setText("2글자 이상의 한글만 입력해주세요.");
+            validname.setTextColor(Color.RED);
+            validname.setText("2글자 이상의 한글을 입력해주세요.");
             return false;
         }
         return true;
@@ -334,10 +380,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean isTelVaild(String input) {
         if (input.length() == 0) {
+            validtel.setTextColor(Color.RED);
             validtel.setText("핸드폰 번호를 입력하세요.");
             return false;
         }
-        if (!Pattern.matches("^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-\\d{4}$", input)) {
+        if (!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", input)) {
+            validtel.setTextColor(Color.RED);
             validtel.setText("올바른 번호가 아닙니다.");
             return false;
         }
@@ -346,10 +394,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean isCarTypeVaild(String input) {
         if (input.length() == 0) {
+            validcartype.setTextColor(Color.RED);
             validcartype.setText("차종을 입력하세요.");
             return false;
         }
         if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
+            validcartype.setTextColor(Color.RED);
             validcartype.setText("특수문자는 사용할 수 없습니다.");
             return false;
         }
@@ -358,11 +408,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean isCarIdVaild(String input) {
         if (input.length() == 0) {
+            validcarid.setTextColor(Color.RED);
             validcarid.setText("차 번호를 입력하세요.");
             return false;
         }
         if (!(Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)
-                || !Pattern.matches("^[가-힣]{2}\\d{2}[가-힣]{1}\\d{4}$", input))) {
+                || Pattern.matches("^[가-힣]{2}\\d{2}[가-힣]{1}\\d{4}$", input))) {
+            validcarid.setTextColor(Color.RED);
             validcarid.setText("올바른 차 번호가 아닙니다.");
             return false;
         }
