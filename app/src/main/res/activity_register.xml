@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="아이디"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/mIdEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge_black"
+        android:focusable="auto"
+        android:nextFocusDown="@+id/mPwEt"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textIsSelectable="true"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/validid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="비밀번호"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/mPwEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge_black"
+        android:focusable="auto"
+        android:nextFocusDown="@+id/mPwCheckEt"
+        android:padding="10dp"
+        android:password="true"
+        android:singleLine="true"
+        android:textIsSelectable="true"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/validpw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="비밀번호 재확인"
+        android:textColor="#000000" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/mPwCheckEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/edge_black"
+            android:focusable="auto"
+            android:nextFocusDown="@+id/mNameEt"
+            android:padding="10dp"
+            android:password="true"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/checkPw"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/x"
+
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/validpwch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="이름"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/mNameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge_black"
+        android:focusable="auto"
+        android:nextFocusDown="@+id/mTelEt"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textIsSelectable="true"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/validname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="휴대전화"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/mTelEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge_black"
+        android:focusable="auto"
+        android:nextFocusDown="@+id/mCarTypeEt"
+        android:padding="10dp"
+        android:phoneNumber="true"
+        android:singleLine="true"
+        android:textIsSelectable="true"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/validtel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingTop="5dp"
+            android:text="차종"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:paddingTop="5dp"
+            android:text="차 번호"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/mCarTypeEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/edge_black"
+            android:focusable="auto"
+            android:nextFocusDown="@+id/mCarIdEt"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/mCarIdEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/edge_black"
+            android:focusable="auto"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/validcartype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textColor="#FF0000" />
+
+        <TextView
+            android:id="@+id/validcarid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="#FF0000" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9CCC65"
+        android:text="가입하기" />
+
+
+</LinearLayout>
