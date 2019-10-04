@@ -36,7 +36,7 @@ public class HttpUtils {
         this.context = context;
     }
 
-    private String request() { //key&value로 전송하고 json으로 받기.
+    public String request() { //key&value로 전송하고 json으로 받기.
         try {
             URL Url = new URL(url);
             con = (HttpURLConnection) Url.openConnection();
@@ -77,6 +77,7 @@ public class HttpUtils {
             while ((line = reader.readLine()) != null) {
                 page += line;
             }
+            Log.i("로그인 정보",page);
             getCookieHeader();
             return page;
         } catch (MalformedURLException e) { // for URL.
