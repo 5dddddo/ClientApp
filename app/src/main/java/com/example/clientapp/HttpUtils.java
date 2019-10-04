@@ -71,15 +71,14 @@ public class HttpUtils {
             }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-
             String line;
-            String page = "";
+            String res = "";
             while ((line = reader.readLine()) != null) {
-                page += line;
+                res += line;
             }
-            Log.i("로그인 정보",page);
+            Log.i("로그인 정보",res);
             getCookieHeader();
-            return page;
+            return res;
         } catch (MalformedURLException e) { // for URL.
             e.printStackTrace();
         } catch (IOException e) { // for openConnection().
@@ -88,7 +87,6 @@ public class HttpUtils {
             if (con != null)
                 con.disconnect();
         }
-
         return null;
 
     }
@@ -109,7 +107,6 @@ public class HttpUtils {
                 //기존에 저장된 세션의 아이디가 없는 경우, 그냥 서버의 세션 아이디를 저장 하면 된다.
                 //요청을 보낼때마다 sharedpref에서 세션아이디 필드가 존재하는지 확인해서 있으면 쿠키를 포함해서 보내고, 없으면 보내지 않는다.
                 setSessionIdInSharedPref(sessionid);
-
             }
         }
     }

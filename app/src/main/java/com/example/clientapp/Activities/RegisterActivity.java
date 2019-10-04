@@ -411,8 +411,7 @@ public class RegisterActivity extends AppCompatActivity {
             validcarid.setText("차 번호를 입력하세요.");
             return false;
         }
-        if (!(Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)
-                || Pattern.matches("^[가-힣]{2}\\d{2}[가-힣]{1}\\d{4}$", input))) {
+        if (!Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)) {
             validcarid.setTextColor(Color.RED);
             validcarid.setText("올바른 차 번호가 아닙니다.");
             return false;

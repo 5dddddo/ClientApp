@@ -1,6 +1,5 @@
-package com.example.clientapp;
+package com.example.clientapp.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +10,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clientapp.Activities.HomeActivity;
 import com.example.clientapp.Activities.RegisterActivity;
+import com.example.clientapp.HttpUtils;
+import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +27,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     String member_id;
     String member_pw;
-    String res;
+    String res = null;
     MemberVO vo;
     Map<String, String> map = new HashMap<String, String>();
 
@@ -50,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 member_id = idEditView.getText().toString();
                 member_pw = pwEditView.getText().toString();
                 Thread t = new Thread() {
@@ -61,27 +56,36 @@ public class MainActivity extends AppCompatActivity {
                             String url = "http://70.12.115.57:9090/TestProject/clogin.do";
                             HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                             res = http.request();
-                            if (res != null) {
-                                try {
-                                    ObjectMapper mapper = new ObjectMapper();
-                                    vo = mapper.readValue(res, MemberVO.class);
-                                    Intent i = new Intent(
-                                            getApplicationContext(),
-                                            HomeActivity.class);
-                                    i.putExtra("vo", vo);
-                                    startActivity(i);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
-                                Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
-                            }
+
                         } catch (Exception e) {
                             Log.i("MemberLoginError", e.toString());
                         }
                     }
                 };
                 t.start();
+                try {
+                    t.join();
+                    Log.i("res가 무어ㅑ", res);
+                    if (res != null) {
+                        ObjectMapper mapper = new ObjectMapper();
+                        vo = mapper.readValue(res, MemberVO.class);
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        i.putExtra("vo", vo);
+                        startActivity(i);
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JsonParseException e) {
+                    e.printStackTrace();
+                } catch (JsonMappingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
