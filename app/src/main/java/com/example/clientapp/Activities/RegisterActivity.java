@@ -30,7 +30,6 @@ import java.util.regex.Pattern;
 import static android.graphics.Color.GREEN;
 
 public class RegisterActivity extends AppCompatActivity {
-    boolean isMember_noValid = false;
     boolean isMember_idValid = false;
     boolean isMember_pwValid = false;
     boolean isMember_pwchkValid = false;
@@ -240,7 +239,7 @@ public class RegisterActivity extends AppCompatActivity {
                     isMember_caridValid = true;
                     mCarId = input;
                     validcarid.setText("사용 가능합니다.");
-                    validcarid.setTextColor(GREEN);
+                    validcarid.setTextColor(2085187);
                 }
             }
         });

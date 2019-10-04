@@ -17,12 +17,12 @@
         android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/clientIdEt"
+        android:id="@+id/mIdEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edge_black"
         android:focusable="auto"
-        android:nextFocusDown="@+id/clientPwEt"
+        android:nextFocusDown="@+id/mPwEt"
         android:padding="10dp"
         android:singleLine="true"
         android:textIsSelectable="true"
@@ -42,12 +42,12 @@
         android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/clientPwEt"
+        android:id="@+id/mPwEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edge_black"
         android:focusable="auto"
-        android:nextFocusDown="@+id/checkPwEt"
+        android:nextFocusDown="@+id/mPwCheckEt"
         android:padding="10dp"
         android:password="true"
         android:singleLine="true"
@@ -72,13 +72,13 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/checkPwEt"
+            android:id="@+id/mPwCheckEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edge_black"
             android:focusable="auto"
-            android:nextFocusDown="@+id/clientNameEt"
+            android:nextFocusDown="@+id/mNameEt"
             android:padding="10dp"
             android:password="true"
             android:singleLine="true"
@@ -112,12 +112,12 @@
         android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/clientNameEt"
+        android:id="@+id/mNameEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edge_black"
         android:focusable="auto"
-        android:nextFocusDown="@+id/telEt"
+        android:nextFocusDown="@+id/mTelEt"
         android:padding="10dp"
         android:singleLine="true"
         android:textIsSelectable="true"
@@ -137,12 +137,12 @@
         android:textColor="#000000" />
 
     <EditText
-        android:id="@+id/telEt"
+        android:id="@+id/mTelEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edge_black"
         android:focusable="auto"
-        android:nextFocusDown="@+id/carIdEt"
+        android:nextFocusDown="@+id/mCarTypeEt"
         android:padding="10dp"
         android:phoneNumber="true"
         android:singleLine="true"
@@ -181,19 +181,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="20dp">
-
-        <Spinner
-            android:id="@+id/carSp"
-            style="@style/Widget.AppCompat.Spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:entries="@array/carName"></Spinner>
+        android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/carIdEt"
+            android:id="@+id/mCarTypeEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/edge_black"
+            android:focusable="auto"
+            android:nextFocusDown="@+id/mCarIdEt"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/mCarIdEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -205,11 +209,28 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/validcarid"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FF0000" />
+        android:orientation="horizontal"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/validcartype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textColor="#FF0000" />
+
+        <TextView
+            android:id="@+id/validcarid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textColor="#FF0000" />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/registerBtn"
