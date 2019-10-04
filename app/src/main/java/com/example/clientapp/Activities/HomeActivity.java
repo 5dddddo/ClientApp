@@ -4,24 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.fragments.CarFragment;
-import com.example.clientapp.fragments.NotificationFragment;
 import com.example.clientapp.fragments.ReservationFragment;
+import com.example.clientapp.fragments.NotificationFragment;
+import com.example.clientapp.fragments.StatusFragment;
 import com.example.clientapp.fragments.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -45,11 +40,11 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment;
             switch (menuItem.getItemId()) {
                 case R.id.car:
-                    fragment = new CarFragment();
+                    fragment = new ReservationFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
-                    fragment = new ReservationFragment();
+                    fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
