@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.fragments.ReservationFragment;
+import com.example.clientapp.fragments.ListFragment;
 import com.example.clientapp.fragments.NotificationFragment;
 import com.example.clientapp.fragments.StatusFragment;
 import com.example.clientapp.fragments.SettingFragment;
@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment;
             switch (menuItem.getItemId()) {
                 case R.id.car:
-                    fragment = new ReservationFragment();
+                    fragment = new ListFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
