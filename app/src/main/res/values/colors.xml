@@ -6,6 +6,6 @@
     <color name="base">#B2D7FFF1</color>
     <color name="button">#6AAFE6</color>
     <color name="umm">#6AAFE6</color>
-    <color name="ffont">#285943</color>
+    <color name="ffont">#000000</color>
     <color name="highbar">#77AF9C</color>
 </resources>
