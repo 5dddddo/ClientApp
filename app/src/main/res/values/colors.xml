@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="base">#B2D7FFF1</color>
+    <color name="button">#6AAFE6</color>
+    <color name="umm">#6AAFE6</color>
+    <color name="ffont">#285943</color>
+    <color name="highbar">#77AF9C</color>
 </resources>
