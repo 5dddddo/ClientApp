@@ -3,12 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF"
+    android:background="#558ed5"
+    android:backgroundTint="#558ed5"
     android:orientation="vertical"
     android:paddingLeft="20dp"
-    android:paddingTop="20dp"
+    android:paddingTop="50dp"
     android:paddingRight="20dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="100dp"
+        android:paddingBottom="50dp"
+        app:srcCompat="@drawable/login" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +28,7 @@
             android:id="@+id/idEditView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/edge_black"
+            android:background="@drawable/edge_gray"
             android:focusable="auto"
             android:hint="가입한 아이디 입력"
             android:nextFocusDown="@+id/pwEditView"
@@ -37,7 +45,7 @@
             android:id="@+id/pwEditView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/edge_black"
+            android:background="@drawable/edge_gray"
             android:focusable="auto"
             android:hint="비밀번호 입력"
             android:padding="15dp"
@@ -77,8 +85,8 @@
         android:id="@+id/addUserBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#558ed5"
+        android:background="#0048A7"
         android:text="회원 가입"
-        android:textColor="#000000" />
+        android:textColor="#ffffff" />
 
 </LinearLayout>

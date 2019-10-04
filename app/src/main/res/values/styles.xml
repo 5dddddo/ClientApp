@@ -12,5 +12,7 @@
     <style name="LoadingTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/loading_car</item>
     </style>
-
+    <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/login</item>
+    </style>
 </resources>
