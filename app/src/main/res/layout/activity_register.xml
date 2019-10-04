@@ -236,7 +236,7 @@
         android:id="@+id/registerBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#9CCC65"
+        android:background="#2196F3"
         android:text="가입하기" />
 
 

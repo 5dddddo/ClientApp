@@ -53,8 +53,8 @@ public class ReservationActivity extends AppCompatActivity {
     double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
     double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
 
-    int f_tire = (int)(100-(tire/ch_tire)*100);
-    int f_wiper = (int)(100-(wiper/ch_wiper)*100);
+    int f_tire = (int) (100 - (tire / ch_tire) * 100);
+    int f_wiper = (int) (100 - (wiper / ch_wiper) * 100);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +77,10 @@ public class ReservationActivity extends AppCompatActivity {
         per_dis = (TextView) findViewById(R.id.disper);
 
 
-
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.pb_tire);
         progressBar.setMax(100);
         progressBar.setProgress(f_tire);
-        if (f_tire <= 25){
+        if (f_tire <= 25) {
             per_tire.setTextColor(Color.RED);
             progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         }
@@ -180,7 +179,7 @@ public class ReservationActivity extends AppCompatActivity {
 
         map.put("member_id", keyword);
         map.put("reservation_time", day + reserve_time);
-        Log.i("공성나",day + reserve_time);
+        Log.i("공성나", day + reserve_time);
         map.put("key", otpkey);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -229,11 +228,11 @@ public class ReservationActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 monthOfYear = monthOfYear + 1;
-                String m=""+monthOfYear, d=""+dayOfMonth;
-                if(m.length() == 1){
+                String m = "" + monthOfYear, d = "" + dayOfMonth;
+                if (m.length() == 1) {
                     m = "0" + m;
                 }
-                if(d.length() == 1){
+                if (d.length() == 1) {
                     d = "0" + d;
                 }
                 textView_Date.setText(year + "-" + m + "-" + d);
@@ -245,11 +244,11 @@ public class ReservationActivity extends AppCompatActivity {
 
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String h=""+hourOfDay, m=""+minute;
-                if(h.length() == 1){
+                String h = "" + hourOfDay, m = "" + minute;
+                if (h.length() == 1) {
                     h = "0" + h;
                 }
-                if(m.length() == 1){
+                if (m.length() == 1) {
                     m = "0" + m;
                 }
                 textView_Date2.setText(h + ":" + m);

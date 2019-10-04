@@ -1,6 +1,5 @@
-package org.techtown.myapplication;
+package com.example.clientapp.Activities;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +8,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clientapp.R;
+import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarMaintenanceActivity extends AppCompatActivity {
-
-    CarInfoSearchService carInfoSearchService;
     String clientid = "mins1011";
     ArrayList<ReservationVO> data;
 
@@ -70,12 +68,10 @@ public class CarMaintenanceActivity extends AppCompatActivity {
         Log.i("msi123", data.toString());
         for (ReservationVO vo : data) {
             adapter.addItem(vo);
-            Log.i("msi411111", vo.getReservation_no()+"");
+            Log.i("msi411111", vo.getReservation_no() + "");
         }
 
         lv.setAdapter(adapter);
-
-
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -94,7 +90,7 @@ public class CarMaintenanceActivity extends AppCompatActivity {
                 ListItems.add("정비소 ID : " + vo.getBodyshop_no());
                 ListItems.add("정비 예약 시간 : " + vo.getReservation_time());
                 ListItems.add("정비 완료 시간 : " + vo.getRepaired_time());
-                ListItems.add("KEY 동의 여부 : " + (vo.getKey().equals("1")? "O" : "X"));
+                ListItems.add("KEY 동의 여부 : " + (vo.getKey().equals("1") ? "O" : "X"));
                 ListItems.add("담당 정비사 :" + vo.getRepaired_person());
 
                 final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
@@ -165,7 +161,7 @@ public class CarMaintenanceActivity extends AppCompatActivity {
 
         data = myObject;
         for (ReservationVO v : myObject)
-            Log.i("KAKAOBOOKLog@@@", v.getReservation_no()+"");
+            Log.i("KAKAOBOOKLog@@@", v.getReservation_no() + "");
         Log.i("오은애", "오은애");
     }
 

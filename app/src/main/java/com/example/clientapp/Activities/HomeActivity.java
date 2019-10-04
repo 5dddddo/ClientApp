@@ -47,10 +47,10 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.car:
                     fragment = new CarFragment();
                     loadFragmentClass(fragment);
-                    finish();
                     return true;
                 case R.id.reservation:
                     fragment = new ReservationFragment();
+                    loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
                     fragment = new SettingFragment();
