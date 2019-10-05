@@ -14,11 +14,8 @@ import android.widget.ToggleButton;
 import androidx.fragment.app.Fragment;
 
 import com.example.clientapp.R;
+import com.example.clientapp.VO.MemberVO;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SettingFragment extends Fragment {
 
     private TextView IdTv;
@@ -31,14 +28,21 @@ public class SettingFragment extends Fragment {
     private EditText carIdEt;
 
     private ToggleButton ctelBtn;
+    private Button modifyBtn;
     private Button cancelBtn;
 
     private String name;
     private String client_id;
     private String tel;
+    private MemberVO vo;
 
     public SettingFragment() {
         // Required empty public constructor
+    }
+
+    public SettingFragment(MemberVO vo) {
+        // Required empty public constructor
+        this.vo = vo;
     }
 
 
@@ -58,12 +62,12 @@ public class SettingFragment extends Fragment {
         carSp = (Spinner) rootView.findViewById(R.id.carSp);
 
 
-//        IdTv.setText(clientService.getClientVO().getCLIENT_ID());
-//        nameTv.setText(clientService.getClientVO().getCLIENT_NAME());
-//        telTv.setText(clientService.getClientVO().getTEL());
-////        carSp.setSelection(Integer.parseInt(clientService.getClientVO().getCAR_TYPE()));
-//        carSp.setSelection(1);
-//        carIdEt.setText(clientService.getClientVO().getCAR_ID());
+        IdTv.setText(vo.getMember_id());
+        nameTv.setText(vo.getMember_mname());
+        telTv.setText(vo.getMember_phonenumber());
+//        carSp.setSelection(Integer.parseInt(clientService.getClientVO().getCAR_TYPE()));
+        carSp.setSelection(1);
+        carIdEt.setText("소나타");
 
         cnameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +100,7 @@ public class SettingFragment extends Fragment {
                 }
             }
         });
+
         return rootView;
     }
 
