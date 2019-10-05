@@ -26,7 +26,6 @@ public class SettingActivity extends AppCompatActivity {
     private ToggleButton cnameBtn;
     private EditText telEt;
     private TextView telTv;
-    private Spinner carSp;
     private EditText carIdEt;
 
     private ToggleButton ctelBtn;
@@ -49,7 +48,6 @@ public class SettingActivity extends AppCompatActivity {
         carIdEt = (EditText) findViewById(R.id.carIdEt);
         ctelBtn = (ToggleButton) findViewById(R.id.ctelBtn);
         cancelBtn = (Button) findViewById(R.id.cancelBtn);
-        carSp = (Spinner) findViewById(R.id.carSp);
 
 
 //        IdTv.setText(clientService.getClientVO().getCLIENT_ID());

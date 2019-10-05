@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -19,39 +20,37 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
-        ImageView mImageView = (ImageView) findViewById(R.id.loading_img);
-        Glide.with(this).load(R.raw.logo1).into(mImageView);
+        ImageView mImageView = (ImageView) findViewById(R.id.gif);
+        GlideDrawableImageViewTarget gifImage = new GlideDrawableImageViewTarget(mImageView);
+        Glide.with(this).load(R.raw.car).into(gifImage);
+
 
         Handler mHandler = new Handler();
         mHandler.postDelayed(new SplashHandler(), 3000);
-        Log.i("SplashAcitivty", "SplashAcitivty");
-
-
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+        Log.i("LoadingActivity", "LoadingActivity");
     }
 
     private class SplashHandler implements Runnable {
 
         @Override
         public void run() {
-            startActivity(new Intent(getApplicationContext(), ReservationStatusActivity.class));
-            OpeningActivity.this.finish();
-
-            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
-            String data = preferences.getString("myObject", "NO");
-
-//            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-//            OpeningActivity.this.finish();
-            // call LoginActivity
-            if (data.equals("NO")) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                OpeningActivity.this.finish();
-            } else {
-                // Call MapsActivity
-                startActivity(new Intent(getApplicationContext(), ReservationStatusActivity.class));
-                OpeningActivity.this.finish();
-            }
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            LoadingActivity.this.finish();
+//
+//            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+//            String data = preferences.getString("myObject", "NO");
+//
+////            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+////            OpeningActivity.this.finish();
+//            // call LoginActivity
+//            if (data.equals("NO")) {
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                LoadingActivity.this.finish();
+//            } else {
+//                // Call MapsActivity
+//                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+//                LoadingActivity.this.finish();
+//            }
         }
     }
 
