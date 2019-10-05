@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.clientapp.Activities.HomeActivity;
-import com.example.clientapp.Activities.RegisterActivity;
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 t.start();
                 try {
                     t.join();
-                    Log.i("res가 무어ㅑ", res);
                     if (res != null) {
                         ObjectMapper mapper = new ObjectMapper();
                         vo = mapper.readValue(res, MemberVO.class);
@@ -73,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra("vo", vo);
                         startActivity(i);
                     } else {
-
                         Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                     }
                 } catch (InterruptedException e) {
@@ -112,50 +108,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public void login(String member_id, String member_pw) {
-//        try {
-//            URL url = new URL("http://70.12.115.57:9090/TestProject/clogin.do");
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setRequestMethod("POST");
-//            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            conn.setRequestProperty("Connection", "Keep-Alive");
-//            conn.setRequestProperty("charset", "utf-8");
-//
-//            OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-//            Map<String, String> map = new HashMap<String, String>();
-//
-//            map.put("id", member_id);
-//            map.put("pw", member_pw);
-//
-//            ObjectMapper mapper = new ObjectMapper();
-//            String json = mapper.writeValueAsString(map);
-//            osw.write(json);
-//            osw.flush();
-//
-//            Log.i("MemberLogin", "성공");
-//            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//            String inputLine;
-//            StringBuffer sb = new StringBuffer();
-//            while ((inputLine = br.readLine()) != null) {
-//                sb.append(inputLine);
-//            }
-//            br.close();
-//            Log.i("MemberLoginVO", sb.toString());
-//
-//            vo = mapper.readValue(sb.toString(), MemberVO.class);
-//            Log.i("MemberLoginID", vo.getMember_id());
-//            return;
-//
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        } catch (ProtocolException e) {
-//            e.printStackTrace();
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
 }
