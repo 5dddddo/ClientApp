@@ -10,6 +10,7 @@ public class MemberVO implements Parcelable {
     private String member_pw;
     private String member_mname;
     private String member_phonenumber;
+    private int car_no;
 
 
     public MemberVO() {
@@ -25,6 +26,7 @@ public class MemberVO implements Parcelable {
         this.member_pw = member_pw;
         this.member_mname = member_mname;
         this.member_phonenumber = member_phonenumber;
+        this.car_no = car_no;
     }
 
     public static final Creator<MemberVO> CREATOR = new Creator<MemberVO>() {
@@ -51,6 +53,7 @@ public class MemberVO implements Parcelable {
         member_pw = parcel.readString();
         member_mname = parcel.readString();
         member_phonenumber = parcel.readString();
+        car_no = parcel.readInt();
     }
 
     @Override
@@ -66,6 +69,7 @@ public class MemberVO implements Parcelable {
             parcel.writeString(member_pw);
             parcel.writeString(member_mname);
             parcel.writeString(member_phonenumber);
+            parcel.writeInt(car_no);
         } catch (Exception e) {
             Log.i("LOG", e.toString());
         }
@@ -111,9 +115,17 @@ public class MemberVO implements Parcelable {
         return member_phonenumber;
     }
 
+
     public void setMember_phonenumber(String member_phonenumber) {
         this.member_phonenumber = member_phonenumber;
     }
 
+    public int getCar_no() {
+        return car_no;
+    }
+
+    public void setCar_no(int car_no) {
+        this.car_no = car_no;
+    }
 
 }
