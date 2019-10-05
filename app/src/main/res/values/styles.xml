@@ -5,14 +5,8 @@
         <item name="colorPrimary">#558ed5</item>
         <item name="colorPrimaryDark">#558ed5</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
     </style>
 
-    <style name="LoadingTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/loading_car</item>
-    </style>
-    <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/login</item>
-    </style>
 </resources>
