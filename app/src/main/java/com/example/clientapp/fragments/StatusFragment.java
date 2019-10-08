@@ -120,7 +120,7 @@ public class StatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getContext(), ReservationActivity.class);
+                Intent intent = new Intent(getActivity(), ReservationActivity.class);
                 intent.putExtra("vo",vo);
                 startActivity(intent);
             }

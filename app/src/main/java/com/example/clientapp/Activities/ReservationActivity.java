@@ -66,7 +66,7 @@ public class ReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reservation);
 
         Intent i = getIntent();
-        vo = (MemberVO) i.getExtras().get("vo");
+        vo = (MemberVO) i.getExtras().getParcelable("vo");
         Log.i("vooovoovovoov", vo.getMember_id());
 
         textView_Date = (TextView) findViewById(R.id.textView_date);

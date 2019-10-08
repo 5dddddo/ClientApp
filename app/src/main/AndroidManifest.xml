@@ -21,8 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Activities.ReservationActivity" />
         <activity android:name=".Activities.SettingActivity" />
         <activity android:name=".Activities.HomeActivity">
+
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
