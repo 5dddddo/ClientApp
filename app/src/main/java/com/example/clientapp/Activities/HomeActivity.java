@@ -1,6 +1,5 @@
 package com.example.clientapp.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -14,9 +13,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.fragments.ListFragment;
 import com.example.clientapp.fragments.NotificationFragment;
 import com.example.clientapp.fragments.StatusFragment;
+import com.example.clientapp.fragments.ReservationFragment;
 import com.example.clientapp.fragments.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 //        Intent i = getIntent();
 //        MemberVO vo = i.getExtras().getParcelable("vo");
         actionbar_text.setText("차량 상태 정보");
-        loadFragmentClass(new ListFragment());
+        loadFragmentClass(new NotificationFragment());
 
     }
 
@@ -53,12 +52,12 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.car:
                     actionbar_text.setText("차량 상태 정보");
-                    fragment = new ListFragment();
+                    fragment = new NotificationFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
                     actionbar_text.setText("점검 내역");
-                    fragment = new StatusFragment();
+                    fragment = new ReservationFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
@@ -68,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 case R.id.notification:
                     actionbar_text.setText("알림사항");
-                    fragment = new NotificationFragment();
+                    fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
             }
