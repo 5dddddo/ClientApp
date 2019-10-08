@@ -26,6 +26,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.graphics.Color.GREEN;
@@ -116,15 +117,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (input.equals("공학수학마스터")) {
                     isMember_idValid = false;
-                    mId = "";
                     validid.setText("이미 존재하는 닉네임 입니다.");
                 } else if (!isIdValid(validid, input)) {
                     isMember_idValid = false;
                 } else {
                     isMember_idValid = true;
                     mId = input;
-                    validid.setText("사용 가능한 아이디입니다.");
                     validid.setTextColor(GREEN);
+                    validid.setText("사용 가능한 아이디입니다.");
                 }
             }
 
@@ -148,8 +148,8 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_pwValid = true;
                     mPw = input;
-                    validpw.setText("사용 가능합니다.");
                     validpw.setTextColor(GREEN);
+                    validpw.setText("사용 가능합니다.");
                 }
             }
         });
@@ -171,12 +171,12 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_nameValid = true;
                     mName = input;
-                    validname.setText("사용 가능합니다.");
                     validname.setTextColor(GREEN);
+                    validname.setText("사용 가능합니다.");
                 }
             }
         });
-        mNameEt.addTextChangedListener(new TextWatcher() {
+        mTelEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -195,12 +195,14 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_telValid = true;
                     mTel = input;
-                    validtel.setText("사용 가능합니다.");
                     validtel.setTextColor(GREEN);
+                    validtel.setText("사용 가능합니다.");
                 }
 
             }
         });
+
+
         mCarTypeEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -221,8 +223,9 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_cartypeValid = true;
                     mCarType = input;
+
+                    validtel.setTextColor(GREEN);
                     validcartype.setText("사용 가능합니다.");
-                    validcartype.setTextColor(Color.RED);
                 }
             }
 
@@ -246,8 +249,8 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_caridValid = true;
                     mCarId = input;
-                    validcarid.setText("사용 가능합니다.");
                     validcarid.setTextColor(2085187);
+                    validcarid.setText("사용 가능합니다.");
                 }
             }
         });
@@ -279,6 +282,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isInputComplete()) {
+                    map = new HashMap<String, String>();
                     map.put("member_id", mId);
                     map.put("member_pw", mPw);
                     map.put("member_mname", mName);
@@ -286,6 +290,8 @@ public class RegisterActivity extends AppCompatActivity {
                     map.put("car_type", mCarType);
                     map.put("car_id", mCarId);
                     String url = "http://70.12.115.57:9090/TestProject/register.do";
+                    HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+                    http.request();
                     Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
 //                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
 //                    Thread t = new Thread(registerRunnable);
