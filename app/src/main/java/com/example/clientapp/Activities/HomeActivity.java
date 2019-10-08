@@ -19,7 +19,7 @@ import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
+    BottomNavigationView bottomNavigationView;
     BackPressCloseHandler backPressCloseHandler;
     TextView actionbar_text;
     MemberVO vo;
@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 //        Intent i = getIntent();
 //        MemberVO vo = i.getExtras().getParcelable("vo");
         actionbar_text.setText("차량 상태 정보");
-        loadFragmentClass(new StatusFragment());
+        loadFragmentClass(new StatusFragment(vo));
 
     }
 
@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.car:
                     actionbar_text.setText("차량 상태 정보");
-                    fragment = new StatusFragment();
+                    fragment = new StatusFragment(vo);
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
