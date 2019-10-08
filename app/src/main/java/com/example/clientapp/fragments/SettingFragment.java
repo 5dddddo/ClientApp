@@ -66,7 +66,6 @@ public class SettingFragment extends Fragment {
         IdTv.setText(vo.getMember_id());
         nameTv.setText(vo.getMember_mname());
         telTv.setText(vo.getMember_phonenumber());
-//        carSp.setSelection(Integer.parseInt(clientService.getClientVO().getCAR_TYPE()));
         carSp.setSelection(1);
         carIdEt.setText("소나타");
 

@@ -31,7 +31,6 @@ public class MemberVO implements Parcelable {
         this.car_no = car_no;
         this.car_type = car_type;
         this.car_id = car_id;
-
     }
 
     public static final Creator<MemberVO> CREATOR = new Creator<MemberVO>() {
@@ -152,5 +151,4 @@ public class MemberVO implements Parcelable {
     public void setCar_type(String car_type) {
         this.car_type = car_type;
     }
-
 }
