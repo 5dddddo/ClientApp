@@ -257,7 +257,7 @@ public class ReservationActivity extends AppCompatActivity {
     void insertinfoloss() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 //        alert.setTitle("Error");
-        alert.setMessage("예약날짜, 시각을 확인해 주세요");
+        alert.setMessage("예약날짜, 시간을 확인해 주세요");
         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

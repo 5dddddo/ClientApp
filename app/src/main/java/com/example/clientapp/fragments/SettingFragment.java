@@ -60,8 +60,7 @@ public class SettingFragment extends Fragment {
         cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
         carSp = (Spinner) rootView.findViewById(R.id.carSp);
 
-        vo = new MemberVO(1, "oea0805", "1234",
-                "오은애", "01056113427", 1, "짱짱", "써나타");
+        vo = new MemberVO(1, "oea0805", "1234","오은애", "01056113427", 1, "짱짱", "써나타","Black");
 
         IdTv.setText(vo.getMember_id());
         nameTv.setText(vo.getMember_mname());
