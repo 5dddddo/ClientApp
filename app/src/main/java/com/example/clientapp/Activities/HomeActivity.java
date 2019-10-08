@@ -13,10 +13,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
+import com.example.clientapp.fragments.HistoryFragment;
 import com.example.clientapp.fragments.NotificationFragment;
-import com.example.clientapp.fragments.StatusFragment;
 import com.example.clientapp.fragments.ReservationFragment;
 import com.example.clientapp.fragments.SettingFragment;
+import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     BackPressCloseHandler backPressCloseHandler;
     TextView actionbar_text;
     MemberVO vo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 //        Intent i = getIntent();
 //        MemberVO vo = i.getExtras().getParcelable("vo");
         actionbar_text.setText("차량 상태 정보");
-        loadFragmentClass(new NotificationFragment());
+        loadFragmentClass(new StatusFragment());
 
     }
 
@@ -52,12 +54,12 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.car:
                     actionbar_text.setText("차량 상태 정보");
-                    fragment = new NotificationFragment();
+                    fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
                     actionbar_text.setText("점검 내역");
-                    fragment = new ReservationFragment();
+                    fragment = new HistoryFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
@@ -67,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 case R.id.notification:
                     actionbar_text.setText("알림사항");
-                    fragment = new StatusFragment();
+                    fragment = new NotificationFragment();
                     loadFragmentClass(fragment);
                     return true;
             }
