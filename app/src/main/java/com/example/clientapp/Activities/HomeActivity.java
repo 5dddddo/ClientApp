@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
         vo = new MemberVO(1, "oea0805", "1234",
-                "오은애", "01056113427", 1);
+                "오은애", "01056113427", 1, "짱짱", "써나타");
 
 //
 //        Intent i = getIntent();

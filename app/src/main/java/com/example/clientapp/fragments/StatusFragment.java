@@ -47,20 +47,20 @@ public class StatusFragment extends Fragment {
     String keyword = "111";     // 가상의 클라이언트 ID
     String date = "", time = "", otpkey = "", reserve_time = "", day = "";
     String reserokdata;
-    String TIRE_CHANGE_DISTANCE = "58000", WIPER_CHANGE_DISTANCE = "8000", ENGINE_OIL_VISCOSITY = "60", DISTANCE = "90000", COOLER_LEFT = "80";
-    String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "10000";
+//    String TIRE_CHANGE_DISTANCE = "58000", WIPER_CHANGE_DISTANCE = "8000", ENGINE_OIL_VISCOSITY = "60", DISTANCE = "90000", COOLER_LEFT = "80";
+//    String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "10000";
 
-    double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
-    double wiper = Double.parseDouble(WIPER_CHANGE_DISTANCE);
-    int engineoil = Integer.parseInt(ENGINE_OIL_VISCOSITY);
-    int distance = Integer.parseInt(DISTANCE);
-    int cooler = Integer.parseInt(COOLER_LEFT);
+//    double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
+//    double wiper = Double.parseDouble(WIPER_CHANGE_DISTANCE);
+//    int engineoil = Integer.parseInt(ENGINE_OIL_VISCOSITY);
+//    int distance = Integer.parseInt(DISTANCE);
+//    int cooler = Integer.parseInt(COOLER_LEFT);
 
-    double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
-    double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
+//    double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
+//    double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
 
-    int f_tire = (int) (100 - (tire / ch_tire) * 100);
-    int f_wiper = (int) (100 - (wiper / ch_wiper) * 100);
+//    int f_tire = (int) (100 - (tire / ch_tire) * 100);
+//    int f_wiper = (int) (100 - (wiper / ch_wiper) * 100);
 
     public StatusFragment() {
         // Required empty public constructor
@@ -85,53 +85,53 @@ public class StatusFragment extends Fragment {
         text_date = (TextView) rootView.findViewById(R.id.textView_date);
         text_time = (TextView) rootView.findViewById(R.id.textView_date2);
         checkBox = (CheckBox) rootView.findViewById(R.id.checkbox);
-
-        per_tire = (TextView) rootView.findViewById(R.id.tireper);
-        per_wiper = (TextView) rootView.findViewById(R.id.wiperper);
-        per_oil = (TextView) rootView.findViewById(R.id.engineper);
-        per_cool = (TextView) rootView.findViewById(R.id.coolper);
-        per_dis = (TextView) rootView.findViewById(R.id.disper);
-        ProgressBar progressBar1 = (ProgressBar) rootView.findViewById(R.id.pb_tire);
-        ProgressBar progressBar2 = (ProgressBar) rootView.findViewById(R.id.pb_cooler);
-        ProgressBar progressBar3 = (ProgressBar) rootView.findViewById(R.id.pb_enginoil);
-        ProgressBar progressBar4 = (ProgressBar) rootView.findViewById(R.id.pb_tdistance);
-        ProgressBar progressBar5 = (ProgressBar) rootView.findViewById(R.id.pb_wiper);
-        progressBar1.setMax(100);
-        progressBar1.setProgress(f_tire);
-        if (f_tire <= 25) {
-            per_tire.setTextColor(Color.RED);
-            progressBar1.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
-        }
-        per_tire.setText(f_tire + "%");
-
-        progressBar2.setMax(100);
-        progressBar2.setProgress(cooler);
-        if (cooler <= 25) {
-            per_cool.setTextColor(Color.RED);
-            progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
-        }
-        per_cool.setText(cooler + "%");
-
-        progressBar3.setMax(100);
-        progressBar3.setProgress(engineoil);
-        if (engineoil <= 25) {
-            per_oil.setTextColor(Color.RED);
-            progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
-        }
-        per_oil.setText(engineoil + "%");
-
-
-        progressBar4.setMax(100);
-        progressBar4.setProgress(distance);
-        per_dis.setText(distance + "km");
-
-        progressBar5.setMax(100);
-        progressBar5.setProgress(f_wiper);
-        if (f_wiper <= 25) {
-            per_wiper.setTextColor(Color.RED);
-            progressBar5.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
-        }
-        per_wiper.setText(f_wiper + "%");
+//
+//        per_tire = (TextView) rootView.findViewById(R.id.tireper);
+//        per_wiper = (TextView) rootView.findViewById(R.id.wiperper);
+//        per_oil = (TextView) rootView.findViewById(R.id.engineper);
+//        per_cool = (TextView) rootView.findViewById(R.id.coolper);
+//        per_dis = (TextView) rootView.findViewById(R.id.disper);
+//        ProgressBar progressBar1 = (ProgressBar) rootView.findViewById(R.id.pb_tire);
+//        ProgressBar progressBar2 = (ProgressBar) rootView.findViewById(R.id.pb_cooler);
+//        ProgressBar progressBar3 = (ProgressBar) rootView.findViewById(R.id.pb_enginoil);
+//        ProgressBar progressBar4 = (ProgressBar) rootView.findViewById(R.id.pb_tdistance);
+//        ProgressBar progressBar5 = (ProgressBar) rootView.findViewById(R.id.pb_wiper);
+//        progressBar1.setMax(100);
+//        progressBar1.setProgress(f_tire);
+//        if (f_tire <= 25) {
+//            per_tire.setTextColor(Color.RED);
+//            progressBar1.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
+//        }
+//        per_tire.setText(f_tire + "%");
+//
+//        progressBar2.setMax(100);
+//        progressBar2.setProgress(cooler);
+//        if (cooler <= 25) {
+//            per_cool.setTextColor(Color.RED);
+//            progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
+//        }
+//        per_cool.setText(cooler + "%");
+//
+//        progressBar3.setMax(100);
+//        progressBar3.setProgress(engineoil);
+//        if (engineoil <= 25) {
+//            per_oil.setTextColor(Color.RED);
+//            progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
+//        }
+//        per_oil.setText(engineoil + "%");
+//
+//
+//        progressBar4.setMax(100);
+//        progressBar4.setProgress(distance);
+//        per_dis.setText(distance + "km");
+//
+//        progressBar5.setMax(100);
+//        progressBar5.setProgress(f_wiper);
+//        if (f_wiper <= 25) {
+//            per_wiper.setTextColor(Color.RED);
+//            progressBar5.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
+//        }
+//        per_wiper.setText(f_wiper + "%");
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
