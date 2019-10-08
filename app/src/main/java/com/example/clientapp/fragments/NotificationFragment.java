@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class NotificationFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_notification, container, false);
 
+        Button btn = (Button) rootView.findViewById(R.id.reserbtn);
 
         per_tire = (TextView) rootView.findViewById(R.id.tireper);
         per_wiper = (TextView) rootView.findViewById(R.id.wiperper);
