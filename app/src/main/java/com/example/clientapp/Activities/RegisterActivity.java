@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,9 +26,15 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 import static android.graphics.Color.GREEN;
+import static com.example.clientapp.HttpUtils.isCarIdVaild;
+import static com.example.clientapp.HttpUtils.isCarTypeVaild;
+import static com.example.clientapp.HttpUtils.isIdValid;
+import static com.example.clientapp.HttpUtils.isNameVaild;
+import static com.example.clientapp.HttpUtils.isPwVaild;
+import static com.example.clientapp.HttpUtils.isTelVaild;
 
 public class RegisterActivity extends AppCompatActivity {
     boolean isMember_idValid = false;
@@ -63,7 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String mTel;
     private String mCarType;
     private String mCarId;
-
+    HttpUtils http;
+    Map<String, String> map;
     private MemberVO vo = new MemberVO();
 
     @Override
@@ -110,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                     isMember_idValid = false;
                     mId = "";
                     validid.setText("이미 존재하는 닉네임 입니다.");
-                } else if (!isIdValid(input)) {
+                } else if (!isIdValid(validid, input)) {
                     isMember_idValid = false;
                 } else {
                     isMember_idValid = true;
@@ -135,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String input = mPwEt.getText().toString();
                 if (isMember_pwValid && input.equals(mPw)) return;
-                else if (!isPwVaild(input)) {
+                else if (!isPwVaild(validpw, input)) {
                     isMember_pwValid = false;
                 } else {
                     isMember_pwValid = true;
@@ -158,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String input = mNameEt.getText().toString();
                 if (isMember_nameValid && input.equals(mName)) return;
-                if (!isNameVaild(input)) {
+                if (!isNameVaild(validname, input)) {
                     isMember_nameValid = false;
                 } else {
                     isMember_nameValid = true;
@@ -182,7 +190,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String input = mTelEt.getText().toString();
                 if (isMember_telValid && input.equals(mTel)) return;
 
-                if (!isTelVaild(input)) {
+                if (!isTelVaild(validtel, input)) {
                     isMember_telValid = false;
                 } else {
                     isMember_telValid = true;
@@ -208,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (isMember_cartypeValid && input.equals(mCarType)) return;
 
-                if (!isCarTypeVaild(input)) {
+                if (!isCarTypeVaild(validcartype, input)) {
                     isMember_cartypeValid = false;
                 } else {
                     isMember_cartypeValid = true;
@@ -233,7 +241,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String input = mCarIdEt.getText().toString();
 
                 if (isMember_caridValid && input.equals(mCarId)) return;
-                if (!isCarIdVaild(input)) {
+                if (!isCarIdVaild(validcarid, input)) {
                     isMember_caridValid = false;
                 } else {
                     isMember_caridValid = true;
@@ -271,7 +279,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isInputComplete()) {
-
+                    map.put("member_id", mId);
+                    map.put("member_pw", mPw);
+                    map.put("member_mname", mName);
+                    map.put("member_phonenumber", mTel);
+                    map.put("car_type", mCarType);
+                    map.put("car_id", mCarId);
+                    String url = "http://70.12.115.57:9090/TestProject/register.do";
                     Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
 //                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
 //                    Thread t = new Thread(registerRunnable);
@@ -335,90 +349,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public boolean isIdValid(String input) {
-        if (input.length() == 0) {
-
-            validid.setTextColor(Color.RED);
-            validid.setText("아이디를 입력하세요.");
-            return false;
-        }
-        if (!Pattern.matches("^[a-zA-Z0-9]{5,10}$", input)) {
-            validid.setTextColor(Color.RED);
-            validid.setText("5~10자의 영문 대/소문자, 숫자만 사용 가능합니다.");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isPwVaild(String input) {
-        if (input.length() == 0) {
-            validpw.setTextColor(Color.RED);
-            validpw.setText("비밀번호를 입력하세요.");
-            return false;
-        }
-        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$", input)) {
-            validpw.setTextColor(Color.RED);
-            validpw.setText("8~15자의 영문 대/소문자, 숫자만 사용 가능합니다.");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isNameVaild(String input) {
-        if (input.length() == 0) {
-            validname.setText("이름을 입력하세요.");
-            return false;
-        }
-        if (!Pattern.matches("^[가-힣]{2,10}$", input)) {
-            validname.setTextColor(Color.RED);
-            validname.setText("2글자 이상의 한글을 입력해주세요.");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isTelVaild(String input) {
-        if (input.length() == 0) {
-            validtel.setTextColor(Color.RED);
-            validtel.setText("핸드폰 번호를 입력하세요.");
-            return false;
-        }
-        if (!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", input)) {
-            validtel.setTextColor(Color.RED);
-            validtel.setText("올바른 번호가 아닙니다.");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isCarTypeVaild(String input) {
-        if (input.length() == 0) {
-            validcartype.setTextColor(Color.RED);
-            validcartype.setText("차종을 입력하세요.");
-            return false;
-        }
-        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
-            validcartype.setTextColor(Color.RED);
-            validcartype.setText("특수문자는 사용할 수 없습니다.");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isCarIdVaild(String input) {
-        if (input.length() == 0) {
-            validcarid.setTextColor(Color.RED);
-            validcarid.setText("차 번호를 입력하세요.");
-            return false;
-        }
-        if (!Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)) {
-            validcarid.setTextColor(Color.RED);
-            validcarid.setText("올바른 차 번호가 아닙니다.");
-            return false;
-        }
-        return true;
-    }
-
     public boolean isInputComplete() {
         if (isMember_caridValid && isMember_cartypeValid && isMember_idValid &&
                 isMember_nameValid && isMember_pwchkValid && isMember_pwValid && isMember_telValid)
@@ -426,6 +356,98 @@ public class RegisterActivity extends AppCompatActivity {
         else
             return false;
     }
+//
+//    public boolean isIdValid(String input) {
+//        if (input.length() == 0) {
+//
+//            validid.setTextColor(Color.RED);
+//            validid.setText("아이디를 입력하세요.");
+//            return false;
+//        }
+//        if (!Pattern.matches("^[a-zA-Z0-9]{5,10}$", input)) {
+//            validid.setTextColor(Color.RED);
+//            validid.setText("5~10자의 영문 대/소문자, 숫자만 사용 가능합니다.");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean isPwVaild(String input) {
+//        if (input.length() == 0) {
+//            validpw.setTextColor(Color.RED);
+//            validpw.setText("비밀번호를 입력하세요.");
+//            return false;
+//        }
+//        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$", input)) {
+//            validpw.setTextColor(Color.RED);
+//            validpw.setText("8~15자의 영문 대/소문자, 숫자만 사용 가능합니다.");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean isNameVaild(String input) {
+//        if (input.length() == 0) {
+//            validname.setText("이름을 입력하세요.");
+//            return false;
+//        }
+//        if (!Pattern.matches("^[가-힣]{2,10}$", input)) {
+//            validname.setTextColor(Color.RED);
+//            validname.setText("2글자 이상의 한글을 입력해주세요.");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean isTelVaild(String input) {
+//        if (input.length() == 0) {
+//            validtel.setTextColor(Color.RED);
+//            validtel.setText("핸드폰 번호를 입력하세요.");
+//            return false;
+//        }
+//        if (!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", input)) {
+//            validtel.setTextColor(Color.RED);
+//            validtel.setText("올바른 번호가 아닙니다.");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean isCarTypeVaild(String input) {
+//        if (input.length() == 0) {
+//            validcartype.setTextColor(Color.RED);
+//            validcartype.setText("차종을 입력하세요.");
+//            return false;
+//        }
+//        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
+//            validcartype.setTextColor(Color.RED);
+//            validcartype.setText("특수문자는 사용할 수 없습니다.");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean isCarIdVaild(String input) {
+//        if (input.length() == 0) {
+//            validcarid.setTextColor(Color.RED);
+//            validcarid.setText("차 번호를 입력하세요.");
+//            return false;
+//        }
+//        if (!Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)) {
+//            validcarid.setTextColor(Color.RED);
+//            validcarid.setText("올바른 차 번호가 아닙니다.");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean isInputComplete() {
+//        if (isMember_caridValid && isMember_cartypeValid && isMember_idValid &&
+//                isMember_nameValid && isMember_pwchkValid && isMember_pwValid && isMember_telValid)
+//            return true;
+//        else
+//            return false;
+//    }
 
 }
 

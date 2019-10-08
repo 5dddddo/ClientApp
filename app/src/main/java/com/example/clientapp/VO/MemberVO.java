@@ -11,6 +11,8 @@ public class MemberVO implements Parcelable {
     private String member_mname;
     private String member_phonenumber;
     private int car_no;
+    private String car_id;
+    private String car_type;
 
 
     public MemberVO() {
@@ -19,7 +21,7 @@ public class MemberVO implements Parcelable {
 
 
     public MemberVO(int member_no, String member_id, String member_pw, String member_mname,
-                    String member_phonenumber, int car_no) {
+                    String member_phonenumber, int car_no, String car_type, String car_id) {
         super();
         this.member_no = member_no;
         this.member_id = member_id;
@@ -27,6 +29,8 @@ public class MemberVO implements Parcelable {
         this.member_mname = member_mname;
         this.member_phonenumber = member_phonenumber;
         this.car_no = car_no;
+        this.car_type = car_type;
+        this.car_id = car_id;
     }
 
     public static final Creator<MemberVO> CREATOR = new Creator<MemberVO>() {
@@ -54,6 +58,8 @@ public class MemberVO implements Parcelable {
         member_mname = parcel.readString();
         member_phonenumber = parcel.readString();
         car_no = parcel.readInt();
+        car_type = parcel.readString();
+        car_id = parcel.readString();
     }
 
     @Override
@@ -70,6 +76,8 @@ public class MemberVO implements Parcelable {
             parcel.writeString(member_mname);
             parcel.writeString(member_phonenumber);
             parcel.writeInt(car_no);
+            parcel.writeString(car_type);
+            parcel.writeString(car_id);
         } catch (Exception e) {
             Log.i("LOG", e.toString());
         }
@@ -128,4 +136,19 @@ public class MemberVO implements Parcelable {
         this.car_no = car_no;
     }
 
+    public String getCar_id() {
+        return car_id;
+    }
+
+    public void setCar_id(String car_id) {
+        this.car_id = car_id;
+    }
+
+    public String getCar_type() {
+        return car_type;
+    }
+
+    public void setCar_type(String car_type) {
+        this.car_type = car_type;
+    }
 }

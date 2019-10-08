@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#558ed5"
-    android:backgroundTint="#558ed5"
+    android:background="#8eb4e3"
+    android:backgroundTint="#8eb4e3"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingTop="50dp"
@@ -12,11 +12,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
-        android:paddingBottom="50dp"
-        app:srcCompat="@drawable/login" />
+        android:paddingTop="95dp"
+        android:paddingBottom="30dp"
+        app:srcCompat="@drawable/chavis" />
 
     <LinearLayout
         android:layout_width="match_parent"

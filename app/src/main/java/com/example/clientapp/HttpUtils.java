@@ -2,7 +2,9 @@ package com.example.clientapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,6 +20,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class HttpUtils {
     private Context context;
@@ -60,7 +63,7 @@ public class HttpUtils {
                 con.setRequestMethod("GET");
                 con.setDoOutput(false); //DoOutPut설정시 GET으로 설정해도 자동으로 POST로 바뀐다.
             }
-            setCookieHeader();
+//            setCookieHeader();
             //사용자가 로그인해서 세션 쿠키를 서버로부터 발급받은적 있다면 그 다음 요청 헤더 부터는 그 세션 쿠키를 포함해서 전송해야 함.
 
 
@@ -77,7 +80,7 @@ public class HttpUtils {
                 res += line;
             }
             Log.i("로그인 정보",res);
-            getCookieHeader();
+//            getCookieHeader();
             return res;
         } catch (MalformedURLException e) { // for URL.
             e.printStackTrace();
@@ -132,4 +135,90 @@ public class HttpUtils {
         edit.putString("sessionid", sessionid);
         edit.apply(); //비동기 처리
     }
+
+    public static boolean isIdValid(TextView valid, String input) {
+        if (input.length() == 0) {
+            valid.setTextColor(Color.RED);
+            valid.setText("아이디를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^[a-zA-Z0-9]{5,10}$", input)) {
+            valid.setTextColor(Color.RED);
+            valid.setText("5~10자의 영문 대/소문자, 숫자만 사용 가능합니다.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isPwVaild(TextView valid,String input) {
+        if (input.length() == 0) {
+            valid.setTextColor(Color.RED);
+            valid.setText("비밀번호를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$", input)) {
+            valid.setTextColor(Color.RED);
+            valid.setText("8~15자의 영문 대/소문자, 숫자만 사용 가능합니다.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isNameVaild(TextView valid,String input) {
+        if (input.length() == 0) {
+            valid.setText("이름을 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^[가-힣]{2,10}$", input)) {
+            valid.setTextColor(Color.RED);
+            valid.setText("2글자 이상의 한글을 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isTelVaild(TextView valid,String input) {
+        if (input.length() == 0) {
+            valid.setTextColor(Color.RED);
+            valid.setText("핸드폰 번호를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", input)) {
+            valid.setTextColor(Color.RED);
+            valid.setText("올바른 번호가 아닙니다.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isCarTypeVaild(TextView valid,String input) {
+        if (input.length() == 0) {
+            valid.setTextColor(Color.RED);
+            valid.setText("차종을 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
+            valid.setTextColor(Color.RED);
+            valid.setText("특수문자는 사용할 수 없습니다.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isCarIdVaild(TextView valid,String input) {
+        if (input.length() == 0) {
+            valid.setTextColor(Color.RED);
+            valid.setText("차 번호를 입력하세요.");
+            return false;
+        }
+        if (!Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)) {
+            valid.setTextColor(Color.RED);
+            valid.setText("올바른 차 번호가 아닙니다.");
+            return false;
+        }
+        return true;
+    }
+
+
+
 }
