@@ -46,43 +46,48 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 member_id = idEditView.getText().toString();
                 member_pw = pwEditView.getText().toString();
-                Thread t = new Thread() {
-                    public void run() {
-                        try {
-                            map.put("member_id", member_id);
-                            map.put("member_pw", member_pw);
-                            String url = "http://70.12.115.57:9090/TestProject/clogin.do";
-                            HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
-                            res = http.request();
-                        } catch (Exception e) {
-                            Log.i("MemberLoginError", e.toString());
+                if (member_id.length() != 0 && member_pw.length() != 0) {
+                    Thread t = new Thread() {
+                        public void run() {
+                            try {
+                                map.put("member_id", member_id);
+                                map.put("member_pw", member_pw);
+                                String url = "http://70.12.115.57:9090/TestProject/clogin.do";
+                                HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+                                res = http.request();
+                            } catch (Exception e) {
+                                Log.i("MemberLoginError", e.toString());
+                            }
                         }
+                    };
+                    t.start();
+                    try {
+                        t.join();
+                        if (!res.equals("null")) {
+                            ObjectMapper mapper = new ObjectMapper();
+                            vo = mapper.readValue(res, MemberVO.class);
+                            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                            i.putExtra("vo", vo);
+                            i.putExtra("fragment", "login");
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (JsonParseException e) {
+                        e.printStackTrace();
+                    } catch (JsonMappingException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                };
-                t.start();
-                try {
-                    t.join();
-                    if (res != null) {
-                        ObjectMapper mapper = new ObjectMapper();
-                        vo = mapper.readValue(res, MemberVO.class);
-                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                        i.putExtra("vo", vo);
-                        i.putExtra("fragment","login");
-                        startActivity(i);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (JsonParseException e) {
-                    e.printStackTrace();
-                } catch (JsonMappingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
+                } else {
+                    Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
+                }
             }
+
         });
 
         addUserBtn.setOnClickListener(new View.OnClickListener() {

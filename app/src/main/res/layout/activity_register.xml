@@ -9,7 +9,11 @@
     android:paddingTop="20dp"
     android:paddingRight="20dp">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -239,5 +243,6 @@
         android:background="#42A5F5"
         android:text="가입하기" />
 
+    </ScrollView>
 
 </LinearLayout>
