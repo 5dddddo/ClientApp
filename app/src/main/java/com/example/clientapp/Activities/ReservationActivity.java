@@ -87,7 +87,7 @@ public class ReservationActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(ReservationActivity.this,R.style.MyDatePickerDialogTheme, callbackMethod, 2019, 9, 20);
+                DatePickerDialog dialog = new DatePickerDialog(ReservationActivity.this,R.style.MyDatePickerDialogTheme, callbackMethod, 2019, 10, 8);
                 dialog.show();
             }
         });
@@ -95,7 +95,7 @@ public class ReservationActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog dialog2 = new TimePickerDialog(ReservationActivity.this,R.style.MyTimePickerDialog, callbackMethod2, 8, 10, false);
+                TimePickerDialog dialog2 = new TimePickerDialog(ReservationActivity.this,R.style.MyTimePickerDialog, callbackMethod2, 5, 11, false);
                 dialog2.show();
             }
         });
@@ -179,7 +179,6 @@ public class ReservationActivity extends AppCompatActivity {
 
 
         Log.i("msi", "222");
-        int responseCode = conn.getResponseCode();
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -243,7 +242,7 @@ public class ReservationActivity extends AppCompatActivity {
 //        builder.setMessage("AlertDialog Content");
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "예약 잘 되엇는지 확인하는 엑티비티?로.", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "예약 잘 되엇는지 확인하는 엑티비티?로.", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         intent.putExtra("fragment", "reservation");
                         intent.putExtra("vo", vo);
@@ -257,8 +256,8 @@ public class ReservationActivity extends AppCompatActivity {
 
     void insertinfoloss() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Error");
-        alert.setMessage("입력되지않은 정보가 존재합니다.");
+//        alert.setTitle("Error");
+        alert.setMessage("예약날짜, 시각을 확인해 주세요");
         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
