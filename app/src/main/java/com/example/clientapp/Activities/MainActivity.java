@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                             String url = "http://70.12.115.57:9090/TestProject/clogin.do";
                             HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                             res = http.request();
-
                         } catch (Exception e) {
                             Log.i("MemberLoginError", e.toString());
                         }

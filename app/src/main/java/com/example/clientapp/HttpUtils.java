@@ -43,11 +43,12 @@ public class HttpUtils {
         try {
             URL Url = new URL(url);
             con = (HttpURLConnection) Url.openConnection();
-            con.setRequestProperty("Accept", "application/json");
+            con.setRequestProperty("charset", "utf-8");
+//            con.setRequestProperty("Accept", "application/json");
             con.setDefaultUseCaches(false);
             con.setUseCaches(false);
             con.setDoInput(true);
-            con.setRequestProperty("Accept-Charset", "UTF-8");
+//            con.setRequestProperty("Accept-Charset", "UTF-8");
 
             if (Method == HttpUtils.POST) {
                 con.setRequestMethod("POST");
@@ -55,6 +56,7 @@ public class HttpUtils {
                 OutputStream os = con.getOutputStream();
                 ObjectMapper mapper = new ObjectMapper();
                 String sendMsg = mapper.writeValueAsString(map);
+                Log.i("mapampampa", sendMsg + map.get("member_id"));
                 os.write(sendMsg.getBytes("UTF-8"));
                 os.flush();
                 os.close();
@@ -79,7 +81,7 @@ public class HttpUtils {
             while ((line = reader.readLine()) != null) {
                 res += line;
             }
-            Log.i("로그인 정보",res);
+            Log.i("로그인 정보", res);
 //            getCookieHeader();
             return res;
         } catch (MalformedURLException e) { // for URL.
@@ -150,7 +152,7 @@ public class HttpUtils {
         return true;
     }
 
-    public static boolean isPwVaild(TextView valid,String input) {
+    public static boolean isPwVaild(TextView valid, String input) {
         if (input.length() == 0) {
             valid.setTextColor(Color.RED);
             valid.setText("비밀번호를 입력하세요.");
@@ -164,8 +166,9 @@ public class HttpUtils {
         return true;
     }
 
-    public static boolean isNameVaild(TextView valid,String input) {
+    public static boolean isNameVaild(TextView valid, String input) {
         if (input.length() == 0) {
+            valid.setTextColor(Color.RED);
             valid.setText("이름을 입력하세요.");
             return false;
         }
@@ -177,7 +180,7 @@ public class HttpUtils {
         return true;
     }
 
-    public static boolean isTelVaild(TextView valid,String input) {
+    public static boolean isTelVaild(TextView valid, String input) {
         if (input.length() == 0) {
             valid.setTextColor(Color.RED);
             valid.setText("핸드폰 번호를 입력하세요.");
@@ -191,7 +194,7 @@ public class HttpUtils {
         return true;
     }
 
-    public static boolean isCarTypeVaild(TextView valid,String input) {
+    public static boolean isCarTypeVaild(TextView valid, String input) {
         if (input.length() == 0) {
             valid.setTextColor(Color.RED);
             valid.setText("차종을 입력하세요.");
@@ -205,7 +208,7 @@ public class HttpUtils {
         return true;
     }
 
-    public static boolean isCarIdVaild(TextView valid,String input) {
+    public static boolean isCarIdVaild(TextView valid, String input) {
         if (input.length() == 0) {
             valid.setTextColor(Color.RED);
             valid.setText("차 번호를 입력하세요.");
@@ -218,7 +221,6 @@ public class HttpUtils {
         }
         return true;
     }
-
 
 
 }
