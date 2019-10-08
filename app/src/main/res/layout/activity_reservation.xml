@@ -140,287 +140,288 @@
         <!--android:textStyle="bold"-->
         <!--/>-->
         <!--hear-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:gravity="center_vertical"
-                android:padding="20dp"
-                android:text="내차현황"
-                android:textColor="@color/ffont"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/listview_outline"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="타이어"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginVertical="10dp"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:padding="20dp"-->
+                <!--android:text="내차현황"-->
+                <!--android:textColor="@color/ffont"-->
+                <!--android:textSize="20dp"-->
+                <!--android:textStyle="bold" />-->
+        <!--</LinearLayout>-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginHorizontal="20dp"-->
+            <!--android:background="@drawable/listview_outline"-->
+            <!--android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="와이퍼"
-                        android:textStyle="bold" />
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="vertical">-->
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
 
-                </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="30dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="타이어"-->
+                        <!--android:textStyle="bold" />-->
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="엔진오일"
-                        android:textStyle="bold" />
+                <!--</LinearLayout>-->
 
 
-                </LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="30dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="와이퍼"-->
+                        <!--android:textStyle="bold" />-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="냉각수"
-                        android:textStyle="bold" />
+                <!--</LinearLayout>-->
 
 
-                </LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:text="주행거리"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tireper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:textColor="#03A9F4"
-                        android:textSize="11dp" />
-                </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="30dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="엔진오일"-->
+                        <!--android:textStyle="bold" />-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/wiperper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:textColor="#03A9F4"
-                        android:textSize="11dp" />
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="30dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="냉각수"-->
+                        <!--android:textStyle="bold" />-->
 
 
-                    <TextView
-                        android:id="@+id/engineper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:textColor="#03A9F4"
-                        android:textSize="11dp" />
-                </LinearLayout>
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="30dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="주행거리"-->
+                        <!--android:textStyle="bold" />-->
+
+                <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tireper"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="#03A9F4"-->
+                        <!--android:textSize="11dp" />-->
+                <!--</LinearLayout>-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/wiperper"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="#03A9F4"-->
+                        <!--android:textSize="11dp" />-->
+                <!--</LinearLayout>-->
 
 
-                    <TextView
-                        android:id="@+id/coolper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:textColor="#03A9F4"
-                        android:textSize="11dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
 
 
-                    <TextView
-                        android:id="@+id/disper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:textColor="#03A9F4"
-                        android:textSize="11dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
-
-                <ProgressBar
-                    android:id="@+id/pb_tire"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:progressDrawable="@drawable/progressbar_progressbar1" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/engineper"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="#03A9F4"-->
+                        <!--android:textSize="11dp" />-->
+                <!--</LinearLayout>-->
 
 
-                <ProgressBar
-                    android:id="@+id/pb_wiper"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:progressDrawable="@drawable/progressbar_progressbar1" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
 
-                <ProgressBar
-                    android:id="@+id/pb_enginoil"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:progressDrawable="@drawable/progressbar_progressbar1"
 
-                    />
+                    <!--<TextView-->
+                        <!--android:id="@+id/coolper"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="#03A9F4"-->
+                        <!--android:textSize="11dp" />-->
+                <!--</LinearLayout>-->
 
-                <ProgressBar
-                    android:id="@+id/pb_cooler"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:progressDrawable="@drawable/progressbar_progressbar1"
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
 
-                    />
 
-                <ProgressBar
-                    android:id="@+id/pb_tdistance"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:progressDrawable="@drawable/progressbar_progressbar1" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/disper"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="#03A9F4"-->
+                        <!--android:textSize="11dp" />-->
+                <!--</LinearLayout>-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-        </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="3"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/pb_tire"-->
+                    <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="30dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:progressDrawable="@drawable/progressbar_progressbar1" />-->
+
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/pb_wiper"-->
+                    <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="30dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:progressDrawable="@drawable/progressbar_progressbar1" />-->
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/pb_enginoil"-->
+                    <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="30dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:progressDrawable="@drawable/progressbar_progressbar1"-->
+
+                    <!--/>-->
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/pb_cooler"-->
+                    <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="30dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:progressDrawable="@drawable/progressbar_progressbar1"-->
+
+                    <!--/>-->
+
+                <!--<ProgressBar-->
+                    <!--android:id="@+id/pb_tdistance"-->
+                    <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="30dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:progressDrawable="@drawable/progressbar_progressbar1" />-->
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -466,7 +467,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/mycar"
+                android:id="@+id/mycartype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"

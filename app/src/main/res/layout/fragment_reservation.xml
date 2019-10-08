@@ -169,7 +169,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/mycar"
+                    android:id="@+id/mycartype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"

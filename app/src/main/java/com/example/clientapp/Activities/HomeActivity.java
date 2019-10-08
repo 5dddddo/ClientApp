@@ -1,5 +1,6 @@
 package com.example.clientapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -35,14 +36,18 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
-        vo = new MemberVO(1, "oea0805", "1234",
-                "오은애", "01056113427", 1, "짱짱", "써나타");
 
-//
-//        Intent i = getIntent();
-//        MemberVO vo = i.getExtras().getParcelable("vo");
-        actionbar_text.setText("차량 상태 정보");
-        loadFragmentClass(new StatusFragment(vo));
+        Intent i = getIntent();
+        vo = i.getExtras().getParcelable("vo");
+        String f = i.getExtras().get("fragment").toString();
+        if (f.equals("reservation")) {
+            actionbar_text.setText("점검 내역");
+            loadFragmentClass(new HistoryFragment(vo));
+        } else {
+            actionbar_text.setText("차량 상태 정보");
+            loadFragmentClass(new StatusFragment(vo));
+        }
+
 
     }
 
@@ -58,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 case R.id.reservation:
                     actionbar_text.setText("점검 내역");
-                    fragment = new HistoryFragment();
+                    fragment = new HistoryFragment(vo);
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
@@ -77,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
     };
 
 
-    private void loadFragmentClass(Fragment fragment) {
+    public void loadFragmentClass(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_content, fragment);
         transaction.commit();

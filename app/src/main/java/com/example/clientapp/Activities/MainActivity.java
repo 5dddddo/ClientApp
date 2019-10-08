@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 Thread t = new Thread() {
                     public void run() {
                         try {
-                            map.put("id", member_id);
-                            map.put("pw", member_pw);
+                            map.put("member_id", member_id);
+                            map.put("member_pw", member_pw);
                             String url = "http://70.12.115.57:9090/TestProject/clogin.do";
                             HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                             res = http.request();
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         vo = mapper.readValue(res, MemberVO.class);
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         i.putExtra("vo", vo);
+                        i.putExtra("fragment","login");
                         startActivity(i);
                     } else {
                         Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();

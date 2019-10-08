@@ -64,7 +64,7 @@ public class StatusFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_status, container, false);
 
-        Button btn = (Button) rootView.findViewById(R.id.reserbtn);
+        Button btn = (Button) rootView.findViewById(R.id.go_reservebtn);
 
         per_tire = (TextView) rootView.findViewById(R.id.tireper);
         per_wiper = (TextView) rootView.findViewById(R.id.wiperper);

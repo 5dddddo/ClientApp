@@ -1,18 +1,20 @@
 package com.example.clientapp.Activities;
 
+
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class ReservationActivity extends AppCompatActivity {
     private MemberVO vo;
 
@@ -38,26 +41,12 @@ public class ReservationActivity extends AppCompatActivity {
     private TextView textView_Date2;
     private DatePickerDialog.OnDateSetListener callbackMethod;
     private TimePickerDialog.OnTimeSetListener callbackMethod2;
-    TextView text_date, text_time, per_tire, per_wiper, per_oil, per_cool, per_dis;
+    TextView text_date, text_time;
     CheckBox checkBox;
 
-    String keyword = "111";     // 가상의 클라이언트 ID
+    //    String member_id = "111";     // 가상의 클라이언트 ID
     String date = "", time = "", otpkey = "", reserve_time = "", day = "";
     String reserokdata;
-    String TIRE_CHANGE_DISTANCE = "58000", WIPER_CHANGE_DISTANCE = "8000", ENGINE_OIL_VISCOSITY = "60", DISTANCE = "90000", COOLER_LEFT = "80";
-    String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "10000";
-
-    double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
-    double wiper = Double.parseDouble(WIPER_CHANGE_DISTANCE);
-    int engineoil = Integer.parseInt(ENGINE_OIL_VISCOSITY);
-    int distance = Integer.parseInt(DISTANCE);
-    int cooler = Integer.parseInt(COOLER_LEFT);
-
-    double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
-    double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
-
-    int f_tire = (int) (100 - (tire / ch_tire) * 100);
-    int f_wiper = (int) (100 - (wiper / ch_wiper) * 100);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,23 +57,37 @@ public class ReservationActivity extends AppCompatActivity {
         Intent i = getIntent();
         vo = (MemberVO) i.getExtras().getParcelable("vo");
         Log.i("vooovoovovoov", vo.getMember_id());
+//        member_id = vo.getMember_id();
 
         textView_Date = (TextView) findViewById(R.id.textView_date);
         textView_Date2 = (TextView) findViewById(R.id.textView_date2);
 
         this.InitializeListener();
 
-
+        Button btn = (Button) findViewById(R.id.reserbtn);
         Button button = (Button) findViewById(R.id.button);
         Button button2 = (Button) findViewById(R.id.button2);
+
         text_date = (TextView) findViewById(R.id.textView_date);
         text_time = (TextView) findViewById(R.id.textView_date2);
+
         checkBox = (CheckBox) findViewById(R.id.checkbox);
+
+        TextView myname = (TextView) findViewById(R.id.myname);
+        TextView myphonenumber = (TextView) findViewById(R.id.myphonenumber);
+        TextView mycartype = (TextView) findViewById(R.id.mycartype);
+        TextView mycarnumber = (TextView) findViewById(R.id.mycarnumber);
+
+        myname.setText(vo.getMember_mname());
+        myphonenumber.setText(vo.getMember_phonenumber());
+        mycartype.setText(vo.getCar_type());
+        mycarnumber.setText(vo.getCar_id());
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog = new DatePickerDialog(getApplicationContext(), callbackMethod, 2019, 9, 20);
+                DatePickerDialog dialog = new DatePickerDialog(ReservationActivity.this,R.style.MyDatePickerDialogTheme, callbackMethod, 2019, 9, 20);
                 dialog.show();
             }
         });
@@ -92,11 +95,112 @@ public class ReservationActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog dialog2 = new TimePickerDialog(getApplicationContext(), callbackMethod2, 8, 10, false);
+                TimePickerDialog dialog2 = new TimePickerDialog(ReservationActivity.this,R.style.MyTimePickerDialog, callbackMethod2, 8, 10, false);
                 dialog2.show();
             }
         });
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (reserve_time.length() == 0 || day.length() == 0) {
+                    insertinfoloss();
+                    return;
+
+                } else {
+                    try {
+                        Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
+                            public void run() {
+                                try {
+                                    sendPost(vo.getMember_id());
+                                } catch (Exception e) {
+                                    Log.i("msi", e.toString());
+                                }
+                            }
+                        };
+                        wThread.start();
+
+                        try {
+                            wThread.join();
+                        } catch (Exception e) {
+                            Log.i("msi", "이상이상22");
+                        }
+                    } catch (Exception e) {
+                        Log.i("msi", e.toString());
+                    }
+
+                    reserve_ok_dialog();
+                }
+
+            }
+        });
     }
+
+    private String sendPost(String parameters) throws Exception {
+
+        String receivedata;
+        String sendMsg;
+
+//        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
+        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
+//        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add.do");    // 한석햄22
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//        conn.setRequestProperty("Content-Type", "application/JSON");      // 한석햄..
+        conn.setRequestProperty("Connection", "Keep-Alive");
+        conn.setRequestProperty("charset", "utf-8");
+        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+
+        Map<String, String> map = new HashMap<String, String>();
+
+        if (checkBox.isChecked()) {
+            // TODO : CheckBox is checked.
+            otpkey = "1";
+        } else {
+            // TODO : CheckBox is unchecked.
+            otpkey = "0";
+        }
+
+        map.put("member_id", vo.getMember_id());
+        map.put("reservation_time", day + reserve_time);
+        Log.i("공성나", day + reserve_time);
+        map.put("key", otpkey);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(map);
+        Log.i("msi", "가랏 데이터 : " + json);
+
+        osw.write(json);
+        osw.flush();
+
+
+        Log.i("msi", "222");
+        int responseCode = conn.getResponseCode();
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        receivedata = response.toString();
+        in.close();
+        Log.i("KAKAOBOOKLog22", receivedata);
+
+        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
+        });
+        for (ReservationVO v : myObject)
+            Log.i("KAKAOBOOKLog@@@", v.getReservation_no() + "");
+        Log.i("오은애", "오은애");
+
+        reserokdata = receivedata;
+
+        return receivedata;
+    }
+
 
     public void InitializeListener() {
         callbackMethod = new DatePickerDialog.OnDateSetListener() {
@@ -131,6 +235,36 @@ public class ReservationActivity extends AppCompatActivity {
             }
         };
 
+    }
+
+    void reserve_ok_dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("예약이 완료되었습니다");
+//        builder.setMessage("AlertDialog Content");
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "예약 잘 되엇는지 확인하는 엑티비티?로.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.putExtra("fragment", "reservation");
+                        intent.putExtra("vo", vo);
+
+                        startActivity(intent);
+                    }
+
+                });
+        builder.show();
+    }
+
+    void insertinfoloss() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Error");
+        alert.setMessage("입력되지않은 정보가 존재합니다.");
+        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alert.show();
     }
 
 }

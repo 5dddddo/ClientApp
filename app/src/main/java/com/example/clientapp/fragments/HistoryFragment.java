@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.clientapp.Activities.CustomListViewAdapter;
 import com.example.clientapp.R;
+import com.example.clientapp.VO.MemberVO;
 import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,11 +33,17 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class HistoryFragment extends Fragment {
-    String clientid = "mins1011";
+
     ArrayList<ReservationVO> data;
+    MemberVO vo;
+
 
     public HistoryFragment() {
         // Required empty public constructor
+    }
+
+    public HistoryFragment(MemberVO vo) {
+       this.vo = vo;
     }
 
 
@@ -49,7 +56,7 @@ public class HistoryFragment extends Fragment {
             Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
                 public void run() {
                     try {
-                        receiveD(clientid);
+                        receiveD(vo.getMember_id());
                     } catch (Exception e) {
                         Log.i("msi", e.toString());
                     }
@@ -128,13 +135,13 @@ public class HistoryFragment extends Fragment {
         return rootView;
     }
 
-    private void receiveD(String clientid) throws Exception {
+    private void receiveD(String member_id) throws Exception {
 
         String receivedata;
 
 //        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
-        String r_url = "http://70.12.115.57:9090/TestProject/rlist.do?id=" + clientid;
-//        String r_url = "http://70.12.115.73:9090/Chavis/Member/view.do?member_id=" + clientid;  // 한석햄
+        String r_url = "http://70.12.115.57:9090/TestProject/rlist.do?id=" + member_id;
+//        String r_url = "http://70.12.115.73:9090/Chavis/Member/view.do?member_id=" + member_id;  // 한석햄
 //        String r_url = "http://70.12.115.73:9090/Chavis/Reservation/add.do";
 
         URL url = new URL(r_url);
