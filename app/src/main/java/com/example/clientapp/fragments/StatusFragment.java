@@ -79,7 +79,7 @@ public class StatusFragment extends Fragment {
 
         this.InitializeListener();
 
-        Button btn = (Button) rootView.findViewById(R.id.reserbtn);
+
         Button button = (Button) rootView.findViewById(R.id.button);
         Button button2 = (Button) rootView.findViewById(R.id.button2);
         text_date = (TextView) rootView.findViewById(R.id.textView_date);
@@ -133,32 +133,32 @@ public class StatusFragment extends Fragment {
 //        }
 //        per_wiper.setText(f_wiper + "%");
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
-                        public void run() {
-                            try {
-                                sendPost(keyword);
-                                Log.i("msi", keyword);
-                            } catch (Exception e) {
-                                Log.i("msi", e.toString());
-                            }
-                        }
-                    };
-                    wThread.start();
-
-                    try {
-                        wThread.join();
-                    } catch (Exception e) {
-                        Log.i("msi", "이상이상22");
-                    }
-                } catch (Exception e) {
-                    Log.i("msi", e.toString());
-                }
-            }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                try {
+//                    Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
+//                        public void run() {
+//                            try {
+//                                sendPost(keyword);
+//                                Log.i("msi", keyword);
+//                            } catch (Exception e) {
+//                                Log.i("msi", e.toString());
+//                            }
+//                        }
+//                    };
+//                    wThread.start();
+//
+//                    try {
+//                        wThread.join();
+//                    } catch (Exception e) {
+//                        Log.i("msi", "이상이상22");
+//                    }
+//                } catch (Exception e) {
+//                    Log.i("msi", e.toString());
+//                }
+//            }
+//        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,71 +179,71 @@ public class StatusFragment extends Fragment {
         return rootView;
     }
 
-    private String sendPost(String parameters) throws Exception {
-
-        String receivedata;
-        String sendMsg;
-
-//        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
-        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
-//        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add.do");    // 한석햄22
-
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//        conn.setRequestProperty("Content-Type", "application/JSON");      // 한석햄..
-        conn.setRequestProperty("Connection", "Keep-Alive");
-        conn.setRequestProperty("charset", "utf-8");
-        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-
-        Map<String, String> map = new HashMap<String, String>();
-
-        if (checkBox.isChecked()) {
-            // TODO : CheckBox is checked.
-            otpkey = "1";
-        } else {
-            // TODO : CheckBox is unchecked.
-            otpkey = "0";
-        }
-
-        map.put("member_id", keyword);
-        map.put("reservation_time", day + reserve_time);
-        Log.i("공성나", day + reserve_time);
-        map.put("key", otpkey);
-
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(map);
-        Log.i("msi", "가랏 데이터 : " + json);
-
-//        sendMsg = "id=" + keyword + "&reserve_time=" + reserve_time + "&otpkey=" + otpkey;
-//        Log.i("msi",sendMsg);
-
-        osw.write(json);
-        osw.flush();
-
-
-        Log.i("msi", "222");
-        int responseCode = conn.getResponseCode();
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        receivedata = response.toString();
-        in.close();
-        Log.i("KAKAOBOOKLog22", receivedata);
-
-        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
-        });
-        for (ReservationVO v : myObject)
-            Log.i("KAKAOBOOKLog@@@", v.getReservation_no() + "");
-        Log.i("오은애", "오은애");
-
-        reserokdata = receivedata;
-
-        return receivedata;
-    }
+//    private String sendPost(String parameters) throws Exception {
+//
+//        String receivedata;
+//        String sendMsg;
+//
+////        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
+//        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
+////        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add.do");    // 한석햄22
+//
+//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//        conn.setRequestMethod("POST");
+//        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+////        conn.setRequestProperty("Content-Type", "application/JSON");      // 한석햄..
+//        conn.setRequestProperty("Connection", "Keep-Alive");
+//        conn.setRequestProperty("charset", "utf-8");
+//        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+//
+//        Map<String, String> map = new HashMap<String, String>();
+//
+//        if (checkBox.isChecked()) {
+//            // TODO : CheckBox is checked.
+//            otpkey = "1";
+//        } else {
+//            // TODO : CheckBox is unchecked.
+//            otpkey = "0";
+//        }
+//
+//        map.put("member_id", keyword);
+//        map.put("reservation_time", day + reserve_time);
+//        Log.i("공성나", day + reserve_time);
+//        map.put("key", otpkey);
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = mapper.writeValueAsString(map);
+//        Log.i("msi", "가랏 데이터 : " + json);
+//
+////        sendMsg = "id=" + keyword + "&reserve_time=" + reserve_time + "&otpkey=" + otpkey;
+////        Log.i("msi",sendMsg);
+//
+//        osw.write(json);
+//        osw.flush();
+//
+//
+//        Log.i("msi", "222");
+//        int responseCode = conn.getResponseCode();
+//        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//        String inputLine;
+//        StringBuffer response = new StringBuffer();
+//        while ((inputLine = in.readLine()) != null) {
+//            response.append(inputLine);
+//        }
+//        receivedata = response.toString();
+//        in.close();
+//        Log.i("KAKAOBOOKLog22", receivedata);
+//
+//        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
+//        });
+//        for (ReservationVO v : myObject)
+//            Log.i("KAKAOBOOKLog@@@", v.getReservation_no() + "");
+//        Log.i("오은애", "오은애");
+//
+//        reserokdata = receivedata;
+//
+//        return receivedata;
+//    }
 
 
     public void InitializeListener() {
