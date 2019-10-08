@@ -109,9 +109,6 @@ public class NotificationFragment extends Fragment {
         }
         per_wiper.setText(f_wiper + "%");
 
-
-
-
         return rootView;
     }
 
