@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
 //        Intent i = getIntent();
 //        MemberVO vo = i.getExtras().getParcelable("vo");
         actionbar_text.setText("차량 상태 정보");
-        loadFragmentClass(new SettingFragment(vo));
+        loadFragmentClass(new ListFragment());
 
     }
 
