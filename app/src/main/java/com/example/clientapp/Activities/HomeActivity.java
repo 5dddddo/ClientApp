@@ -41,8 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 //
 //        Intent i = getIntent();
 //        MemberVO vo = i.getExtras().getParcelable("vo");
-        actionbar_text.setText("차량 상태 정보");
-        loadFragmentClass(new StatusFragment(vo));
+        loadFragmentClass(new StatusFragment(vo),"차량 상태 정보");
 
     }
 
@@ -52,24 +51,20 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment;
             switch (menuItem.getItemId()) {
                 case R.id.car:
-                    actionbar_text.setText("차량 상태 정보");
                     fragment = new StatusFragment(vo);
-                    loadFragmentClass(fragment);
+                    loadFragmentClass(fragment,"차량 상태 정보");
                     return true;
                 case R.id.reservation:
-                    actionbar_text.setText("점검 내역");
                     fragment = new HistoryFragment();
-                    loadFragmentClass(fragment);
+                    loadFragmentClass(fragment,"점검 내역");
                     return true;
                 case R.id.setting:
-                    actionbar_text.setText("회원 정보");
                     fragment = new SettingFragment(vo);
-                    loadFragmentClass(fragment);
+                    loadFragmentClass(fragment,"회원 정보");
                     return true;
                 case R.id.notification:
-                    actionbar_text.setText("알림사항");
                     fragment = new NotificationFragment();
-                    loadFragmentClass(fragment);
+                    loadFragmentClass(fragment,"알림사항");
                     return true;
             }
             return false;
@@ -77,7 +72,8 @@ public class HomeActivity extends AppCompatActivity {
     };
 
 
-    private void loadFragmentClass(Fragment fragment) {
+    void loadFragmentClass(Fragment fragment, String text) {
+        actionbar_text.setText(text);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_content, fragment);
         transaction.commit();

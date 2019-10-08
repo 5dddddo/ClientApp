@@ -1,5 +1,6 @@
 package com.example.clientapp.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
 import static com.example.clientapp.HttpUtils.isCarIdVaild;
 import static com.example.clientapp.HttpUtils.isCarTypeVaild;
 import static com.example.clientapp.HttpUtils.isIdValid;
@@ -39,6 +41,7 @@ import static com.example.clientapp.HttpUtils.isTelVaild;
 
 public class RegisterActivity extends AppCompatActivity {
     boolean isMember_idValid = false;
+    boolean isDupValid = false;
     boolean isMember_pwValid = false;
     boolean isMember_pwchkValid = false;
     boolean isMember_nameValid = false;
@@ -72,7 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
     private String mCarType;
     private String mCarId;
     HttpUtils http;
-    Map<String, String> map;
+    Map<String, String> map = new HashMap<String, String>();
+    ;
+    private String res;
     private MemberVO vo = new MemberVO();
 
     @Override
@@ -113,22 +118,25 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String input = mIdEt.getText().toString();
 
-                if (isMember_idValid && input.equals(mId)) return;
+                if (isMember_idValid && isDupValid && input.equals(mId)) return;
 
-                if (input.equals("공학수학마스터")) {
-                    isMember_idValid = false;
-                    validid.setText("이미 존재하는 닉네임 입니다.");
+                if (idCheck(input)) {
+                    isDupValid = false;
+                    validid.setTextColor(RED);
+                    validid.setText("이미 존재하는 아이디입니다.");
                 } else if (!isIdValid(validid, input)) {
                     isMember_idValid = false;
                 } else {
+                    isDupValid = true;
                     isMember_idValid = true;
-                    mId = input;
                     validid.setTextColor(GREEN);
                     validid.setText("사용 가능한 아이디입니다.");
+                    mId = input;
                 }
             }
 
         });
+
         mPwEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -189,7 +197,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String input = mTelEt.getText().toString();
                 if (isMember_telValid && input.equals(mTel)) return;
-
                 if (!isTelVaild(validtel, input)) {
                     isMember_telValid = false;
                 } else {
@@ -281,20 +288,37 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isInputComplete()) {
-                    map = new HashMap<String, String>();
-                    map.put("member_id", mId);
-                    map.put("member_pw", mPw);
-                    map.put("member_mname", mName);
-                    map.put("member_phonenumber", mTel);
-                    map.put("car_type", mCarType);
-                    map.put("car_id", mCarId);
-                    String url = "http://70.12.115.57:9090/TestProject/register.do";
-                    HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
-                    http.request();
-                    Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
-//                    RegisterRunnable registerRunnable = new RegisterRunnable(vo);
-//                    Thread t = new Thread(registerRunnable);
-//                    t.start();
+                    Thread t = new Thread() {
+                        public void run() {
+                            try {
+                                map = new HashMap<String, String>();
+                                map.put("member_id", mId);
+                                map.put("member_pw", mPw);
+                                map.put("member_mname", mName);
+                                map.put("member_phonenumber", mTel);
+                                map.put("car_type", mCarType);
+                                map.put("car_id", mCarId);
+                                String url = "http://70.12.115.57:9090/TestProject/register.do";
+                                HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+                                res = http.request();
+                            } catch (Exception e) {
+                                Log.i("MemberRegisterError", e.toString());
+                            }
+                        }
+                    };
+                    t.start();
+                    try {
+                        t.join();
+                        if (res.equals("true")) {
+                            Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
                 }
@@ -355,104 +379,46 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isInputComplete() {
-        if (isMember_caridValid && isMember_cartypeValid && isMember_idValid &&
+        if (isMember_caridValid && isDupValid && isMember_cartypeValid && isMember_idValid &&
                 isMember_nameValid && isMember_pwchkValid && isMember_pwValid && isMember_telValid)
             return true;
         else
             return false;
     }
-//
-//    public boolean isIdValid(String input) {
-//        if (input.length() == 0) {
-//
-//            validid.setTextColor(Color.RED);
-//            validid.setText("아이디를 입력하세요.");
-//            return false;
-//        }
-//        if (!Pattern.matches("^[a-zA-Z0-9]{5,10}$", input)) {
-//            validid.setTextColor(Color.RED);
-//            validid.setText("5~10자의 영문 대/소문자, 숫자만 사용 가능합니다.");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public boolean isPwVaild(String input) {
-//        if (input.length() == 0) {
-//            validpw.setTextColor(Color.RED);
-//            validpw.setText("비밀번호를 입력하세요.");
-//            return false;
-//        }
-//        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$", input)) {
-//            validpw.setTextColor(Color.RED);
-//            validpw.setText("8~15자의 영문 대/소문자, 숫자만 사용 가능합니다.");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public boolean isNameVaild(String input) {
-//        if (input.length() == 0) {
-//            validname.setText("이름을 입력하세요.");
-//            return false;
-//        }
-//        if (!Pattern.matches("^[가-힣]{2,10}$", input)) {
-//            validname.setTextColor(Color.RED);
-//            validname.setText("2글자 이상의 한글을 입력해주세요.");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public boolean isTelVaild(String input) {
-//        if (input.length() == 0) {
-//            validtel.setTextColor(Color.RED);
-//            validtel.setText("핸드폰 번호를 입력하세요.");
-//            return false;
-//        }
-//        if (!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", input)) {
-//            validtel.setTextColor(Color.RED);
-//            validtel.setText("올바른 번호가 아닙니다.");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public boolean isCarTypeVaild(String input) {
-//        if (input.length() == 0) {
-//            validcartype.setTextColor(Color.RED);
-//            validcartype.setText("차종을 입력하세요.");
-//            return false;
-//        }
-//        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
-//            validcartype.setTextColor(Color.RED);
-//            validcartype.setText("특수문자는 사용할 수 없습니다.");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public boolean isCarIdVaild(String input) {
-//        if (input.length() == 0) {
-//            validcarid.setTextColor(Color.RED);
-//            validcarid.setText("차 번호를 입력하세요.");
-//            return false;
-//        }
-//        if (!Pattern.matches("^\\d{2}[가-힣]{1}\\d{4}$", input)) {
-//            validcarid.setTextColor(Color.RED);
-//            validcarid.setText("올바른 차 번호가 아닙니다.");
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    public boolean isInputComplete() {
-//        if (isMember_caridValid && isMember_cartypeValid && isMember_idValid &&
-//                isMember_nameValid && isMember_pwchkValid && isMember_pwValid && isMember_telValid)
-//            return true;
-//        else
-//            return false;
-//    }
+
+    public boolean idCheck(String input) {
+        final String id = input;
+        map = new HashMap<String, String>();
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    String url = "http://70.12.115.57:9090/TestProject/idcheck.do?id=" + id;
+                    HttpUtils http = new HttpUtils(HttpUtils.GET, map, url, getApplicationContext());
+                    res = http.request();
+                } catch (Exception e) {
+                    Log.i("MemberIdError", e.toString());
+                }
+            }
+        };
+        t.start();
+        try {
+            t.join();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (res.equals("true")) {
+
+            Log.i("checkehcekTTTTTTTTTTTT", res);
+            return true;
+        } else {
+
+            Log.i("checkehcekFFFFFFFFFFFF", res);
+            return false;
+        }
+
+    }
 
 }
 

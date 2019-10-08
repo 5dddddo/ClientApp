@@ -32,7 +32,6 @@ public class SettingFragment extends Fragment {
     private Button cancelBtn;
 
     private String name;
-    private String client_id;
     private String tel;
     private MemberVO vo;
 
@@ -91,14 +90,14 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ctelBtn.isChecked()) {
+                    telTv.setText(tel);
                     telTv.setVisibility(View.GONE);
                     telEt.setVisibility(View.VISIBLE);
                 } else {
-                    if (telEt.getText().length() != 0)
-                        tel = telEt.getText().toString();
-                    telTv.setText(tel);
                     telTv.setVisibility(View.VISIBLE);
                     telEt.setVisibility(View.GONE);
+                    if (telEt.getText().length() != 0)
+                        tel = telEt.getText().toString();
                 }
             }
         });

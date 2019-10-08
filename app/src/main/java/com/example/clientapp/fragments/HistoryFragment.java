@@ -44,18 +44,18 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
-        final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
-        try {
-            Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
-                public void run() {
-                    try {
-                        receiveD(clientid);
-                    } catch (Exception e) {
-                        Log.i("msi", e.toString());
+            final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
+            try {
+                Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
+                    public void run() {
+                        try {
+                            receiveD(clientid);
+                        } catch (Exception e) {
+                            Log.i("msi", e.toString());
+                        }
                     }
-                }
-            };
-            wThread.start();
+                };
+                wThread.start();
 
             try {
                 wThread.join();
