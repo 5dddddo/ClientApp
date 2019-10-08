@@ -21,7 +21,7 @@ import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
+    BottomNavigationView bottomNavigationView;
     BackPressCloseHandler backPressCloseHandler;
     TextView actionbar_text;
     MemberVO vo;

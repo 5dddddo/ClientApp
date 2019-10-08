@@ -3,6 +3,7 @@ package com.example.clientapp.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,17 +14,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.clientapp.Activities.ReservationActivity;
 import com.example.clientapp.R;
+import com.example.clientapp.VO.MemberVO;
+
+import java.lang.reflect.Member;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class StatusFragment extends Fragment {
+    private MemberVO vo;
 
-    public StatusFragment() {
-        // Required empty public constructor
+    public StatusFragment(MemberVO vo) {
+        this.vo = vo;
     }
 
     private TextView textView_Date;
@@ -109,7 +116,15 @@ public class StatusFragment extends Fragment {
         per_wiper.setText(f_wiper + "%");
 
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(getContext(), ReservationActivity.class);
+                intent.putExtra("vo",vo);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
