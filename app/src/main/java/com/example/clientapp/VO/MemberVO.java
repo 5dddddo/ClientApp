@@ -22,7 +22,7 @@ public class MemberVO implements Parcelable {
 
 
     public MemberVO(int member_no, String member_id, String member_pw, String member_mname,
-                    String member_phonenumber, int car_no, String car_type, String car_id,String car_color) {
+                    String member_phonenumber, int car_no, String car_type, String car_id, String car_color) {
         super();
         this.member_no = member_no;
         this.member_id = member_id;
@@ -32,7 +32,7 @@ public class MemberVO implements Parcelable {
         this.car_no = car_no;
         this.car_type = car_type;
         this.car_id = car_id;
-        this.car_color=car_color;
+        this.car_color = car_color;
     }
 
     public static final Creator<MemberVO> CREATOR = new Creator<MemberVO>() {
@@ -82,7 +82,6 @@ public class MemberVO implements Parcelable {
             parcel.writeString(car_type);
             parcel.writeString(car_id);
             parcel.writeString(car_color);
-
         } catch (Exception e) {
             Log.i("LOG", e.toString());
         }

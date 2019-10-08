@@ -97,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         mTelEt = (EditText) findViewById(R.id.mTelEt);
         mCarTypeEt = (EditText) findViewById(R.id.mCarTypeEt);
         mCarColorEt = (EditText) findViewById(R.id.mCarColorEt);
+        
         mCarIdEt = (EditText) findViewById(R.id.mCarIdEt);
         checkPw = (ImageView) findViewById(R.id.checkPw);
 
@@ -441,6 +442,3 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 }
-
-
-

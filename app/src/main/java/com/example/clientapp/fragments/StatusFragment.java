@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clientapp.Activities.ReservationActivity;
 import com.example.clientapp.R;
+import com.example.clientapp.VO.CarVO;
 import com.example.clientapp.VO.MemberVO;
+import com.example.clientapp.VO.ReservationVO;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.lang.reflect.Member;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -45,17 +56,7 @@ public class StatusFragment extends Fragment {
     String TIRE_CHANGE_DISTANCE = "58000", WIPER_CHANGE_DISTANCE = "8000", ENGINE_OIL_VISCOSITY = "60", DISTANCE = "90000", COOLER_LEFT = "80";
     String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "10000";
 
-    double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
-    double wiper = Double.parseDouble(WIPER_CHANGE_DISTANCE);
-    int engineoil = Integer.parseInt(ENGINE_OIL_VISCOSITY);
-    int distance = Integer.parseInt(DISTANCE);
-    int cooler = Integer.parseInt(COOLER_LEFT);
 
-    double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
-    double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
-
-    int f_tire = (int) (100 - (tire / ch_tire) * 100);
-    int f_wiper = (int) (100 - (wiper / ch_wiper) * 100);
 
 
     @Override
@@ -71,6 +72,39 @@ public class StatusFragment extends Fragment {
         per_oil = (TextView) rootView.findViewById(R.id.engineper);
         per_cool = (TextView) rootView.findViewById(R.id.coolper);
         per_dis = (TextView) rootView.findViewById(R.id.disper);
+
+        try {
+            Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
+                public void run() {
+                    try {
+                        sendPost(vo.getMember_id());
+                    } catch (Exception e) {
+                        Log.i("msi", e.toString());
+                    }
+                }
+            };
+            wThread.start();
+
+            try {
+                wThread.join();
+            } catch (Exception e) {
+                Log.i("msi", "이상이상22");
+            }
+        } catch (Exception e) {
+            Log.i("msi", e.toString());
+        }
+
+        double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
+        double wiper = Double.parseDouble(WIPER_CHANGE_DISTANCE);
+        int engineoil = Integer.parseInt(ENGINE_OIL_VISCOSITY);
+        int distance = Integer.parseInt(DISTANCE);
+        int cooler = Integer.parseInt(COOLER_LEFT);
+
+        double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
+        double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
+
+        int f_tire = (int) (100 - (tire / ch_tire) * 100);
+        int f_wiper = (int) (100 - (wiper / ch_wiper) * 100);
 
 
         ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.pb_tire);
@@ -121,12 +155,75 @@ public class StatusFragment extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), ReservationActivity.class);
-                intent.putExtra("vo",vo);
+                intent.putExtra("vo", vo);
                 startActivity(intent);
             }
         });
 
+
+
         return rootView;
     }
+
+
+    private void sendPost(String parameters) throws Exception {
+
+        String receivedata;
+
+        URL url = new URL("http://70.12.115.73:9090/Chavis/Car/personalview.do");    // 한석햄22
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+//        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Connection", "Keep-Alive");
+        conn.setRequestProperty("charset", "utf-8");
+        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+
+        Map<String, String> map = new HashMap<String, String>();
+
+
+        map.put("member_id", vo.getMember_id());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(map);
+        Log.i("msi", "내 맴버아이디 가라 : " + json);
+
+        osw.write(json);
+        osw.flush();
+
+
+        Log.i("msi", "22ㅇㅅㅇ2");
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        receivedata = response.toString();
+        in.close();
+        Log.i("msi", receivedata);
+
+
+//        ArrayList<CarVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<CarVO>>() {
+//        });
+        CarVO myObject = mapper.readValue(receivedata, new TypeReference<CarVO>() {
+        });
+        Log.i("msi", myObject.getCar_color());
+
+        TIRE_CHANGE_DISTANCE = myObject.getTire_change_distance();
+        Log.i("msi", myObject.getTire_change_distance());
+        WIPER_CHANGE_DISTANCE = myObject.getWiper_change_distance();
+        Log.i("msi", myObject.getWiper_change_distance());
+        ENGINE_OIL_VISCOSITY = myObject.getEngine_oil_viscosity();
+        Log.i("msi", myObject.getEngine_oil_viscosity());
+        DISTANCE = myObject.getDistance();
+        Log.i("msi", myObject.getDistance());
+        COOLER_LEFT = myObject.getCooler_left();
+        Log.i("msi", myObject.getCooler_left());
+
+        reserokdata = receivedata;
+    }
+
 
 }
