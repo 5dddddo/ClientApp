@@ -1,7 +1,6 @@
 package com.example.clientapp.Activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -48,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     boolean isMember_telValid = false;
     boolean isMember_cartypeValid = false;
     boolean isMember_caridValid = false;
+    boolean isMember_carcolorValid = false;
 
     private EditText mIdEt;
     private EditText mPwEt;
@@ -56,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mTelEt;
     private EditText mCarTypeEt;
     private EditText mCarIdEt;
+    private EditText mCarColorEt;
     private ImageView checkPw;
 
     private TextView validid;
@@ -65,6 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView validtel;
     private TextView validcartype;
     private TextView validcarid;
+    private TextView validcarcolor;
+
 
     private Button registerBtn;
 
@@ -74,6 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String mTel;
     private String mCarType;
     private String mCarId;
+    private String mCarColor;
+
     HttpUtils http;
     Map<String, String> map = new HashMap<String, String>();
     ;
@@ -91,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         mNameEt = (EditText) findViewById(R.id.mNameEt);
         mTelEt = (EditText) findViewById(R.id.mTelEt);
         mCarTypeEt = (EditText) findViewById(R.id.mCarTypeEt);
+        mCarColorEt = (EditText) findViewById(R.id.mCarColorEt);
         mCarIdEt = (EditText) findViewById(R.id.mCarIdEt);
         checkPw = (ImageView) findViewById(R.id.checkPw);
 
@@ -100,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
         validname = (TextView) findViewById(R.id.validname);
         validtel = (TextView) findViewById(R.id.validtel);
         validcartype = (TextView) findViewById(R.id.validcartype);
+        validcarcolor = (TextView) findViewById(R.id.validcarcolor);
         validcarid = (TextView) findViewById(R.id.validcarid);
 
         registerBtn = (Button) findViewById(R.id.registerBtn);
@@ -111,7 +118,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
 
             @Override
@@ -134,7 +140,6 @@ public class RegisterActivity extends AppCompatActivity {
                     mId = input;
                 }
             }
-
         });
 
         mPwEt.addTextChangedListener(new TextWatcher() {
@@ -144,7 +149,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
 
             @Override
@@ -209,7 +213,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
         mCarTypeEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -236,6 +239,31 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         });
+        mCarColorEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String input = mCarColorEt.getText().toString();
+
+                if (isMember_carcolorValid && input.equals(mCarColor)) return;
+                if (!isNameVaild(validcarcolor, input)) {
+                    isMember_carcolorValid = false;
+                } else {
+                    isMember_carcolorValid = true;
+                    mCarColor = input;
+                    validcarcolor.setTextColor(GREEN);
+                    validcarcolor.setText("사용 가능합니다.");
+                }
+            }
+        });
+
         mCarIdEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -255,7 +283,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_caridValid = true;
                     mCarId = input;
-                    validcarid.setTextColor(2085187);
+                    validcarid.setTextColor(GREEN);
                     validcarid.setText("사용 가능합니다.");
                 }
             }
@@ -268,7 +296,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
 
             @Override
@@ -281,8 +308,6 @@ public class RegisterActivity extends AppCompatActivity {
                     isMember_pwchkValid = false;
                 }
             }
-
-
         });
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,6 +322,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 map.put("member_mname", mName);
                                 map.put("member_phonenumber", mTel);
                                 map.put("car_type", mCarType);
+                                map.put("car_color", mCarColor);
                                 map.put("car_id", mCarId);
                                 String url = "http://70.12.115.57:9090/TestProject/register.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
@@ -380,7 +406,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isInputComplete() {
-        if (isMember_caridValid && isDupValid && isMember_cartypeValid && isMember_idValid &&
+        if (isMember_caridValid && isDupValid && isMember_cartypeValid && isMember_carcolorValid && isMember_idValid &&
                 isMember_nameValid && isMember_pwchkValid && isMember_pwValid && isMember_telValid)
             return true;
         else
@@ -404,21 +430,14 @@ public class RegisterActivity extends AppCompatActivity {
         t.start();
         try {
             t.join();
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        if (res.equals("true")) {
-
-            Log.i("checkehcekTTTTTTTTTTTT", res);
+        if (res.equals("true"))
             return true;
-        } else {
-
-            Log.i("checkehcekFFFFFFFFFFFF", res);
+        else
             return false;
-        }
-
     }
 
 }
