@@ -14,6 +14,7 @@ import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 import com.example.clientapp.fragments.HistoryFragment;
+import com.example.clientapp.fragments.NotificationFragment;
 import com.example.clientapp.fragments.SettingFragment;
 import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
