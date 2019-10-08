@@ -31,11 +31,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFragment extends Fragment {
+public class HistoryFragment extends Fragment {
     String clientid = "mins1011";
     ArrayList<ReservationVO> data;
 
-    public ListFragment() {
+    public HistoryFragment() {
         // Required empty public constructor
     }
 
@@ -43,7 +43,7 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_list, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
         final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
         try {
             Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨

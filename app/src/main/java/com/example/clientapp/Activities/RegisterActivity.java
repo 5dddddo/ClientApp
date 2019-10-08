@@ -223,8 +223,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     isMember_cartypeValid = true;
                     mCarType = input;
-
-                    validtel.setTextColor(GREEN);
+                    validcartype.setTextColor(GREEN);
                     validcartype.setText("사용 가능합니다.");
                 }
             }
