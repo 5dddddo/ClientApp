@@ -24,7 +24,6 @@ public class SettingFragment extends Fragment {
     private ToggleButton cnameBtn;
     private EditText telEt;
     private TextView telTv;
-    private Spinner carSp;
     private EditText carIdEt;
 
     private ToggleButton ctelBtn;
@@ -58,7 +57,7 @@ public class SettingFragment extends Fragment {
         carIdEt = (EditText) rootView.findViewById(R.id.carIdEt);
         ctelBtn = (ToggleButton) rootView.findViewById(R.id.ctelBtn);
         cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
-        carSp = (Spinner) rootView.findViewById(R.id.carSp);
+        modifyBtn = (Button) rootView.findViewById(R.id.modifyBtn);
 
         vo = new MemberVO(1, "oea0805", "1234","오은애", "01056113427", 1, "짱짱", "써나타","Black");
 
