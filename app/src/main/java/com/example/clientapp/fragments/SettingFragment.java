@@ -30,8 +30,14 @@ public class SettingFragment extends Fragment {
     private Button modifyBtn;
     private Button cancelBtn;
 
-    private String name;
-    private String tel;
+
+    private String mId;
+    private String mPw;
+    private String mName;
+    private String mTel;
+    private String mCarType;
+    private String mCarId;
+    private String mCarColor;
     private MemberVO vo;
 
     public SettingFragment() {
@@ -59,13 +65,16 @@ public class SettingFragment extends Fragment {
         cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
         modifyBtn = (Button) rootView.findViewById(R.id.modifyBtn);
 
-        vo = new MemberVO(1, "oea0805", "1234","오은애", "01056113427", 1, "짱짱", "써나타","Black");
+        Bundle b = getArgument();
 
+        if (bundle != null) {
+        	vo = b.getParcelable("vo");
+        }
+        
         IdTv.setText(vo.getMember_id());
         nameTv.setText(vo.getMember_mname());
         telTv.setText(vo.getMember_phonenumber());
-        carSp.setSelection(1);
-        carIdEt.setText("소나타");
+        carIdEt.setText(vo.getCar_id());
 
         cnameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,13 +115,13 @@ public class SettingFragment extends Fragment {
                         public void run() {
                             try {
                                 map = new HashMap<String, String>();
-                                map.put("member_pw", member_pw);
-                                map.put("member_id", member_id);
-                                map.put("member_mname", member_mname);
-                                map.put("member_phonenumber", member_phonenumber);
-                                map.put("car_type", car_type);
-                                map.put("car_color", car_color);
-                                map.put("car_id", car_id);
+                                map.put("member_pw", mPw);
+                                map.put("member_id", mId);
+                                map.put("member_mname", mName);
+                                map.put("member_phonenumber", mTel);
+                                map.put("car_type", mCarType);
+                                map.put("car_color", mCarColor);
+                                map.put("car_id", mCarId);
                                 String url = "http://70.12.115.57:9090/TestProject/update.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
