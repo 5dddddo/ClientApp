@@ -99,7 +99,47 @@ public class SettingFragment extends Fragment {
                 }
             }
         });
+        modifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isInputComplete()) {
+                    Thread t = new Thread() {
+                        public void run() {
+                            try {
+                                map = new HashMap<String, String>();
+                                map.put("member_pw", member_pw);
+                                map.put("member_id", member_id);
+                                map.put("member_mname", member_mname);
+                                map.put("member_phonenumber", member_phonenumber);
+                                map.put("car_type", car_type);
+                                map.put("car_color", car_color);
+                                map.put("car_id", car_id);
+                                String url = "http://70.12.115.57:9090/TestProject/update.do";
+                                HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+                                res = http.request();
+                            } catch (Exception e) {
+                                Log.i("MemberRegisterError", e.toString());
+                            }
+                        }
+                    };
+                    t.start();
+                    try {
+                        t.join();
+                        if (res.equals("true")) {
+                            Toast.makeText(getApplicationContext(), "회원정보가 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                            // Settingfragment 띄우기
+                        } else {
+                            Toast.makeText(getApplicationContext(), "회원정보 수정 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+        });
         return rootView;
     }
 
