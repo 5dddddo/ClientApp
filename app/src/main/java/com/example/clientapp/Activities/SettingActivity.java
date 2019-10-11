@@ -1,23 +1,15 @@
 package com.example.clientapp.Activities;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clientapp.R;
-
-import java.util.Set;
 
 public class SettingActivity extends AppCompatActivity {
     private TextView IdTv;
@@ -40,7 +32,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         IdTv = (TextView) findViewById(R.id.IdTv);
-        nameEt = (EditText) findViewById(R.id.nameEt);
+        nameEt = (EditText) findViewById(R.id.telEt);
         nameTv = (TextView) findViewById(R.id.nameTv);
         cnameBtn = (ToggleButton) findViewById(R.id.cnameBtn);
         telEt = (EditText) findViewById(R.id.telEt);

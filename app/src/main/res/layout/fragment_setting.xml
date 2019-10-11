@@ -5,297 +5,442 @@
     android:layout_height="match_parent"
     tools:context=".fragments.SettingFragment">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:backgroundTint="#FFFFFF"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="20dp">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="아이디"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/IdTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edge_gray"
-            android:focusable="auto"
-            android:padding="10dp"
-            android:textSize="18sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="비밀번호"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/PwEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edge_gray"
-            android:focusable="auto"
-            android:nextFocusDown="@+id/checkPwEt"
-            android:padding="10dp"
-            android:password="true"
-            android:singleLine="false"
-            android:textIsSelectable="true"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="비밀번호 재확인"
-            android:textColor="#000000"
-            tools:visibility="gone" />
-
-        <EditText
-            android:id="@+id/cPwEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edge_black"
-            android:focusable="auto"
-            android:nextFocusDown="@+id/clientNameEt"
-            android:padding="10dp"
-            android:password="true"
-            android:singleLine="true"
-            android:textIsSelectable="true"
-            android:textSize="18sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/validpwch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000"
-            android:visibility="gone" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="이름"
-            android:textColor="#000000" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/nameEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/edge_black"
-                android:focusable="auto"
-                android:nextFocusDown="@+id/telEt"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textIsSelectable="true"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/nameTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/edge_gray"
-                android:focusable="auto"
-                android:padding="10dp"
-                android:textSize="18sp"
-                android:visibility="visible" />
-
-            <ToggleButton
-                android:id="@+id/cnameBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:textColorHint="#0AFFFFFF"
-                android:textOff="@null"
-                android:textOn="@null"
-                tools:background="@drawable/toggle" />
-
-        </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/vname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000"
-            tools:visibility="visible" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="휴대전화"
-            android:textColor="#000000" />
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/telTv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/edge_gray"
-                android:focusable="auto"
-                android:padding="10dp"
-                android:textSize="18sp"
-                tools:visibility="visible" />
-
-            <EditText
-                android:id="@+id/telEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/edge_black"
-                android:focusable="auto"
-                android:nextFocusDown="@+id/carIdEt"
-                android:padding="10dp"
-                android:phoneNumber="true"
-                android:singleLine="true"
-                android:textIsSelectable="true"
-                android:textSize="18sp"
-                android:visibility="gone" />
-
-            <ToggleButton
-                android:id="@+id/ctelBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:textColorHint="#0AFFFFFF"
-                android:textOff="@null"
-                android:textOn="@null"
-                tools:background="@drawable/toggle" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/validtel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000" />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:paddingTop="5dp"
-                android:text="차종"
+                android:text="아이디"
                 android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/carIdTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="5dp"
-                android:text="차 번호"
-                android:textColor="#000000" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="20dp">
-
-            <Spinner
-                android:id="@+id/carSp"
-                style="@style/Widget.AppCompat.Spinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:entries="@array/carName"></Spinner>
 
             <EditText
-                android:id="@+id/carIdEt"
+                android:id="@+id/idEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="@drawable/edge_black"
                 android:focusable="auto"
+                android:focusableInTouchMode="false"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textIsSelectable="true"
                 android:textSize="18sp" />
 
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/validcarcolor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/modifyBtn"
+            <TextView
+                android:id="@+id/validid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#558ed5"
-                android:text="수정하기" />
+                android:textColor="#FF0000" />
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/cancelBtn"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="5dp"
+                    android:text="비밀번호"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="5dp"
+                    android:text="비밀번호 재확인"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/pwEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_black"
+                        android:focusable="auto"
+                        android:padding="10dp"
+                        android:password="true"
+                        android:singleLine="true"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/Ipw"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/x" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/cPwEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_black"
+                        android:focusable="auto"
+                        android:padding="10dp"
+                        android:password="true"
+                        android:singleLine="true"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/Icpw"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/x" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/validpw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:id="@+id/validpwch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#FF0000" />
+            </LinearLayout>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="이름"
+                android:textColor="#000000" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/nameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge_black"
+                    android:focusable="auto"
+                    android:nextFocusDown="@+id/telEt"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+
+                <ToggleButton
+                    android:id="@+id/nameBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#0AFFFFFF"
+                    android:textOff="@null"
+                    android:textOn="@null"
+                    tools:background="@drawable/o" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/validname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="휴대전화"
+                android:textColor="#000000" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/telEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge_black"
+                    android:focusable="auto"
+                    android:nextFocusDown="@+id/telEt"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+
+                <ToggleButton
+                    android:id="@+id/typeBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#0AFFFFFF"
+                    android:textOff="@null"
+                    android:textOn="@null"
+                    tools:background="@drawable/o" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/validtel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="5dp"
+                    android:text="차종"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="차 색깔"
+                    android:textColor="#000000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/carTypeEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_black"
+                        android:focusable="auto"
+                        android:nextFocusDown="@+id/carColorEt"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <ToggleButton
+                        android:id="@+id/typeBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:textColorHint="#0AFFFFFF"
+                        android:textOff="@null"
+                        android:textOn="@null"
+                        tools:background="@drawable/o" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/carColorEt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_black"
+                        android:focusable="auto"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <ToggleButton
+                        android:id="@+id/colorBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:textColorHint="#0AFFFFFF"
+                        android:textOff="@null"
+                        android:textOn="@null"
+                        tools:background="@drawable/o" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/validcartype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:id="@+id/validcarcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#FF0000" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingTop="5dp"
+                android:text="차 번호"
+                android:textColor="#000000" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#BEBEBE"
-                android:text="수정취소" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/carIdEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edge_black"
+                    android:focusable="auto"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+
+                <ToggleButton
+                    android:id="@+id/cidBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:textColorHint="#0AFFFFFF"
+                    android:textOff="@null"
+                    android:textOn="@null"
+                    tools:background="@drawable/o" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/validcarid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="2"
+                android:textColor="#FF0000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/modifyBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#558ed5"
+                    android:text="수정하기" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#BEBEBE"
+                    android:text="수정취소" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-    </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

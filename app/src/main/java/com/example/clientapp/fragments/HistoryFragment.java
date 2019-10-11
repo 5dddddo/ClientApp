@@ -34,17 +34,10 @@ import java.util.List;
  */
 public class HistoryFragment extends Fragment {
 
-    ArrayList<ReservationVO> data;
-    MemberVO vo;
+    private ArrayList<ReservationVO> data;
+    private MemberVO vo;
 
-
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
-
-    public HistoryFragment(MemberVO vo) {
-       this.vo = vo;
-    }
+    public HistoryFragment() { }
 
 
     @Override
@@ -82,8 +75,6 @@ public class HistoryFragment extends Fragment {
         }
 
         lv.setAdapter(adapter);
-
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {

@@ -95,11 +95,11 @@ public class RegisterActivity extends AppCompatActivity {
         mPwCheckEt = (EditText) findViewById(R.id.mPwCheckEt);
         mNameEt = (EditText) findViewById(R.id.mNameEt);
         mTelEt = (EditText) findViewById(R.id.mTelEt);
-        mCarTypeEt = (EditText) findViewById(R.id.mCarTypeEt);
-        mCarColorEt = (EditText) findViewById(R.id.mCarColorEt);
+        mCarTypeEt = (EditText) findViewById(R.id.carTypeEt);
+        mCarColorEt = (EditText) findViewById(R.id.carColorEt);
         
-        mCarIdEt = (EditText) findViewById(R.id.mCarIdEt);
-        checkPw = (ImageView) findViewById(R.id.checkPw);
+        mCarIdEt = (EditText) findViewById(R.id.carIdEt);
+        checkPw = (ImageView) findViewById(R.id.Ipw);
 
         validid = (TextView) findViewById(R.id.validid);
         validpw = (TextView) findViewById(R.id.validpw);
