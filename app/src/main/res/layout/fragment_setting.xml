@@ -13,8 +13,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
@@ -26,20 +24,16 @@
                 android:text="아이디"
                 android:textColor="#000000" />
 
-            <EditText
+            <TextView
                 android:id="@+id/idEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edge_black"
-                android:focusable="auto"
-                android:focusableInTouchMode="false"
+                android:background="@drawable/edge_gray"
                 android:padding="10dp"
-                android:singleLine="true"
-                android:textIsSelectable="true"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/validid"
+                android:id="@+id/vid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000" />
@@ -58,12 +52,14 @@
                     android:textColor="#000000" />
 
                 <TextView
+                    android:id="@+id/cpwtv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="5dp"
                     android:text="비밀번호 재확인"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,51 +72,78 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
+                    <TextView
+                        android:id="@+id/pwTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_gray"
+                        android:padding="10dp"
+                        android:password="true"
+                        android:textSize="18sp" />
+
                     <EditText
                         android:id="@+id/pwEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:focusable="auto"
+                        android:editable="false"
+                        android:inputType="none"
                         android:padding="10dp"
                         android:password="true"
+                        android:shadowColor="#FFFFFF"
                         android:singleLine="true"
                         android:textIsSelectable="true"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:visibility="gone" />
 
-                    <ImageView
-                        android:id="@+id/Ipw"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                    <ToggleButton
+                        android:id="@+id/pwBtn"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:src="@drawable/x" />
+                        android:background="@drawable/pencil"
+                        android:textOff="@null"
+                        android:textOn="@null" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relativePw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:visibility="invisible">
 
                     <EditText
                         android:id="@+id/cPwEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:focusable="auto"
                         android:padding="10dp"
                         android:password="true"
                         android:singleLine="true"
+                        android:textColorHint="#FFFFFF"
                         android:textIsSelectable="true"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:id="@+id/Icpw"
+                        android:id="@+id/ipw"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
@@ -138,14 +161,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/validpw"
+                    android:id="@+id/vpw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#FF0000" />
 
                 <TextView
-                    android:id="@+id/validpwch"
+                    android:id="@+id/vcpw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -164,38 +187,47 @@
                 android:layout_height="45dp"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/nameTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge_gray"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
                 <EditText
                     android:id="@+id/nameEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/edge_black"
-                    android:focusable="auto"
-                    android:nextFocusDown="@+id/telEt"
+                    android:focusable="false"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textIsSelectable="true"
                     android:textSize="18sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <ToggleButton
                     android:id="@+id/nameBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:textColorHint="#0AFFFFFF"
+                    android:background="@drawable/pencil"
                     android:textOff="@null"
-                    android:textOn="@null"
-                    tools:background="@drawable/o" />
+                    android:textOn="@null" />
 
             </RelativeLayout>
 
 
             <TextView
-                android:id="@+id/validname"
+                android:id="@+id/vname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000" />
@@ -212,6 +244,17 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/telTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge_gray"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
                 <EditText
                     android:id="@+id/telEt"
                     android:layout_width="match_parent"
@@ -220,31 +263,29 @@
                     android:layout_marginBottom="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/edge_black"
-                    android:focusable="auto"
-                    android:nextFocusDown="@+id/telEt"
+                    android:editable="false"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textIsSelectable="true"
                     android:textSize="18sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <ToggleButton
-                    android:id="@+id/typeBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/telBtn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:textColorHint="#0AFFFFFF"
+                    android:background="@drawable/pencil"
                     android:textOff="@null"
-                    android:textOn="@null"
-                    tools:background="@drawable/o" />
+                    android:textOn="@null" />
 
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/validtel"
+                android:id="@+id/vtel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000" />
@@ -266,7 +307,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="차 색깔"
+                    android:text="  차량 Color"
                     android:textColor="#000000" />
 
             </LinearLayout>
@@ -282,33 +323,47 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/cartypeTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_gray"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+
                     <EditText
                         android:id="@+id/carTypeEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:focusable="auto"
-                        android:nextFocusDown="@+id/carColorEt"
+                        android:editable="false"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textIsSelectable="true"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:visibility="gone" />
 
                     <ToggleButton
                         android:id="@+id/typeBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:textColorHint="#0AFFFFFF"
+                        android:background="@drawable/pencil"
                         android:textOff="@null"
-                        android:textOn="@null"
-                        tools:background="@drawable/o" />
+                        android:textOn="@null" />
 
                 </RelativeLayout>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -316,30 +371,41 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/colorTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge_gray"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+
                     <EditText
                         android:id="@+id/carColorEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:focusable="auto"
+                        android:editable="false"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textIsSelectable="true"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:visibility="gone" />
 
                     <ToggleButton
                         android:id="@+id/colorBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:textColorHint="#0AFFFFFF"
+                        android:background="@drawable/pencil"
                         android:textOff="@null"
-                        android:textOn="@null"
-                        tools:background="@drawable/o" />
+                        android:textOn="@null" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -350,14 +416,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/validcartype"
+                    android:id="@+id/vtype"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#FF0000" />
 
                 <TextView
-                    android:id="@+id/validcarcolor"
+                    android:id="@+id/vcolor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -371,7 +437,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:paddingTop="5dp"
-                android:text="차 번호"
+                android:text="차량 번호"
                 android:textColor="#000000" />
 
             <RelativeLayout
@@ -380,34 +446,45 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/cidTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge_gray"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
                 <EditText
                     android:id="@+id/carIdEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edge_black"
-                    android:focusable="auto"
+                    android:editable="false"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textIsSelectable="true"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:visibility="gone" />
 
-                <ToggleButton
+                <Button
                     android:id="@+id/cidBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:textColorHint="#0AFFFFFF"
+                    android:background="@drawable/pencil"
                     android:textOff="@null"
-                    android:textOn="@null"
-                    tools:background="@drawable/o" />
+                    android:textOn="@null" />
 
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/validcarid"
+                android:id="@+id/vcarid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"

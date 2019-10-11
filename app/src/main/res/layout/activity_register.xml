@@ -34,7 +34,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/validid"
+            android:id="@+id/vid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF0000" />
@@ -89,6 +89,8 @@
                     android:id="@+id/mPwCheckEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/edge_black"
                     android:focusable="auto"
@@ -100,7 +102,7 @@
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/Ipw"
+                    android:id="@+id/checkPw"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
@@ -120,14 +122,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/validpw"
+                android:id="@+id/vpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#FF0000" />
 
             <TextView
-                android:id="@+id/validpwch"
+                android:id="@+id/vcpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -154,7 +156,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/validname"
+            android:id="@+id/vname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF0000" />
@@ -180,7 +182,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/validtel"
+            android:id="@+id/vtel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FF0000" />
@@ -246,14 +248,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/validcartype"
+                android:id="@+id/vtype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#FF0000" />
 
             <TextView
-                android:id="@+id/validcarcolor"
+                android:id="@+id/vcolor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -283,7 +285,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/validcarid"
+            android:id="@+id/vcarid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"

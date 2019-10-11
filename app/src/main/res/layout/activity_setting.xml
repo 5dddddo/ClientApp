@@ -78,7 +78,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/validpwch"
+        android:id="@+id/vcpw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#FF0000"
@@ -199,7 +199,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/validtel"
+        android:id="@+id/vtel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#FF0000" />
@@ -258,7 +258,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/validcarcolor"
+        android:id="@+id/vcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#FF0000" />
