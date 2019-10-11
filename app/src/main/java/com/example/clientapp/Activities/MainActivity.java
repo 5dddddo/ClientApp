@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 map.put("member_id", member_id);
                                 map.put("member_pw", member_pw);
-                                String url = "http://70.12.115.57:9090/TestProject/clogin.do";
+                                String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
+                                Log.i("dlakfjalekjf;qiwejf",res);
                             } catch (Exception e) {
                                 Log.i("MemberLoginError", e.toString());
                             }

@@ -39,15 +39,15 @@ import static com.example.clientapp.HttpUtils.isPwVaild;
 import static com.example.clientapp.HttpUtils.isTelVaild;
 
 public class RegisterActivity extends AppCompatActivity {
-    boolean isMember_idValid = false;
-    boolean isDupValid = false;
-    boolean isMember_pwValid = false;
-    boolean isMember_pwchkValid = false;
-    boolean isMember_nameValid = false;
-    boolean isMember_telValid = false;
-    boolean isMember_cartypeValid = false;
-    boolean isMember_caridValid = false;
-    boolean isMember_carcolorValid = false;
+    private boolean isMember_idValid = false;
+    private boolean isDupValid = false;
+    private boolean isMember_pwValid = false;
+    private boolean isMember_pwchkValid = false;
+    private boolean isMember_nameValid = false;
+    private boolean isMember_telValid = false;
+    private boolean isMember_cartypeValid = false;
+    private boolean isMember_caridValid = false;
+    private boolean isMember_carcolorValid = false;
 
     private EditText mIdEt;
     private EditText mPwEt;
@@ -99,16 +99,16 @@ public class RegisterActivity extends AppCompatActivity {
         mCarColorEt = (EditText) findViewById(R.id.carColorEt);
         
         mCarIdEt = (EditText) findViewById(R.id.carIdEt);
-        checkPw = (ImageView) findViewById(R.id.Ipw);
+        checkPw = (ImageView) findViewById(R.id.checkPw);
 
-        validid = (TextView) findViewById(R.id.validid);
-        validpw = (TextView) findViewById(R.id.validpw);
-        validpwch = (TextView) findViewById(R.id.validpwch);
-        validname = (TextView) findViewById(R.id.validname);
-        validtel = (TextView) findViewById(R.id.validtel);
-        validcartype = (TextView) findViewById(R.id.validcartype);
-        validcarcolor = (TextView) findViewById(R.id.validcarcolor);
-        validcarid = (TextView) findViewById(R.id.validcarid);
+        validid = (TextView) findViewById(R.id.vid);
+        validpw = (TextView) findViewById(R.id.vpw);
+        validpwch = (TextView) findViewById(R.id.vcpw);
+        validname = (TextView) findViewById(R.id.vname);
+        validtel = (TextView) findViewById(R.id.vtel);
+        validcartype = (TextView) findViewById(R.id.vtype);
+        validcarcolor = (TextView) findViewById(R.id.vcolor);
+        validcarid = (TextView) findViewById(R.id.vcarid);
 
         registerBtn = (Button) findViewById(R.id.registerBtn);
 
@@ -325,7 +325,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 map.put("car_type", mCarType);
                                 map.put("car_color", mCarColor);
                                 map.put("car_id", mCarId);
-                                String url = "http://70.12.115.57:9090/TestProject/register.do";
+                                String url = "http://70.12.115.73:9090/Chavis/Member/register.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
                             } catch (Exception e) {
@@ -352,58 +352,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
-    }
-
-    class RegisterRunnable implements Runnable {
-        Boolean status = false;
-        MemberVO vo;
-
-        public RegisterRunnable(MemberVO vo) {
-            this.vo = vo;
-        }
-
-        @Override
-        public void run() {
-            try {
-                URL url = new URL("http://70.12.115.57:9090/TestProject/register.do");
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("POST");
-                con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                con.setRequestProperty("Connection", "Keep-Alive");
-                con.setRequestProperty("charset", "utf-8");
-                con.setDoInput(true);
-                con.setDoOutput(true);
-
-                Log.i("ClientService", "Http connection 됐다!!");
-
-                OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream());
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-
-                ObjectMapper mapper = new ObjectMapper();
-                String sendMsg = mapper.writeValueAsString(vo);
-
-                osw.write(sendMsg);
-                osw.flush();
-
-                String input;
-                StringBuffer sb = new StringBuffer();
-                // stream을 통해 data 읽어오기
-                while ((input = br.readLine()) != null) {
-                    sb.append(input);
-                }
-                Log.i("ClientReceiveData", sb.toString());
-                br.close();
-                con.disconnect();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 
     public boolean isInputComplete() {
@@ -420,8 +368,9 @@ public class RegisterActivity extends AppCompatActivity {
         Thread t = new Thread() {
             public void run() {
                 try {
-                    String url = "http://70.12.115.57:9090/TestProject/idcheck.do?id=" + id;
-                    HttpUtils http = new HttpUtils(HttpUtils.GET, map, url, getApplicationContext());
+                    map.put("member_id", mId);
+                    String url = "http://70.12.115.73:9090/Chavis/Member/dupcheck.do";
+                    HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                     res = http.request();
                 } catch (Exception e) {
                     Log.i("MemberIdError", e.toString());
