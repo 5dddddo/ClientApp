@@ -43,12 +43,12 @@ public class HttpUtils {
         try {
             URL Url = new URL(url);
             con = (HttpURLConnection) Url.openConnection();
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Connection", "Keep-Alive");
             con.setRequestProperty("charset", "utf-8");
-//            con.setRequestProperty("Accept", "application/json");
             con.setDefaultUseCaches(false);
             con.setUseCaches(false);
             con.setDoInput(true);
-//            con.setRequestProperty("Accept-Charset", "UTF-8");
 
             if (Method == HttpUtils.POST) {
                 con.setRequestMethod("POST");
@@ -200,7 +200,7 @@ public class HttpUtils {
             valid.setText("차종을 입력하세요.");
             return false;
         }
-        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{2,}$", input)) {
+        if (!Pattern.matches("^[가-힣a-zA-Z0-9]+$", input)) {
             valid.setTextColor(Color.RED);
             valid.setText("특수문자는 사용할 수 없습니다.");
             return false;

@@ -25,18 +25,13 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/idEt"
+                android:id="@+id/idTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/edge_gray"
                 android:padding="10dp"
                 android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/vid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FF0000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,7 +53,6 @@
                     android:layout_weight="1"
                     android:paddingTop="5dp"
                     android:text="비밀번호 재확인"
-                    android:textColor="#000000"
                     android:visibility="invisible" />
             </LinearLayout>
 
@@ -92,11 +86,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:editable="false"
-                        android:inputType="none"
                         android:padding="10dp"
                         android:password="true"
-                        android:shadowColor="#FFFFFF"
                         android:singleLine="true"
                         android:textIsSelectable="true"
                         android:textSize="18sp"
@@ -130,15 +121,11 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
                         android:padding="10dp"
                         android:password="true"
                         android:singleLine="true"
-                        android:textColorHint="#FFFFFF"
                         android:textIsSelectable="true"
                         android:textSize="18sp" />
 
@@ -199,12 +186,21 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge_black"
+                    android:singleLine="true"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <EditText
                     android:id="@+id/nameEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/edge_black"
-                    android:focusable="false"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textIsSelectable="true"
@@ -260,10 +256,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/edge_black"
-                    android:editable="false"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textIsSelectable="true"
@@ -303,11 +297,15 @@
                     android:text="차종"
                     android:textColor="#000000" />
 
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="  차량 Color"
+                    android:text="차량 Color"
                     android:textColor="#000000" />
 
             </LinearLayout>
@@ -338,9 +336,10 @@
                         android:id="@+id/carTypeEt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:editable="false"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textIsSelectable="true"
@@ -388,7 +387,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/edge_black"
-                        android:editable="false"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textIsSelectable="true"
@@ -421,6 +419,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#FF0000" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/vcolor"
@@ -462,14 +464,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edge_black"
-                    android:editable="false"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textIsSelectable="true"
                     android:textSize="18sp"
                     android:visibility="gone" />
 
-                <Button
+                <ToggleButton
                     android:id="@+id/cidBtn"
                     android:layout_width="25dp"
                     android:layout_height="25dp"

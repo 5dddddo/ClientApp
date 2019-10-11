@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
         mCarColorEt = (EditText) findViewById(R.id.carColorEt);
         
         mCarIdEt = (EditText) findViewById(R.id.carIdEt);
-        checkPw = (ImageView) findViewById(R.id.pwBtn);
+        checkPw = (ImageView) findViewById(R.id.checkPw);
 
         validid = (TextView) findViewById(R.id.vid);
         validpw = (TextView) findViewById(R.id.vpw);
@@ -325,7 +325,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 map.put("car_type", mCarType);
                                 map.put("car_color", mCarColor);
                                 map.put("car_id", mCarId);
-                                String url = "http://70.12.115.57:9090/TestProject/register.do";
+                                String url = "http://70.12.115.73:9090/Chavis/Member/register.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
                             } catch (Exception e) {
@@ -352,7 +352,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public boolean isInputComplete() {

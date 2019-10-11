@@ -200,6 +200,10 @@
                 android:text="차종"
                 android:textColor="#000000" />
 
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
@@ -229,6 +233,10 @@
                 android:textIsSelectable="true"
                 android:textSize="18sp" />
 
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
             <EditText
                 android:id="@+id/carColorEt"
                 android:layout_width="match_parent"
@@ -253,6 +261,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#FF0000" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/vcolor"
