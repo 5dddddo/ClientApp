@@ -75,11 +75,11 @@ public class SettingFragment extends Fragment {
             vo = b.getParcelable("vo");
             Log.i("야휴", "야휴");
         }
-
-        IdTv.setText(vo.getMember_id());
-        nameTv.setText(vo.getMember_mname());
-        telTv.setText(vo.getMember_phonenumber());
-        carIdEt.setText(vo.getCar_id());
+//
+//        IdTv.setText(vo.getMember_id());
+//        nameTv.setText(vo.getMember_mname());
+//        telTv.setText(vo.getMember_phonenumber());
+//        carIdEt.setText(vo.getCar_id());
 
         cnameBtn.setOnClickListener(new View.OnClickListener() {
             @Override

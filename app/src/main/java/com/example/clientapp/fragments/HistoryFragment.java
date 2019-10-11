@@ -37,14 +37,22 @@ public class HistoryFragment extends Fragment {
     private ArrayList<ReservationVO> data;
     private MemberVO vo;
 
-    public HistoryFragment() { }
+
+    public HistoryFragment() {
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
+//        ViewGroup rootView2 = (ViewGroup) inflater.inflate(R.layout.listview_item, container, false);
         final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
+//
+//        TextView textView = (TextView) rootView2.findViewById(R.id.checksuccess);
+//        TextView textView2 = (TextView) rootView2.findViewById(R.id.checkwait);
+
+
         Bundle b = getArguments();
         vo = b.getParcelable("vo");
         try {
@@ -70,11 +78,10 @@ public class HistoryFragment extends Fragment {
 
         ListView lv = (ListView) rootView.findViewById(R.id.lv);
         CustomListViewAdapter adapter = new CustomListViewAdapter();
-        Log.i("msi123", data.toString());
         for (ReservationVO vo : data) {
             adapter.addItem(vo);
-            Log.i("msi411111", vo.getReservation_no() + "");
         }
+
 
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,12 +96,12 @@ public class HistoryFragment extends Fragment {
 
                 final List<String> ListItems = new ArrayList<>();
 
-                ListItems.add("예약 번호 : " + vo.getReservation_no());
-                ListItems.add("정비소 ID : " + vo.getBodyshop_no());
-                ListItems.add("정비 예약 시간 : " + vo.getReservation_time());
-                ListItems.add("정비 완료 시간 : " + vo.getRepaired_time());
-                ListItems.add("KEY 동의 여부 : " + (vo.getKey().equals("1") ? "O" : "X"));
-                ListItems.add("담당 정비사 :" + vo.getRepaired_person());
+                ListItems.add("예약 번호  :  " + vo.getReservation_no());
+                ListItems.add("정비소 ID  :  " + vo.getBodyshop_no());
+                ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
+                ListItems.add(vo.getRepaired_time() == null || vo.getRepaired_time().equals("0") ? ("정비 완료 시간  :  정비중") : ("정비 완료 시간  :  " + vo.getRepaired_time()));
+                ListItems.add("KEY 동의 여부  :  " + (vo.getKey().equals("1") ? "O" : "X"));
+                ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
 
                 final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
 
@@ -167,5 +174,6 @@ public class HistoryFragment extends Fragment {
             Log.i("KAKAOBOOKLog@@@", v.getReservation_no() + "");
         Log.i("오은애", "오은애");
     }
+
 
 }

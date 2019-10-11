@@ -47,16 +47,29 @@ public class CustomListViewAdapter extends BaseAdapter {
             LayoutInflater inflater =
                     (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // 생성된 View객체에 XML Layout을 설정.
-            view = inflater.inflate(R.layout.listview_item, viewGroup, false);      // Imageview, Textview, Textview 3개 만드는거
+            view = inflater.inflate(R.layout.listview_item, viewGroup, false);
+
+            ViewGroup rootView2 = (ViewGroup) inflater.inflate(R.layout.listview_item, viewGroup, false);// Imageview, Textview, Textview 3개 만드는거
         }
         // 출력할 View Component의 reference를 획독.
         TextView tv1 = (TextView) view.findViewById(R.id.customTv1);
         TextView tv2 = (TextView) view.findViewById(R.id.customTv2);
 
+        TextView checksuccess = (TextView) view.findViewById(R.id.checksuccess);
+        TextView checkwait = (TextView) view.findViewById(R.id.checkwait);
         ReservationVO vo = list.get(i);    // 화면에 출력할 데이터를 가져와요!
+
         try {
             tv1.setText(" " + vo.getReservation_no());
             tv2.setText(" " + vo.getReservation_time().substring(0, 11));
+
+            if (vo.getRepaired_time() == null || vo.getRepaired_time().equals("0")) {
+                checkwait.setVisibility(View.VISIBLE);
+                checksuccess.setVisibility(View.GONE);
+            } else {
+                checkwait.setVisibility(View.GONE);
+                checksuccess.setVisibility(View.VISIBLE);
+            }
         } catch (Exception e) {
             Log.i("KAKAOBOOKLog", e.toString());
         }

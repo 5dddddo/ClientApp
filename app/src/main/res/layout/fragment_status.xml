@@ -58,6 +58,22 @@
                             android:layout_weight="2"
                             android:gravity="center_vertical"
                             android:padding="5dp"
+                            android:text="주행거리"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:padding="5dp"
                             android:text="타이어"
                             android:textStyle="bold" />
 
@@ -125,15 +141,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="30dp"
-                            android:layout_weight="2"
-                            android:gravity="center_vertical"
-                            android:padding="5dp"
-                            android:text="주행거리"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -144,6 +151,23 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:id="@+id/disper3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:padding="5dp"
+                            android:textColor="#03A9F4"
+                            android:textSize="11dp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -214,40 +238,44 @@
                             android:textSize="11dp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-
-                        <TextView
-                            android:id="@+id/disper"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:padding="5dp"
-                            android:textColor="#03A9F4"
-                            android:textSize="11dp" />
-                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="2"
                     android:orientation="vertical">
+
+                    <!--<ProgressBar-->
+                    <!--android:id="@+id/pb_tdistance"-->
+                    <!--style="@android:style/Widget.ProgressBar.Horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginEnd="30dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:progressDrawable="@drawable/progressbar_progressbar1" />-->
+
+                    <TextView
+                        android:id="@+id/disper"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center_vertical"
+                        android:padding="5dp"
+                        android:textColor="#03A9F4"
+                        android:textSize="11dp" />
+
 
                     <ProgressBar
                         android:id="@+id/pb_tire"
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
                         android:gravity="center_vertical"
                         android:padding="5dp"
-                        android:progressDrawable="@drawable/progressbar_progressbar1" />
+                        android:progressDrawable="@drawable/progressbar_progressbar1"/>
 
 
                     <ProgressBar
@@ -255,7 +283,6 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
                         android:gravity="center_vertical"
                         android:padding="5dp"
                         android:progressDrawable="@drawable/progressbar_progressbar1" />
@@ -265,7 +292,6 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
                         android:gravity="center_vertical"
                         android:padding="5dp"
                         android:progressDrawable="@drawable/progressbar_progressbar1"
@@ -277,22 +303,12 @@
                         style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
                         android:gravity="center_vertical"
                         android:padding="5dp"
                         android:progressDrawable="@drawable/progressbar_progressbar1"
 
                         />
 
-                    <ProgressBar
-                        android:id="@+id/pb_tdistance"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        android:progressDrawable="@drawable/progressbar_progressbar1" />
 
                 </LinearLayout>
 

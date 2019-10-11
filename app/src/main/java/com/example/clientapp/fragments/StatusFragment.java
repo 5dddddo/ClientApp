@@ -134,9 +134,9 @@ public class StatusFragment extends Fragment {
         per_oil.setText(engineoil + "%");
 
 
-        ProgressBar progressBar4 = (ProgressBar) rootView.findViewById(R.id.pb_tdistance);
-        progressBar4.setMax(100);
-        progressBar4.setProgress(distance);
+//        ProgressBar progressBar4 = (ProgressBar) rootView.findViewById(R.id.pb_tdistance);
+//        progressBar4.setMax(100);
+//        progressBar4.setProgress(distance);
         per_dis.setText(distance + "km");
 
         ProgressBar progressBar5 = (ProgressBar) rootView.findViewById(R.id.pb_wiper);
