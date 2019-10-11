@@ -40,8 +40,7 @@ import java.util.Map;
 public class StatusFragment extends Fragment {
     private MemberVO vo;
 
-    public StatusFragment(MemberVO vo) {
-        this.vo = vo;
+    public StatusFragment() {
     }
 
     private TextView textView_Date;
@@ -153,7 +152,6 @@ public class StatusFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), ReservationActivity.class);
                 intent.putExtra("vo", vo);
                 startActivity(intent);

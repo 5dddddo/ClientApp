@@ -2,6 +2,7 @@ package com.example.clientapp.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SettingFragment extends Fragment {
 
@@ -39,6 +45,7 @@ public class SettingFragment extends Fragment {
     private String mCarId;
     private String mCarColor;
     private MemberVO vo;
+    private Map<String, String> map;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -65,12 +72,12 @@ public class SettingFragment extends Fragment {
         cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
         modifyBtn = (Button) rootView.findViewById(R.id.modifyBtn);
 
-        Bundle b = getArgument();
-
-        if (bundle != null) {
-        	vo = b.getParcelable("vo");
+        Bundle b = getArguments();
+        if (b != null) {
+            vo = b.getParcelable("vo");
+            Log.i("야휴", "야휴");
         }
-        
+
         IdTv.setText(vo.getMember_id());
         nameTv.setText(vo.getMember_mname());
         telTv.setText(vo.getMember_phonenumber());
@@ -84,8 +91,8 @@ public class SettingFragment extends Fragment {
                     nameEt.setVisibility(View.VISIBLE);
                 } else {
                     if (nameEt.getText().length() != 0)
-                        name = nameEt.getText().toString();
-                    nameTv.setText(name);
+                        mName = nameEt.getText().toString();
+                    nameTv.setText(mName);
                     nameTv.setVisibility(View.VISIBLE);
                     nameEt.setVisibility(View.GONE);
 
@@ -96,14 +103,14 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ctelBtn.isChecked()) {
-                    telTv.setText(tel);
+                    telTv.setText(mTel);
                     telTv.setVisibility(View.GONE);
                     telEt.setVisibility(View.VISIBLE);
                 } else {
                     telTv.setVisibility(View.VISIBLE);
                     telEt.setVisibility(View.GONE);
                     if (telEt.getText().length() != 0)
-                        tel = telEt.getText().toString();
+                        mTel = telEt.getText().toString();
                 }
             }
         });
@@ -123,7 +130,7 @@ public class SettingFragment extends Fragment {
                                 map.put("car_color", mCarColor);
                                 map.put("car_id", mCarId);
                                 String url = "http://70.12.115.57:9090/TestProject/update.do";
-                                HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+                                HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getAp());
                                 res = http.request();
                             } catch (Exception e) {
                                 Log.i("MemberRegisterError", e.toString());

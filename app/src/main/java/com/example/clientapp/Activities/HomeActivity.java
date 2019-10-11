@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     BackPressCloseHandler backPressCloseHandler;
     TextView actionbar_text;
-    MemberVO vo;
+    private MemberVO vo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +42,10 @@ public class HomeActivity extends AppCompatActivity {
         String f = i.getExtras().get("fragment").toString();
         if (f.equals("reservation")) {
             actionbar_text.setText("점검 내역");
-            loadFragmentClass(new HistoryFragment(vo));
+            loadFragmentClass(new HistoryFragment());
         } else {
             actionbar_text.setText("차량 상태 정보");
-            loadFragmentClass(new StatusFragment(vo));
+            loadFragmentClass(new StatusFragment());
         }
 
 
@@ -58,17 +58,17 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.car:
                     actionbar_text.setText("차량 상태 정보");
-                    fragment = new StatusFragment(vo);
+                    fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
                     actionbar_text.setText("점검 내역");
-                    fragment = new HistoryFragment(vo);
+                    fragment = new HistoryFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
                     actionbar_text.setText("회원 정보");
-                    fragment = new SettingFragment(vo);
+                    fragment = new SettingFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.notification:
@@ -83,6 +83,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void loadFragmentClass(Fragment fragment) {
+        Bundle b = new Bundle();
+        b.putParcelable("vo",vo);
+        fragment.setArguments(b);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_content, fragment);
         transaction.commit();
