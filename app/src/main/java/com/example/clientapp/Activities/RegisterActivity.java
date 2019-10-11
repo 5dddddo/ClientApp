@@ -368,8 +368,9 @@ public class RegisterActivity extends AppCompatActivity {
         Thread t = new Thread() {
             public void run() {
                 try {
-                    String url = "http://70.12.115.57:9090/TestProject/idcheck.do?id=" + id;
-                    HttpUtils http = new HttpUtils(HttpUtils.GET, map, url, getApplicationContext());
+                    map.put("member_id", mId);
+                    String url = "http://70.12.115.73:9090/Chavis/Member/dupcheck.do";
+                    HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                     res = http.request();
                 } catch (Exception e) {
                     Log.i("MemberIdError", e.toString());
