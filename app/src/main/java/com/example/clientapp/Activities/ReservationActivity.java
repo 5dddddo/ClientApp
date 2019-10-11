@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,7 +55,8 @@ public class ReservationActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         vo = (MemberVO) i.getExtras().getParcelable("vo");
-        Log.i("vooovoovovoov", vo.getMember_id());
+
+//        Log.i("vooovoovovoov", vo.getMember_id());
 //        member_id = vo.getMember_id();
 
         textView_Date = (TextView) findViewById(R.id.textView_date);
@@ -158,10 +158,8 @@ public class ReservationActivity extends AppCompatActivity {
         Map<String, String> map = new HashMap<String, String>();
 
         if (checkBox.isChecked()) {
-            // TODO : CheckBox is checked.
             otpkey = "1";
         } else {
-            // TODO : CheckBox is unchecked.
             otpkey = "0";
         }
 

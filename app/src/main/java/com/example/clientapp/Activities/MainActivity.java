@@ -1,5 +1,6 @@
 package com.example.clientapp.Activities;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
                         if (!res.equals("null")) {
                             ObjectMapper mapper = new ObjectMapper();
                             vo = mapper.readValue(res, MemberVO.class);
+
+
+                            // 서비스 실행
+                            Intent servicei = new Intent();
+                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
+                            servicei.setComponent(sComponentName);
+                            servicei.putExtra("mNo",vo.getMember_no()+"");
+                            startService(servicei);
+
+
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");

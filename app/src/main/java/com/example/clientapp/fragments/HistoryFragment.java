@@ -46,11 +46,8 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
-//        ViewGroup rootView2 = (ViewGroup) inflater.inflate(R.layout.listview_item, container, false);
         final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
-//
-//        TextView textView = (TextView) rootView2.findViewById(R.id.checksuccess);
-//        TextView textView2 = (TextView) rootView2.findViewById(R.id.checkwait);
+
 
 
         Bundle b = getArguments();
@@ -159,7 +156,6 @@ public class HistoryFragment extends Fragment {
                 new InputStreamReader(conn.getInputStream()));
         while ((inputLine = br.readLine()) != null) {
             sb.append(inputLine);
-            Log.i("KAKAOBOOKLog", inputLine);
         }
         receivedata = sb.toString();
         br.close();

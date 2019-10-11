@@ -20,7 +20,6 @@ import com.example.clientapp.Activities.ReservationActivity;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.CarVO;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,7 +28,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,16 +54,16 @@ public class StatusFragment extends Fragment {
     String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "10000";
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_status, container, false);
 
-        Button btn = (Button) rootView.findViewById(R.id.go_reservebtn);
+        Bundle b = getArguments();
+        vo = b.getParcelable("vo");
 
+        Button btn = (Button) rootView.findViewById(R.id.go_reservebtn);
         per_tire = (TextView) rootView.findViewById(R.id.tireper);
         per_wiper = (TextView) rootView.findViewById(R.id.wiperper);
         per_oil = (TextView) rootView.findViewById(R.id.engineper);
@@ -153,11 +151,11 @@ public class StatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ReservationActivity.class);
+                Log.i("이름이름: ", vo.getMember_mname());
                 intent.putExtra("vo", vo);
                 startActivity(intent);
             }
         });
-
 
 
         return rootView;
@@ -222,6 +220,4 @@ public class StatusFragment extends Fragment {
 
         reserokdata = receivedata;
     }
-
-
 }
