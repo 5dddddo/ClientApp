@@ -317,14 +317,20 @@ public class RegisterActivity extends AppCompatActivity {
                     Thread t = new Thread() {
                         public void run() {
                             try {
-                                map = new HashMap<String, String>();
-                                map.put("member_id", mId);
-                                map.put("member_pw", mPw);
-                                map.put("member_mname", mName);
-                                map.put("member_phonenumber", mTel);
-                                map.put("car_type", mCarType);
-                                map.put("car_color", mCarColor);
-                                map.put("car_id", mCarId);
+                                MemberVO tmp = new MemberVO(vo.getMember_no(),mId,mPw,mName,mTel,
+                                                            vo.getCar_no(),mCarType,mCarColor,mCarColor);
+                               // map = new HashMap<String, String>();
+//                                 map.put("member_id", mId);
+//                                 map.put("member_pw", mPw);
+//                                 map.put("member_mname", mName);
+//                                 map.put("member_phonenumber", mTel);
+//                                 map.put("car_type", mCarType);
+//                                 map.put("car_color", mCarColor);
+//                                 map.put("car_id", mCarId);
+                                
+                                map = new HashMap<String, Object>();
+                                map.put("vo",tmp);
+                               
                                 String url = "http://70.12.115.73:9090/Chavis/Member/register.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
