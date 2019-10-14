@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,10 +17,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+
+        <service
+            android:name=".PersistentService"
+            android:enabled="true">
+            <!--android:process=":remote">-->
+
+        </service>
+        <receiver
+            android:name=".RestartService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="RestartService">
+            <!--android:process=":remote"-->
+
+            <intent-filter>
+                <action android:name="ACTION.RESTART.PersistentService" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+
         <service
             android:name=".ClientService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".Activities.LoadingActivity"

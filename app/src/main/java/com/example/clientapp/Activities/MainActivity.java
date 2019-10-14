@@ -1,6 +1,8 @@
 package com.example.clientapp.Activities;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clientapp.HttpUtils;
+import com.example.clientapp.PersistentService;
 import com.example.clientapp.R;
+import com.example.clientapp.RestartService;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -24,6 +28,10 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private Intent intent;
+    private RestartService restartService;
+
     String member_id;
     String member_pw;
     String res = null;
@@ -56,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                                 String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
+                                Log.i("dlakfjalekjf;qiwejf",res);
                             } catch (Exception e) {
                                 Log.i("MemberLoginError", e.toString());
                             }
@@ -64,9 +73,23 @@ public class MainActivity extends AppCompatActivity {
                     t.start();
                     try {
                         t.join();
-                        ObjectMapper mapper = new ObjectMapper();
-                        vo = mapper.readValue(res, MemberVO.class);
-                        if (vo.getCode().equals("200")) {
+                        if (!res.equals("null")) {
+                            ObjectMapper mapper = new ObjectMapper();
+                            vo = mapper.readValue(res, MemberVO.class);
+
+
+                            initData();
+                            Log.i("st","000");
+
+                            // 서비스 실행
+                            Intent servicei = new Intent();
+                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
+                            servicei.setComponent(sComponentName);
+                            servicei.putExtra("mNo",vo.getMember_no()+"");
+                            startService(servicei);
+                            Log.i("st","1234");
+
+
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");
@@ -83,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                 }
@@ -111,6 +135,35 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.i("MainActivity","onDestroy");
+        //브로드 캐스트 해제
+        unregisterReceiver(restartService);
+    }
+
+    private void initData(){
+
+        //리스타트 서비스 생성
+        restartService = new RestartService();
+        intent = new Intent(MainActivity.this, PersistentService.class);
+        Log.i("얍","12");
+
+
+        IntentFilter intentFilter = new IntentFilter("com.example.clientapp.PersistentService");
+        Log.i("얍","34");
+        //브로드 캐스트에 등록
+        registerReceiver(restartService,intentFilter);
+        Log.i("얍","56");
+        // 서비스 시작
+        startService(intent);
+        Log.i("얍","78");
     }
 
 }

@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.clientapp.Activities.ReservationActivity;
 import com.example.clientapp.R;
+import com.example.clientapp.RestartService;
 import com.example.clientapp.VO.CarVO;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -38,6 +39,8 @@ import java.util.Map;
 public class StatusFragment extends Fragment {
     private MemberVO vo;
 
+    private RestartService restartService;
+
     public StatusFragment() {
     }
 
@@ -50,8 +53,8 @@ public class StatusFragment extends Fragment {
     String keyword = "111";     // 가상의 클라이언트 ID
     String date = "", time = "", otpkey = "", reserve_time = "", day = "";
     String reserokdata;
-    String TIRE_CHANGE_DISTANCE = "58000", WIPER_CHANGE_DISTANCE = "8000", ENGINE_OIL_VISCOSITY = "60", DISTANCE = "90000", COOLER_LEFT = "80";
-    String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "10000";
+    String TIRE_CHANGE_DISTANCE = "0", WIPER_CHANGE_DISTANCE = "0", ENGINE_OIL_VISCOSITY = "0", DISTANCE = "0", COOLER_LEFT = "0";
+    String change_TIRE_CHANGE_DISTANCE = "0", change_WIPER_CHANGE_DISTANCE = "0";
 
 
     @Override
@@ -220,4 +223,7 @@ public class StatusFragment extends Fragment {
 
         reserokdata = receivedata;
     }
+
+
+
 }

@@ -89,11 +89,9 @@ public class ClientService extends Service {
     public void onCreate() {
         Log.i("service", "서비스 시작");
 
-
-
-
         super.onCreate();
     }
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -117,4 +115,5 @@ public class ClientService extends Service {
     public void onDestroy() {
         super.onDestroy();
     }
+
 }
