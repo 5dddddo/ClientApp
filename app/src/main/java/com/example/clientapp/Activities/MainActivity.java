@@ -73,10 +73,9 @@ public class MainActivity extends AppCompatActivity {
                     t.start();
                     try {
                         t.join();
-                        if (!res.equals("null")) {
-                            ObjectMapper mapper = new ObjectMapper();
-                            vo = mapper.readValue(res, MemberVO.class);
-
+                        ObjectMapper mapper = new ObjectMapper();
+                        vo = mapper.readValue(res, MemberVO.class);
+                        if (vo.getCode().equals("200")) {
 
 //                            initData();
 //                            Log.i("st","000");
