@@ -1,6 +1,5 @@
 package com.example.clientapp.Activities;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,19 +65,10 @@ public class MainActivity extends AppCompatActivity {
                     t.start();
                     try {
                         t.join();
-                        if (!res.equals("null")) {
+                        if (!res.equals("null") ) {
                             ObjectMapper mapper = new ObjectMapper();
                             vo = mapper.readValue(res, MemberVO.class);
-
-
-                            // 서비스 실행
-                            Intent servicei = new Intent();
-                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
-                            servicei.setComponent(sComponentName);
-                            servicei.putExtra("mNo",vo.getMember_no()+"");
-                            startService(servicei);
-
-
+                            Log.i("3424675958309540945","12436");
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");
@@ -91,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JsonParseException e) {
                         e.printStackTrace();
                     } catch (JsonMappingException e) {
+
+                        Log.i("00000000000000000",res);
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();

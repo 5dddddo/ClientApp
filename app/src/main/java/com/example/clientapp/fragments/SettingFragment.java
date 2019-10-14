@@ -14,14 +14,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 
+import java.lang.reflect.Member;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.graphics.Color.GREEN;
@@ -408,6 +412,7 @@ public class SettingFragment extends Fragment {
                     Thread t = new Thread() {
                         public void run() {
                             try {
+//                                MemberVO tmp = new MemberVO(vo.getMember_no(), mId, mPw, mName, mTel, vo.getCar_no(), mCarType, mCarColor, mCarId);
                                 map = new HashMap<String, String>();
                                 map.put("member_id", mId);
                                 map.put("member_pw", mPw);
@@ -416,7 +421,9 @@ public class SettingFragment extends Fragment {
                                 map.put("car_type", mCarType);
                                 map.put("car_color", mCarColor);
                                 map.put("car_id", mCarId);
-                                String url = "http://70.12.115.57:9090/TestProject/update.do";
+
+//                                map.put("vo", tmp);
+                                String url = "http://70.12.115.73:9090/Chavis/Member/update.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getContext());
                                 res = http.request();
                             } catch (Exception e) {
@@ -427,7 +434,7 @@ public class SettingFragment extends Fragment {
                     t.start();
                     try {
                         t.join();
-                        if (res.equals("true"))
+                        if (Integer.parseInt(res) == 1)
                             Toast.makeText(getContext(), "회원정보가 수정 성공", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(getContext(), "회원정보 수정 실패", Toast.LENGTH_SHORT).show();

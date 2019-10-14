@@ -17,16 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static android.graphics.Color.GREEN;
@@ -80,10 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
     private String mCarColor;
 
     HttpUtils http;
-    Map<String, String> map = new HashMap<String, String>();
-    ;
     private String res;
     private MemberVO vo = new MemberVO();
+    private Map<String, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
         mTelEt = (EditText) findViewById(R.id.mTelEt);
         mCarTypeEt = (EditText) findViewById(R.id.carTypeEt);
         mCarColorEt = (EditText) findViewById(R.id.carColorEt);
-        
+
         mCarIdEt = (EditText) findViewById(R.id.carIdEt);
         checkPw = (ImageView) findViewById(R.id.checkPw);
 
@@ -317,21 +309,20 @@ public class RegisterActivity extends AppCompatActivity {
                     Thread t = new Thread() {
                         public void run() {
                             try {
-                                MemberVO tmp = new MemberVO(vo.getMember_no(),mId,mPw,mName,mTel,
-                                                            vo.getCar_no(),mCarType,mCarColor,mCarColor);
-                               // map = new HashMap<String, String>();
-//                                 map.put("member_id", mId);
-//                                 map.put("member_pw", mPw);
-//                                 map.put("member_mname", mName);
-//                                 map.put("member_phonenumber", mTel);
-//                                 map.put("car_type", mCarType);
-//                                 map.put("car_color", mCarColor);
-//                                 map.put("car_id", mCarId);
-                                
-                                map = new HashMap<String, Object>();
-                                map.put("vo",tmp);
-                               
-                                String url = "http://70.12.115.73:9090/Chavis/Member/register.do";
+
+                                MemberVO tmp = new MemberVO(vo.getMember_no(), mId, mPw, mName, mTel, vo.getCar_no(), mCarType, mCarId, mCarColor);
+                                Map<String, String> map = new HashMap<String, String>();
+//                                map.put("MemberVO", tmp);
+                                map.put("member_id", mId);
+                                map.put("member_pw", mPw);
+                                map.put("member_mname", mName);
+                                map.put("member_phonenumber", mTel);
+                                map.put("car_type", mCarType);
+                                map.put("car_color", mCarColor);
+                                map.put("car_id", mCarId);
+
+//                                map.put("MemberVO", tmp);
+                                String url = "http://70.12.115.73:9090/Chavis/Member/add.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
                             } catch (Exception e) {
@@ -374,7 +365,7 @@ public class RegisterActivity extends AppCompatActivity {
         Thread t = new Thread() {
             public void run() {
                 try {
-                    map.put("member_id", mId);
+                    map.put("member_id", id);
                     String url = "http://70.12.115.73:9090/Chavis/Member/dupcheck.do";
                     HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                     res = http.request();
@@ -390,7 +381,7 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (res.equals("true"))
+        if (Integer.parseInt(res) == 1)
             return true;
         else
             return false;

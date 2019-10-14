@@ -31,14 +31,12 @@ public class HttpUtils {
     public static final int GET = 0;
     private static int Method = GET;
 
-
     public HttpUtils(int method, Map<String, String> map, String url, Context context) {
         HttpUtils.Method = method;
         HttpUtils.map = map;
         HttpUtils.url = url;
         this.context = context;
     }
-
     public String request() { //key&value로 전송하고 json으로 받기.
         try {
             URL Url = new URL(url);
@@ -60,6 +58,7 @@ public class HttpUtils {
                 os.write(sendMsg.getBytes("UTF-8"));
                 os.flush();
                 os.close();
+                Log.i("123546789085432",  map.get("member_id"));
             } else if (Method == HttpUtils.GET) {
                 StringBuilder sb = new StringBuilder();
                 con.setRequestMethod("GET");
@@ -85,8 +84,13 @@ public class HttpUtils {
 //            getCookieHeader();
             return res;
         } catch (MalformedURLException e) { // for URL.
+
+            Log.i("13546547보", "!245675");
             e.printStackTrace();
+
         } catch (IOException e) { // for openConnection().
+
+            Log.i("99999999999999999", "!245675");
             e.printStackTrace();
         } finally {
             if (con != null)
