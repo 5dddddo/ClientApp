@@ -78,16 +78,16 @@ public class MainActivity extends AppCompatActivity {
                             vo = mapper.readValue(res, MemberVO.class);
 
 
-                            initData();
-                            Log.i("st","000");
+//                            initData();
+//                            Log.i("st","000");
 
                             // 서비스 실행
-                            Intent servicei = new Intent();
-                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
-                            servicei.setComponent(sComponentName);
-                            servicei.putExtra("mNo",vo.getMember_no()+"");
-                            startService(servicei);
-                            Log.i("st","1234");
+//                            Intent servicei = new Intent();
+//                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
+//                            servicei.setComponent(sComponentName);
+//                            servicei.putExtra("mNo",vo.getMember_no()+"");
+//                            startService(servicei);
+//                            Log.i("st","1234");
 
 
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
@@ -139,14 +139,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Log.i("MainActivity","onDestroy");
-        //브로드 캐스트 해제
-        unregisterReceiver(restartService);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//
+//        Log.i("MainActivity","onDestroy");
+//        //브로드 캐스트 해제
+//        unregisterReceiver(restartService);
+//    }
 
     private void initData(){
 

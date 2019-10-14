@@ -54,7 +54,10 @@ public class StatusFragment extends Fragment {
     String date = "", time = "", otpkey = "", reserve_time = "", day = "";
     String reserokdata;
     String TIRE_CHANGE_DISTANCE = "0", WIPER_CHANGE_DISTANCE = "0", ENGINE_OIL_VISCOSITY = "0", DISTANCE = "0", COOLER_LEFT = "0";
-    String change_TIRE_CHANGE_DISTANCE = "0", change_WIPER_CHANGE_DISTANCE = "0";
+
+
+    // 교체 권장 거리
+    String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "6000";
 
 
     @Override
@@ -96,9 +99,9 @@ public class StatusFragment extends Fragment {
 
         double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
         double wiper = Double.parseDouble(WIPER_CHANGE_DISTANCE);
-        int engineoil = Integer.parseInt(ENGINE_OIL_VISCOSITY);
-        int distance = Integer.parseInt(DISTANCE);
-        int cooler = Integer.parseInt(COOLER_LEFT);
+        double engineoil = Double.parseDouble(ENGINE_OIL_VISCOSITY);
+        double distance = Double.parseDouble(DISTANCE);
+        double cooler = Double.parseDouble(COOLER_LEFT);
 
         double ch_tire = Double.parseDouble(change_TIRE_CHANGE_DISTANCE);
         double ch_wiper = Double.parseDouble(change_WIPER_CHANGE_DISTANCE);
@@ -118,7 +121,7 @@ public class StatusFragment extends Fragment {
 
         ProgressBar progressBar2 = (ProgressBar) rootView.findViewById(R.id.pb_cooler);
         progressBar2.setMax(100);
-        progressBar2.setProgress(cooler);
+        progressBar2.setProgress((int)cooler);
         if (cooler <= 25) {
             per_cool.setTextColor(Color.RED);
             progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
@@ -127,7 +130,7 @@ public class StatusFragment extends Fragment {
 
         ProgressBar progressBar3 = (ProgressBar) rootView.findViewById(R.id.pb_enginoil);
         progressBar3.setMax(100);
-        progressBar3.setProgress(engineoil);
+        progressBar3.setProgress((int)engineoil);
         if (engineoil <= 25) {
             per_oil.setTextColor(Color.RED);
             progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
