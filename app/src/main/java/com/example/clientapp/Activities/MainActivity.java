@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                                 String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
-                                Log.i("dlakfjalekjf;qiwejf",res);
                             } catch (Exception e) {
                                 Log.i("MemberLoginError", e.toString());
                             }
@@ -76,19 +75,6 @@ public class MainActivity extends AppCompatActivity {
                         ObjectMapper mapper = new ObjectMapper();
                         vo = mapper.readValue(res, MemberVO.class);
                         if (vo.getCode().equals("200")) {
-
-//                            initData();
-//                            Log.i("st","000");
-
-                            // 서비스 실행
-//                            Intent servicei = new Intent();
-//                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
-//                            servicei.setComponent(sComponentName);
-//                            servicei.putExtra("mNo",vo.getMember_no()+"");
-//                            startService(servicei);
-//                            Log.i("st","1234");
-
-
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");
@@ -105,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 } else {
                     Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                 }
