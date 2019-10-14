@@ -2,11 +2,8 @@ package com.example.clientapp;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
-
-import com.example.clientapp.Activities.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -114,6 +111,7 @@ public class ClientService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("clientService","클라이언트 서비스 종료");
     }
 
 }

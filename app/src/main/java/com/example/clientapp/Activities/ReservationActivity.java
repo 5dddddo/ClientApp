@@ -144,13 +144,13 @@ public class ReservationActivity extends AppCompatActivity {
         String sendMsg;
 
 //        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
-        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
-//        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add.do");    // 한석햄22
+//        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
+        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add.do");    // 한석햄22
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//        conn.setRequestProperty("Content-Type", "application/JSON");      // 한석햄..
+//        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Content-Type", "application/JSON");      // 한석햄..
         conn.setRequestProperty("Connection", "Keep-Alive");
         conn.setRequestProperty("charset", "utf-8");
         OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());

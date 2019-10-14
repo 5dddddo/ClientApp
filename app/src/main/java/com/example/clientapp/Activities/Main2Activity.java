@@ -1,3 +1,5 @@
+
+
 package com.example.clientapp.Activities;
 
 import android.content.ComponentName;
@@ -26,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
 
     private Intent intent;
     private RestartService restartService;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
         Button findIdPwBtn = (Button) findViewById(R.id.findIdPwBtn);
         Button addUserBtn = (Button) findViewById(R.id.addUserBtn);
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                                 String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
+                                Log.i("dlakfjalekjf;qiwejf", res);
                             } catch (Exception e) {
                                 Log.i("MemberLoginError", e.toString());
                             }
@@ -71,9 +74,11 @@ public class MainActivity extends AppCompatActivity {
                     t.start();
                     try {
                         t.join();
-                        ObjectMapper mapper = new ObjectMapper();
-                        vo = mapper.readValue(res, MemberVO.class);
-                        if (vo.getCode().equals("200")) {
+                        if (!res.equals("null")) {
+                            ObjectMapper mapper = new ObjectMapper();
+                            vo = mapper.readValue(res, MemberVO.class);
+
+
 //                            initData();
 
 //                            서비스 실행
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         //리스타트 서비스 생성
         restartService = new RestartService();
-        intent = new Intent(MainActivity.this, PersistentService.class);
+        intent = new Intent(Main2Activity.this, PersistentService.class);
 
         intent.putExtra("mNo", vo.getMember_no() + "");
 
