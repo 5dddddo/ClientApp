@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,11 +56,9 @@ public class HttpUtils {
                 OutputStream os = con.getOutputStream();
                 ObjectMapper mapper = new ObjectMapper();
                 String sendMsg = mapper.writeValueAsString(map);
-                Log.i("mapampampa", sendMsg + map.get("member_id"));
                 os.write(sendMsg.getBytes("UTF-8"));
                 os.flush();
                 os.close();
-                Log.i("123546789085432",  map.get("member_id"));
             } else if (Method == HttpUtils.GET) {
                 StringBuilder sb = new StringBuilder();
                 con.setRequestMethod("GET");
@@ -66,7 +66,6 @@ public class HttpUtils {
             }
 //            setCookieHeader();
             //사용자가 로그인해서 세션 쿠키를 서버로부터 발급받은적 있다면 그 다음 요청 헤더 부터는 그 세션 쿠키를 포함해서 전송해야 함.
-
 
             Log.d("HttpUtils", url + "로 HTTP 요청 전송");
             if (con.getResponseCode() != HttpURLConnection.HTTP_OK) { //이때 요청이 보내짐.
@@ -82,6 +81,7 @@ public class HttpUtils {
             }
             Log.i("로그인 정보", res);
 //            getCookieHeader();
+
             return res;
         } catch (MalformedURLException e) { // for URL.
 

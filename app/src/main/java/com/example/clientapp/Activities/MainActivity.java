@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                                 String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
-                                Log.i("dlakfjalekjf;qiwejf",res);
                             } catch (Exception e) {
                                 Log.i("MemberLoginError", e.toString());
                             }
@@ -65,10 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     t.start();
                     try {
                         t.join();
-                        if (!res.equals("null") ) {
-                            ObjectMapper mapper = new ObjectMapper();
-                            vo = mapper.readValue(res, MemberVO.class);
-                            Log.i("3424675958309540945","12436");
+                        ObjectMapper mapper = new ObjectMapper();
+                        vo = mapper.readValue(res, MemberVO.class);
+                        if (vo.getCode().equals("200")) {
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");
@@ -81,13 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JsonParseException e) {
                         e.printStackTrace();
                     } catch (JsonMappingException e) {
-
-                        Log.i("00000000000000000",res);
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 } else {
                     Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                 }

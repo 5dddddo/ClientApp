@@ -14,6 +14,7 @@ public class MemberVO implements Parcelable {
     private String car_id;
     private String car_type;
     private String car_color;
+    private String code;
 
 
     public MemberVO() {
@@ -63,6 +64,7 @@ public class MemberVO implements Parcelable {
         car_type = parcel.readString();
         car_id = parcel.readString();
         car_color = parcel.readString();
+        code = parcel.readString();
     }
 
     @Override
@@ -82,6 +84,7 @@ public class MemberVO implements Parcelable {
             parcel.writeString(car_type);
             parcel.writeString(car_id);
             parcel.writeString(car_color);
+            parcel.writeString(code);
         } catch (Exception e) {
             Log.i("LOG", e.toString());
         }
@@ -127,7 +130,6 @@ public class MemberVO implements Parcelable {
         return member_phonenumber;
     }
 
-
     public void setMember_phonenumber(String member_phonenumber) {
         this.member_phonenumber = member_phonenumber;
     }
@@ -162,5 +164,13 @@ public class MemberVO implements Parcelable {
 
     public void setCar_color(String car_color) {
         this.car_color = car_color;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
