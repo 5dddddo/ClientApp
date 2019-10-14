@@ -16,6 +16,9 @@ public class ReservationVO implements Parcelable {
     private String repaired_time;
     private String repaired_person;
 
+    public static Creator<ReservationVO> getCREATOR() {
+        return CREATOR;
+    }
 
     public static final Creator<ReservationVO> CREATOR = new Creator<ReservationVO>() {
         @Override

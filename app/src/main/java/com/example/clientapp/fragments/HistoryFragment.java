@@ -15,6 +15,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.clientapp.Activities.CustomListViewAdapter;
+import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 import com.example.clientapp.VO.ReservationVO;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,7 +38,7 @@ public class HistoryFragment extends Fragment {
 
     private ArrayList<ReservationVO> data;
     private MemberVO vo;
-
+    private String res = "";
 
     public HistoryFragment() {
     }
@@ -47,77 +49,84 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
         final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
-
-
-
+        ListView lv = (ListView) rootView.findViewById(R.id.lv);
         Bundle b = getArguments();
         vo = b.getParcelable("vo");
+
         try {
-            Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
+            Thread t = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
                 public void run() {
                     try {
-                        receiveD(vo.getMember_id());
+                        String url = "http://70.12.115.73:9090/Chavis/Member/rlist.do?id=" + vo.getMember_id();
+                        HttpUtils http = new HttpUtils(HttpUtils.GET, url, getContext());
+                        res = http.request();
+//                        receiveD(vo.getMember_id());
                     } catch (Exception e) {
                         Log.i("msi", e.toString());
                     }
                 }
             };
-            wThread.start();
+            t.start();
 
             try {
-                wThread.join();
+                t.join();
             } catch (Exception e) {
                 Log.i("msi", "이상이상22");
             }
         } catch (Exception e) {
             Log.i("msi", "여기가안댐?" + e.toString());
         }
-
-        ListView lv = (ListView) rootView.findViewById(R.id.lv);
-        CustomListViewAdapter adapter = new CustomListViewAdapter();
-        for (ReservationVO vo : data) {
-            adapter.addItem(vo);
-        }
-
-
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-
-                androidx.appcompat.app.AlertDialog.Builder dialog =
-                        new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                dialog.setTitle("정비 예약 세부 내역");
-
-                ReservationVO vo = data.get(position);
-
-                final List<String> ListItems = new ArrayList<>();
-
-                ListItems.add("예약 번호  :  " + vo.getReservation_no());
-                ListItems.add("정비소 ID  :  " + vo.getBodyshop_no());
-                ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
-                ListItems.add(vo.getRepaired_time() == null || vo.getRepaired_time().equals("0") ? ("정비 완료 시간  :  정비중") : ("정비 완료 시간  :  " + vo.getRepaired_time()));
-                ListItems.add("KEY 동의 여부  :  " + (vo.getKey().equals("1") ? "O" : "X"));
-                ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
-
-                final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
-
-                dialog.setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int pos) {
-                        return;
-                    }
+        if (!res.equals("[]")) {
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                data = mapper.readValue(res, new TypeReference<ArrayList<ReservationVO>>() {
                 });
-
-                dialog.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        return;
-                    }
-                });
-                dialog.show();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
+            CustomListViewAdapter adapter = new CustomListViewAdapter();
+            for (ReservationVO vo : data) {
+                adapter.addItem(vo);
+            }
 
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+
+                    androidx.appcompat.app.AlertDialog.Builder dialog =
+                            new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                    dialog.setTitle("정비 예약 세부 내역");
+
+                    ReservationVO vo = data.get(position);
+
+                    final List<String> ListItems = new ArrayList<>();
+
+                    ListItems.add("예약 번호  :  " + vo.getReservation_no());
+                    ListItems.add("정비소 ID  :  " + vo.getBodyshop_no());
+                    ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
+                    ListItems.add(vo.getRepaired_time() == null || vo.getRepaired_time().equals("0") ? ("정비 완료 시간  :  정비중") : ("정비 완료 시간  :  " + vo.getRepaired_time()));
+                    ListItems.add("KEY 동의 여부  :  " + (vo.getKey().equals("1") ? "O" : "X"));
+                    ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
+
+                    final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
+
+                    dialog.setItems(items, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int pos) {
+                            return;
+                        }
+                    });
+
+                    dialog.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    dialog.show();
+                }
+            });
+        }
 
         Button searchBtn = (Button) rootView.findViewById(R.id.searchBtn);   // 앞에 this가 생략할수도있는데 여기 activity에서 찾는거
         // anonymous inner class를 이용한 Event처리 (Android의 전형적인 event처리)
@@ -128,48 +137,6 @@ public class HistoryFragment extends Fragment {
 
             }
         });
-
         return rootView;
     }
-
-    private void receiveD(String member_id) throws Exception {
-
-        String receivedata;
-
-//        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
-        String r_url = "http://70.12.115.57:9090/TestProject/rlist.do?id=" + member_id;
-//        String r_url = "http://70.12.115.73:9090/Chavis/Member/view.do?member_id=" + member_id;  // 한석햄
-//        String r_url = "http://70.12.115.73:9090/Chavis/Reservation/add.do";
-
-        URL url = new URL(r_url);
-
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestMethod("GET");
-        conn.setDoInput(true);
-
-
-        String inputLine = "";
-        StringBuffer sb = new StringBuffer();
-        // stream을 통해 data 읽어오기
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream()));
-        while ((inputLine = br.readLine()) != null) {
-            sb.append(inputLine);
-        }
-        receivedata = sb.toString();
-        br.close();
-        Log.i("KAKAOBOOKLog22", receivedata);
-
-        ObjectMapper mapper = new ObjectMapper();
-        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
-        });
-
-        data = myObject;
-        for (ReservationVO v : myObject)
-            Log.i("KAKAOBOOKLog@@@", v.getReservation_no() + "");
-        Log.i("오은애", "오은애");
-    }
-
-
 }
