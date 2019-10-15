@@ -13,7 +13,7 @@ import com.example.clientapp.VO.RepairedListVO;
 
 import java.util.ArrayList;
 
-public class CustomListViewAdapter extends BaseAdapter {
+public class HistoryListViewAdapter extends BaseAdapter {
     private ArrayList<RepairedListVO> list = new ArrayList<RepairedListVO>();
     // 반드시 overriding을 해야하는 method가 존재.
 

@@ -27,7 +27,6 @@ public class HomeActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
     private TextView actionbar_text;
     private MemberVO vo;
-    private Button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +105,6 @@ public class HomeActivity extends AppCompatActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.logoutBtn:
-                B
                 return true;
         }
         return false;

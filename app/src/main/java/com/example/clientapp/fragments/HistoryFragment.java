@@ -9,24 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.clientapp.Activities.CustomListViewAdapter;
+import com.example.clientapp.Activities.HistoryListViewAdapter;
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
+import com.example.clientapp.VO.RepairedListVO;
 import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +32,7 @@ import java.util.List;
  */
 public class HistoryFragment extends Fragment {
 
-    private ArrayList<ReservationVO> data;
+    private ArrayList<RepairedListVO> data;
     private MemberVO vo;
     private String res = "";
 
@@ -48,7 +44,6 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
-        final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
         ListView lv = (ListView) rootView.findViewById(R.id.notification_lv);
         Bundle b = getArguments();
         vo = b.getParcelable("vo");
@@ -85,7 +80,7 @@ public class HistoryFragment extends Fragment {
                 e.printStackTrace();
             }
             HistoryListViewAdapter adapter = new HistoryListViewAdapter();
-            for (ReservationVO vo : data) {
+            for (RepairedListVO vo : data) {
                 adapter.addItem(vo);
             }
             lv.setAdapter(adapter);
@@ -108,10 +103,9 @@ public class HistoryFragment extends Fragment {
                     ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
                     ListItems.add("KEY 동의 여부  :  " + (vo.getKey().equals("1") ? "O" : "X"));
 
-                    if (vo.getTire() == null){
+                    if (vo.getTire() == null) {
                         ListItems.add("정비 중");
-                    }
-                    else {
+                    } else {
                         String a[] = {vo.getTire(), vo.getCooler(), vo.getEngine_oil(), vo.getWiper()};
                         ListItems.add("정비 완료 시간  :  " + vo.getRepaired_time());
                         ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
@@ -138,39 +132,28 @@ public class HistoryFragment extends Fragment {
             });
         }
 
-        Button searchBtn = (Button) rootView.findViewById(R.id.searchBtn);   // 앞에 this가 생략할수도있는데 여기 activity에서 찾는거
-        // anonymous inner class를 이용한 Event처리 (Android의 전형적인 event처리)
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 버튼을 눌렀을 때 서비스를 생성하고 실행.
-
-            }
-        });
         return rootView;
     }
 
-    public String CheckRepairedList(String[] a){
+    public String CheckRepairedList(String[] a) {
 
         String s = "";
 
-        if (a[0].equals("O")){
+        if (a[0].equals("O")) {
             s += "타이어 교체, ";
         }
-        if (a[1].equals("O")){
+        if (a[1].equals("O")) {
             s += "냉각수 교체, ";
         }
-        if (a[2].equals("O")){
+        if (a[2].equals("O")) {
             s += "엔진오일 교체, ";
         }
-        if (a[3].equals("O")){
+        if (a[3].equals("O")) {
             s += "와이퍼 교체, ";
         }
 
 
-
-
-        return s.substring(0,s.length()-2);
+        return s.substring(0, s.length() - 2);
     }
 
 }
