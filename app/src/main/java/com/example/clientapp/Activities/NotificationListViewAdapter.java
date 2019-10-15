@@ -67,7 +67,6 @@ public class NotificationListViewAdapter extends BaseExpandableListAdapter {
         if (view == null) {
             view = inflater.inflate(R.layout.listview_parent, null);
         }
-
         //get position
         NotificationVO vo = (NotificationVO) getGroup(i);
 
@@ -81,8 +80,6 @@ public class NotificationListViewAdapter extends BaseExpandableListAdapter {
             imageView.setImageResource(R.drawable.up);
         else
             imageView.setImageResource(R.drawable.down);
-
-        view.setBackgroundColor(Color.LTGRAY);
         return view;
     }
 
@@ -92,10 +89,11 @@ public class NotificationListViewAdapter extends BaseExpandableListAdapter {
         if (view == null)
             view = inflater.inflate(R.layout.listview_child, null);
 
-        mContents = (String) getChild(i, 0);
+        mContents = ((NotificationVO) getChild(i, 0)).getContents();
         TextView contentsTv = (TextView) view.findViewById(R.id.contentsTv);
-        contentsTv.setText(mContents);
 
+        view.setBackgroundColor(Color.LTGRAY);
+        contentsTv.setText(mContents);
         return view;
     }
 

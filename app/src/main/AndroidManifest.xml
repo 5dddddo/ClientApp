@@ -16,8 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.Main2Activity"
-            android:theme="@style/NoActionBar"></activity>
+        <service
+            android:name=".MemberService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity
+            android:name=".Activities.Main2Activity"
+            android:theme="@style/NoActionBar" />
 
         <service
             android:name=".PersistentService"

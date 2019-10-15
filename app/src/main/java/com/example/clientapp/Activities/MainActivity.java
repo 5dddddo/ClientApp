@@ -1,8 +1,8 @@
 package com.example.clientapp.Activities;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 map.put("member_id", member_id);
                                 map.put("member_pw", member_pw);
-                                String url = "http://70.12.115.57:9090/TestProject/login.do";
+                                String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
                             } catch (Exception e) {
@@ -73,15 +73,13 @@ public class MainActivity extends AppCompatActivity {
                         t.join();
                         ObjectMapper mapper = new ObjectMapper();
                         vo = mapper.readValue(res, MemberVO.class);
-                        if (!vo.getCode().equals("200")) {
-//                            initData();
-
-//                            서비스 실행
-//                            Intent servicei = new Intent();
-//                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
-//                            servicei.setComponent(sComponentName);
-//                            servicei.putExtra("mNo", vo.getMember_no() + "");
-//                            startService(servicei);
+                        if (vo.getCode().equals("200")) {
+                            // 자동 로그인 등록
+                            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("myObject", res);
+                            editor.commit();
+                            Log.i("LOGIN_ADD_SharedPref", "로그인 객체 저장 성공");
 
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);
