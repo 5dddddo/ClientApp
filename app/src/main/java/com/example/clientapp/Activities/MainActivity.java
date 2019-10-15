@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");
                             startActivity(i);
+                            MainActivity.this.finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                         }

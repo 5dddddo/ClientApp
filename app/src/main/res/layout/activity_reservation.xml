@@ -476,7 +476,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="내 이름"
+                android:hint="이름"
                 android:inputType="textPersonName"
                 android:padding="5dp"
                 android:textSize="14sp" />
@@ -486,29 +486,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="연락처"
+                android:hint="휴대전화"
                 android:inputType="phone"
                 android:padding="5dp"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/mycartype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="차 종"
+                android:hint="차종"
                 android:padding="5dp"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/mycarnumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="차 번호"
+                android:hint="차량 번호"
                 android:padding="5dp"
                 android:scrollbarSize="50sp"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
 
@@ -520,6 +520,7 @@
             android:layout_margin="30dp"
             android:background="@drawable/button_background"
             android:padding="10dp"
-            android:text="예약하기" />
+            android:text="예약하기"
+            android:textSize="15sp" />
     </LinearLayout>
 </ScrollView>

@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -18,7 +17,6 @@ import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 import com.example.clientapp.VO.RepairedListVO;
-import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -89,15 +87,12 @@ public class HistoryFragment extends Fragment {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    RepairedListVO vo = data.get(position);
+                    List<String> ListItems = new ArrayList<>();
 
                     androidx.appcompat.app.AlertDialog.Builder dialog =
                             new androidx.appcompat.app.AlertDialog.Builder(getContext());
                     dialog.setTitle("정비 예약 세부 내역");
-
-                    RepairedListVO vo = data.get(position);
-
-                    final List<String> ListItems = new ArrayList<>();
-
                     ListItems.add("예약 번호  :  " + vo.getReservation_no());
                     ListItems.add("정비소 이름  :  " + vo.getBodyshop_name());
                     ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
@@ -131,7 +126,6 @@ public class HistoryFragment extends Fragment {
                 }
             });
         }
-
         return rootView;
     }
 
@@ -151,7 +145,6 @@ public class HistoryFragment extends Fragment {
         if (a[3].equals("O")) {
             s += "와이퍼 교체, ";
         }
-
 
         return s.substring(0, s.length() - 2);
     }

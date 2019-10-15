@@ -38,27 +38,15 @@ import java.util.Map;
  */
 public class StatusFragment extends Fragment {
     private MemberVO vo;
-
-    private RestartService restartService;
-
-    public StatusFragment() {
-    }
-
-    private TextView textView_Date;
-    private TextView textView_Date2;
-    private DatePickerDialog.OnDateSetListener callbackMethod;
-    private TimePickerDialog.OnTimeSetListener callbackMethod2;
-    TextView per_tire, per_wiper, per_oil, per_cool, per_dis;
-
-    String keyword = "111";     // 가상의 클라이언트 ID
-    String date = "", time = "", otpkey = "", reserve_time = "", day = "";
+    TextView per_tire, per_wiper, per_oil, per_cool, per_dis, caridTv;
+    Button go_reservebtn;
     String reserokdata;
     String TIRE_CHANGE_DISTANCE = "0", WIPER_CHANGE_DISTANCE = "0", ENGINE_OIL_VISCOSITY = "0", DISTANCE = "0", COOLER_LEFT = "0";
-
-
     // 교체 권장 거리
     String change_TIRE_CHANGE_DISTANCE = "60000", change_WIPER_CHANGE_DISTANCE = "6000";
 
+    public StatusFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,12 +57,14 @@ public class StatusFragment extends Fragment {
         Bundle b = getArguments();
         vo = b.getParcelable("vo");
 
-        Button btn = (Button) rootView.findViewById(R.id.go_reservebtn);
+        go_reservebtn = (Button) rootView.findViewById(R.id.go_reservebtn);
         per_tire = (TextView) rootView.findViewById(R.id.tireper);
         per_wiper = (TextView) rootView.findViewById(R.id.wiperper);
         per_oil = (TextView) rootView.findViewById(R.id.engineper);
         per_cool = (TextView) rootView.findViewById(R.id.coolper);
         per_dis = (TextView) rootView.findViewById(R.id.disper);
+        caridTv = (TextView) rootView.findViewById(R.id.caridTv);
+        caridTv.setText(vo.getCar_id());
 
         try {
             Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
@@ -127,7 +117,7 @@ public class StatusFragment extends Fragment {
         ProgressBar progressBar2 = (ProgressBar) rootView.findViewById(R.id.pb_cooler);
         progressBar2.setMax(100);
         progressBar2.setProgress((int)cooler);
-        if (cooler <= 20) {
+        if (cooler <= 25) {
             per_cool.setTextColor(Color.RED);
             progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         }
@@ -170,7 +160,7 @@ public class StatusFragment extends Fragment {
         per_wiper.setText(f_wiper + "%");
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        go_reservebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ReservationActivity.class);

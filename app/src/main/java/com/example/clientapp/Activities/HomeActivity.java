@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
             actionbar_text.setText(vo.getCar_id());
             loadFragmentClass(new HistoryFragment());
         } else {
-            actionbar_text.setText("차량 상태 정보");
+            actionbar_text.setText("내차현황");
             loadFragmentClass(new StatusFragment());
         }
 
@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment;
             switch (menuItem.getItemId()) {
                 case R.id.car:
-                    actionbar_text.setText(vo.getCar_id());
+                    actionbar_text.setText("내차현황");
                     fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
