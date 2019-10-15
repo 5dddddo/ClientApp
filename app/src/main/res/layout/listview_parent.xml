@@ -23,26 +23,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:padding="10dp"
-                android:text="dlfkajdlfkajewlif" />
+                android:padding="10dp"/>
 
             <TextView
-                android:id="@+id/contentsTv"
+                android:id="@+id/dateTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:paddingStart="10dp"
                 android:paddingTop="5dp"
                 android:paddingEnd="10dp"
-                android:text="edlkfaj;ldkjf"
                 android:textSize="12sp" />
 
         </LinearLayout>
 
-        <ToggleButton
-            android:id="@+id/downBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+        <ImageView
+            android:id="@+id/updown"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -50,27 +48,8 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/down"
-            android:includeFontPadding="false"
-            android:paddingTop="10dp"
-            android:textOff="@null"
-            android:textOn="@null" />
+            android:paddingTop="10dp" />
 
-        <ToggleButton
-            android:id="@+id/upBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/down"
-            android:includeFontPadding="false"
-            android:paddingTop="10dp"
-            android:textOff="@null"
-            android:textOn="@null"
-            android:visibility="gone" />
     </RelativeLayout>
 
 </LinearLayout>

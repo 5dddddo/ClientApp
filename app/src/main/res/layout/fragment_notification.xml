@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
 
-        <ListView
+        <ExpandableListView
             android:id="@+id/notification_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
