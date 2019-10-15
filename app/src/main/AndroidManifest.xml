@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.Main2Activity"></activity>
+        <activity android:name=".Activities.Main2Activity"
+            android:theme="@style/NoActionBar"></activity>
 
         <service
             android:name=".PersistentService"

@@ -63,7 +63,7 @@ public class CustomListViewAdapter extends BaseAdapter {
             tv1.setText(" " + vo.getReservation_no());
             tv2.setText(" " + vo.getReservation_time().substring(0, 11));
 
-            if (vo.getRepaired_time() == null || vo.getRepaired_time().equals("0")) {
+            if (vo.getRepaired_time() == null || vo.getRepaired_time().equals("0") || vo.getRepaired_time().equals("NO")) {
                 checkwait.setVisibility(View.VISIBLE);
                 checksuccess.setVisibility(View.GONE);
             } else {
@@ -71,7 +71,7 @@ public class CustomListViewAdapter extends BaseAdapter {
                 checksuccess.setVisibility(View.VISIBLE);
             }
         } catch (Exception e) {
-            Log.i("KAKAOBOOKLog", e.toString());
+            Log.i("ErRoR", e.toString());
         }
         return view;
     }

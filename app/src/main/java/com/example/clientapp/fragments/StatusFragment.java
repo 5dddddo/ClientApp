@@ -82,7 +82,7 @@ public class StatusFragment extends Fragment {
                     try {
                         sendPost(vo.getMember_id());
                     } catch (Exception e) {
-                        Log.i("msi", e.toString());
+                        Log.i("ErroR", e.toString());
                     }
                 }
             };
@@ -204,25 +204,18 @@ public class StatusFragment extends Fragment {
         }
         receivedata = response.toString();
         in.close();
-        Log.i("msi", receivedata);
 
 
 //        ArrayList<CarVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<CarVO>>() {
 //        });
         CarVO myObject = mapper.readValue(receivedata, new TypeReference<CarVO>() {
         });
-        Log.i("msi", myObject.getCar_color());
 
         TIRE_CHANGE_DISTANCE = myObject.getTire_change_distance();
-        Log.i("msi", myObject.getTire_change_distance());
         WIPER_CHANGE_DISTANCE = myObject.getWiper_change_distance();
-        Log.i("msi", myObject.getWiper_change_distance());
         ENGINE_OIL_VISCOSITY = myObject.getEngine_oil_viscosity();
-        Log.i("msi", myObject.getEngine_oil_viscosity());
         DISTANCE = myObject.getDistance();
-        Log.i("msi", myObject.getDistance());
         COOLER_LEFT = myObject.getCooler_left();
-        Log.i("msi", myObject.getCooler_left());
 
         reserokdata = receivedata;
     }
