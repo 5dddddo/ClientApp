@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.actionbar);
         actionbar_text = (TextView) findViewById(R.id.actionbar_text);
         setContentView(R.layout.activity_home);
-
+        backPressCloseHandler = new BackPressCloseHandler(this);
         logoutBtn = (ImageButton) findViewById(R.id.logoutBtn);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
@@ -75,8 +75,10 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("mjyObect", "NO");
-                        startActivity(new Intent(getApplicationContext(), LoadingActivity.class));
+                        editor.putString("myObject", "NO");
+                        editor.commit();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        HomeActivity.this.finish();
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -125,11 +127,6 @@ public class HomeActivity extends AppCompatActivity {
         transaction.replace(R.id.frag_content, fragment);
         transaction.commit();
     }
-
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//    }
 
     @Override
     public void onBackPressed() {

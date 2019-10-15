@@ -6,60 +6,10 @@
     android:background="#FFFFFF"
     tools:context=".fragments.HistoryFragment">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/notification_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:padding="10dp"
-            android:text="이전 정비 내역"
-            android:textColor="@color/ffont"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/keywordEt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="7dp"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/searchBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="7dp"
-                    android:background="@drawable/button_background"
-                    android:gravity="center"
-                    android:text="날짜 검색!!" />
-
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/notification_lv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp" />
 
 </FrameLayout>

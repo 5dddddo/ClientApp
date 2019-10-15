@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.PersistentService;
 import com.example.clientapp.R;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private BackPressCloseHandler backPressCloseHandler;
     private Intent intent;
     private RestartService restartService;
 
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         Button loginBtn = (Button) findViewById(R.id.loginBtn);
         Button findIdPwBtn = (Button) findViewById(R.id.findIdPwBtn);
         Button addUserBtn = (Button) findViewById(R.id.addUserBtn);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         final EditText idEditView = (EditText) findViewById(R.id.idEditView);
         final EditText pwEditView = (EditText) findViewById(R.id.pwEditView);
@@ -128,16 +131,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        Log.i("MainActivity","onDestroy");
-//        //브로드 캐스트 해제
-//        unregisterReceiver(restartService);
-//    }
-
     private void initData() {
 
         //리스타트 서비스 생성
@@ -152,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(restartService, intentFilter);
         // 서비스 시작
         startService(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 
 }
