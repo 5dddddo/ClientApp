@@ -33,7 +33,7 @@ public class LoadingActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             LoadingActivity.this.finish();
 //
 //            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);

@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.clientapp.Activities.CustomListViewAdapter;
+import com.example.clientapp.Activities.HistoryListViewAdapter;
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
@@ -22,11 +22,7 @@ import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +45,7 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_history, container, false);
         final EditText editText = (EditText) rootView.findViewById(R.id.keywordEt);
-        ListView lv = (ListView) rootView.findViewById(R.id.lv);
+        ListView lv = (ListView) rootView.findViewById(R.id.notification_lv);
         Bundle b = getArguments();
         vo = b.getParcelable("vo");
 
@@ -84,7 +80,7 @@ public class HistoryFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            CustomListViewAdapter adapter = new CustomListViewAdapter();
+            HistoryListViewAdapter adapter = new HistoryListViewAdapter();
             for (ReservationVO vo : data) {
                 adapter.addItem(vo);
             }

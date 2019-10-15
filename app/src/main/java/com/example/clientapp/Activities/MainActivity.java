@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 map.put("member_id", member_id);
                                 map.put("member_pw", member_pw);
-                                String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
+                                String url = "http://70.12.115.57:9090/TestProject/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
                             } catch (Exception e) {
@@ -73,16 +73,15 @@ public class MainActivity extends AppCompatActivity {
                         t.join();
                         ObjectMapper mapper = new ObjectMapper();
                         vo = mapper.readValue(res, MemberVO.class);
-                        if (vo.getCode().equals("200")) {
+                        if (!vo.getCode().equals("200")) {
 //                            initData();
 
 //                            서비스 실행
-                            Intent servicei = new Intent();
-                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
-                            servicei.setComponent(sComponentName);
-                            servicei.putExtra("mNo", vo.getMember_no() + "");
-                            startService(servicei);
-
+//                            Intent servicei = new Intent();
+//                            ComponentName sComponentName = new ComponentName("com.example.clientapp", "com.example.clientapp.ClientService");
+//                            servicei.setComponent(sComponentName);
+//                            servicei.putExtra("mNo", vo.getMember_no() + "");
+//                            startService(servicei);
 
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             i.putExtra("vo", vo);

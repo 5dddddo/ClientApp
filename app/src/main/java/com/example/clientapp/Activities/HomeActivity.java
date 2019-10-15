@@ -57,22 +57,22 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment;
             switch (menuItem.getItemId()) {
                 case R.id.car:
-                    actionbar_text.setText("차량 상태 정보");
+                    actionbar_text.setText(vo.getCar_id());
                     fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.reservation:
-                    actionbar_text.setText("점검 내역");
+                    actionbar_text.setText("점검내역");
                     fragment = new HistoryFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.setting:
-                    actionbar_text.setText("회원 정보");
+                    actionbar_text.setText("회원정보");
                     fragment = new SettingFragment();
                     loadFragmentClass(fragment);
                     return true;
                 case R.id.notification:
-                    actionbar_text.setText("알림사항");
+                    actionbar_text.setText("공지사항");
                     fragment = new NotificationFragment();
                     loadFragmentClass(fragment);
                     return true;
