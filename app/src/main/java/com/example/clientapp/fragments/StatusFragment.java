@@ -113,42 +113,59 @@ public class StatusFragment extends Fragment {
         ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.pb_tire);
         progressBar.setMax(100);
         progressBar.setProgress(f_tire);
-        if (f_tire <= 25) {
+        if (f_tire <= 20) {
             per_tire.setTextColor(Color.RED);
             progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
+        }
+        else if (20 < f_tire &&  f_tire <= 40) {
+            per_tire.setTextColor(Color.YELLOW);
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
+
         }
         per_tire.setText(f_tire + "%");
 
         ProgressBar progressBar2 = (ProgressBar) rootView.findViewById(R.id.pb_cooler);
         progressBar2.setMax(100);
         progressBar2.setProgress((int)cooler);
-        if (cooler <= 25) {
+        if (cooler <= 20) {
             per_cool.setTextColor(Color.RED);
             progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         }
-        per_cool.setText(cooler + "%");
+        else if (20 < cooler &&  cooler <= 40) {
+            per_cool.setTextColor(Color.YELLOW);
+            progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
+
+        }
+        per_cool.setText((int)cooler + "%");
 
         ProgressBar progressBar3 = (ProgressBar) rootView.findViewById(R.id.pb_enginoil);
         progressBar3.setMax(100);
         progressBar3.setProgress((int)engineoil);
-        if (engineoil <= 25) {
+        if (engineoil <= 20) {
             per_oil.setTextColor(Color.RED);
             progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         }
-        per_oil.setText(engineoil + "%");
+        else if (20 < engineoil &&  engineoil <= 40) {
+            per_oil.setTextColor(Color.YELLOW);
+            progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
+
+        }
+        per_oil.setText((int)engineoil + "%");
 
 
-//        ProgressBar progressBar4 = (ProgressBar) rootView.findViewById(R.id.pb_tdistance);
-//        progressBar4.setMax(100);
-//        progressBar4.setProgress(distance);
-        per_dis.setText(distance + "km");
+        per_dis.setText((int)distance + "km");
 
         ProgressBar progressBar5 = (ProgressBar) rootView.findViewById(R.id.pb_wiper);
         progressBar5.setMax(100);
         progressBar5.setProgress(f_wiper);
-        if (f_wiper <= 25) {
+        if (f_wiper <= 20) {
             per_wiper.setTextColor(Color.RED);
             progressBar5.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
+        }
+        else if (20 < f_wiper &&  f_wiper <= 40) {
+            per_wiper.setTextColor(Color.YELLOW);
+            progressBar5.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
+
         }
         per_wiper.setText(f_wiper + "%");
 
