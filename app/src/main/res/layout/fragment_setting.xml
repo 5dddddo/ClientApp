@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SettingFragment">
+    tools:context=".fragments.SettingFragment"
+    android:background="#FFFFFF">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,6 +48,10 @@
                     android:paddingTop="5dp"
                     android:text="비밀번호"
                     android:textColor="#000000" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/cpwtv"
@@ -109,6 +114,10 @@
 
                 </RelativeLayout>
 
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
                 <RelativeLayout
                     android:id="@+id/relativePw"
                     android:layout_width="match_parent"
@@ -155,6 +164,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#FF0000" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/vcpw"

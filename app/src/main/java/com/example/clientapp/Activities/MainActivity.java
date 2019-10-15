@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                             // 자동 로그인 등록
                             SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("myObject", res);
+                            editor.putString("mjyObect", res);
                             editor.commit();
                             Log.i("LOGIN_ADD_SharedPref", "로그인 객체 저장 성공");
 
