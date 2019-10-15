@@ -1,14 +1,18 @@
 package com.example.clientapp.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,10 +27,11 @@ import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
-    private  BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     private BackPressCloseHandler backPressCloseHandler;
     private TextView actionbar_text;
     private MemberVO vo;
+    private ImageButton logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +40,8 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.actionbar);
         actionbar_text = (TextView) findViewById(R.id.actionbar_text);
         setContentView(R.layout.activity_home);
-
-
-
+        backPressCloseHandler = new BackPressCloseHandler(this);
+        logoutBtn = (ImageButton) findViewById(R.id.logoutBtn);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
 
@@ -45,13 +49,42 @@ public class HomeActivity extends AppCompatActivity {
         vo = i.getExtras().getParcelable("vo");
         String f = i.getExtras().get("fragment").toString();
         if (f.equals("reservation")) {
-            actionbar_text.setText("점검 내역");
+            actionbar_text.setText(vo.getCar_id());
             loadFragmentClass(new HistoryFragment());
         } else {
             actionbar_text.setText("차량 상태 정보");
             loadFragmentClass(new StatusFragment());
         }
 
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+
+                builder.setMessage("로그아웃 하시겠습니까?");
+                builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(getApplicationContext(), "Cancel Click", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("myObject", "NO");
+                        editor.commit();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        HomeActivity.this.finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
 
     }
 
@@ -88,26 +121,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void loadFragmentClass(Fragment fragment) {
         Bundle b = new Bundle();
-        b.putParcelable("vo",vo);
+        b.putParcelable("vo", vo);
         fragment.setArguments(b);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_content, fragment);
         transaction.commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.logoutBtn:
-                return true;
-        }
-        return false;
     }
 
     @Override

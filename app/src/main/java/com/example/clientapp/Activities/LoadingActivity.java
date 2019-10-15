@@ -35,6 +35,7 @@ public class LoadingActivity extends AppCompatActivity {
 
     private class SplashHandler implements Runnable {
         private MemberVO vo;
+
         @Override
         public void run() {
             startActivity(new Intent(getApplicationContext(), Main2Activity.class));
@@ -47,15 +48,6 @@ public class LoadingActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                 LoadingActivity.this.finish();
             } else {
-                // 서비스 실행
-//                Intent i = new Intent();
-//                ComponentName sComponentName = new ComponentName("com.example.clientapp.Activities", "com.example.myapplication.MemberService");
-//                i.setComponent(sComponentName);
-//                startService(i);
-
-                // 로그인 데이터 있음 - Call ReservationStatusActivity
-
-
                 try {
                     ObjectMapper mapper = new ObjectMapper();
                     vo = mapper.readValue(data, MemberVO.class);
