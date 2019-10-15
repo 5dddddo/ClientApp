@@ -58,13 +58,14 @@ public class LoadingActivity extends AppCompatActivity {
 
                 try {
                     ObjectMapper mapper = new ObjectMapper();
-                    MemberVO vo = mapper.readValue(data, MemberVO.class);
+                    vo = mapper.readValue(data, MemberVO.class);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 Intent h = new Intent(getApplicationContext(), HomeActivity.class);
                 h.putExtra("vo", vo);
+                h.putExtra("fragment", "login");
                 startActivity(h);
                 LoadingActivity.this.finish();
             }

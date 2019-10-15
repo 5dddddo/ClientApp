@@ -189,13 +189,9 @@ public class StatusFragment extends Fragment {
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(map);
-        Log.i("msi", "내 맴버아이디 가라 : " + json);
-
         osw.write(json);
         osw.flush();
 
-
-        Log.i("msi", "22ㅇㅅㅇ2");
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
