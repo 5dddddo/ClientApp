@@ -2,7 +2,9 @@ package com.example.clientapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,10 +23,11 @@ import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-    BackPressCloseHandler backPressCloseHandler;
-    TextView actionbar_text;
+    private  BottomNavigationView bottomNavigationView;
+    private BackPressCloseHandler backPressCloseHandler;
+    private TextView actionbar_text;
     private MemberVO vo;
+    private Button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.actionbar);
         actionbar_text = (TextView) findViewById(R.id.actionbar_text);
         setContentView(R.layout.activity_home);
+
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
@@ -89,6 +94,22 @@ public class HomeActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_content, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.logoutBtn:
+                B
+                return true;
+        }
+        return false;
     }
 
     @Override
