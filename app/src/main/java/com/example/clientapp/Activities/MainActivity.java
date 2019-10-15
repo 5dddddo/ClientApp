@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         ObjectMapper mapper = new ObjectMapper();
                         vo = mapper.readValue(res, MemberVO.class);
                         if (vo.getCode().equals("200")) {
+
                             // 자동 로그인 등록
                             SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();

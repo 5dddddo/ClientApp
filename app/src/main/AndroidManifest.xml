@@ -5,8 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--<uses-permission android:name="android.permission.BOOT_COMPLETED" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />-->
 
     <application
         android:allowBackup="true"
@@ -16,27 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".RealService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".Activities.Main2Activity"
             android:theme="@style/NoActionBar" />
-        <service
-            android:name=".PersistentService"
-            android:enabled="true">
-        </service>
-        <receiver
-            android:name=".RestartService"
-            android:enabled="true"
-            android:exported="false"
-            android:label="RestartService">
-            <intent-filter>
-                <action android:name="ACTION.RESTART.PersistentService" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+
         <service
             android:name=".ClientService"
             android:enabled="true"
             android:exported="true" />
+
         <activity
             android:name=".Activities.LoadingActivity"
             android:theme="@style/NoActionBar">
@@ -50,12 +44,17 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".Activities.RegisterActivity" />
         <activity
             android:name=".Activities.MainActivity"
             android:theme="@style/NoActionBar" />
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
