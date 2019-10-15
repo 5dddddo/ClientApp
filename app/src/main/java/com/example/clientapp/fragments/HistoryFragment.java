@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.clientapp.Activities.HistoryListViewAdapter;
+import com.example.clientapp.Activities.CustomListViewAdapter;
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
@@ -22,7 +22,11 @@ import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +79,7 @@ public class HistoryFragment extends Fragment {
         if (!res.equals("[]")) {
             try {
                 ObjectMapper mapper = new ObjectMapper();
-                data = mapper.readValue(res, new TypeReference<ArrayList<ReservationVO>>() {
+                data = mapper.readValue(res, new TypeReference<ArrayList<RepairedListVO>>() {
                 });
             } catch (IOException e) {
                 e.printStackTrace();
@@ -84,8 +88,9 @@ public class HistoryFragment extends Fragment {
             for (ReservationVO vo : data) {
                 adapter.addItem(vo);
             }
-
             lv.setAdapter(adapter);
+
+
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -94,16 +99,25 @@ public class HistoryFragment extends Fragment {
                             new androidx.appcompat.app.AlertDialog.Builder(getContext());
                     dialog.setTitle("정비 예약 세부 내역");
 
-                    ReservationVO vo = data.get(position);
+                    RepairedListVO vo = data.get(position);
 
                     final List<String> ListItems = new ArrayList<>();
 
                     ListItems.add("예약 번호  :  " + vo.getReservation_no());
-                    ListItems.add("정비소 ID  :  " + vo.getBodyshop_no());
+                    ListItems.add("정비소 이름  :  " + vo.getBodyshop_name());
                     ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
-                    ListItems.add(vo.getRepaired_time() == null || vo.getRepaired_time().equals("0") ? ("정비 완료 시간  :  정비중") : ("정비 완료 시간  :  " + vo.getRepaired_time()));
                     ListItems.add("KEY 동의 여부  :  " + (vo.getKey().equals("1") ? "O" : "X"));
-                    ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
+
+                    if (vo.getTire() == null){
+                        ListItems.add("정비 중");
+                    }
+                    else {
+                        String a[] = {vo.getTire(), vo.getCooler(), vo.getEngine_oil(), vo.getWiper()};
+                        ListItems.add("정비 완료 시간  :  " + vo.getRepaired_time());
+                        ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
+                        String s = CheckRepairedList(a);
+                        ListItems.add("정비 내역 : " + s);
+                    }
 
                     final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
 
@@ -135,4 +149,28 @@ public class HistoryFragment extends Fragment {
         });
         return rootView;
     }
+
+    public String CheckRepairedList(String[] a){
+
+        String s = "";
+
+        if (a[0].equals("O")){
+            s += "타이어 교체, ";
+        }
+        if (a[1].equals("O")){
+            s += "냉각수 교체, ";
+        }
+        if (a[2].equals("O")){
+            s += "엔진오일 교체, ";
+        }
+        if (a[3].equals("O")){
+            s += "와이퍼 교체, ";
+        }
+
+
+
+
+        return s.substring(0,s.length()-2);
+    }
+
 }

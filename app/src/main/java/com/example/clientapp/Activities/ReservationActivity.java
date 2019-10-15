@@ -277,16 +277,16 @@ public class ReservationActivity extends AppCompatActivity {
         Map<String, String> map = new HashMap<String, String>();
 
         if (checkBox.isChecked()) {
-            otpkey = "1";
+            otpkey = "YES";
         } else {
-            otpkey = "0";
+            otpkey = "NO";
         }
 
         map.put("member_id", vo.getMember_id());
         map.put("reservation_time", day + reserve_time);
         map.put("key", otpkey);
 
-        map.put("bodyshop_no",body_no+"");
+        map.put("bodyshop_no",Integer.toString(body_no));
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(map);

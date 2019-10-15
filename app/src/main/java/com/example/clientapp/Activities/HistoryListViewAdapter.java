@@ -9,15 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.clientapp.R;
-import com.example.clientapp.VO.ReservationVO;
+import com.example.clientapp.VO.RepairedListVO;
 
 import java.util.ArrayList;
 
-public class HistoryListViewAdapter extends BaseAdapter {
-    private ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();
+public class CustomListViewAdapter extends BaseAdapter {
+    private ArrayList<RepairedListVO> list = new ArrayList<RepairedListVO>();
     // 반드시 overriding을 해야하는 method가 존재.
 
-    public void addItem(ReservationVO vo) {     // 이녀석에 의해서 위에 선언한 list에 데이터들이 슈슉슉휴귝슉 들어가게 되고
+    public void addItem(RepairedListVO vo) {     // 이녀석에 의해서 위에 선언한 list에 데이터들이 슈슉슉휴귝슉 들어가게 되고
         list.add(vo);
     }
 
@@ -57,7 +57,7 @@ public class HistoryListViewAdapter extends BaseAdapter {
 
         TextView checksuccess = (TextView) view.findViewById(R.id.checksuccess);
         TextView checkwait = (TextView) view.findViewById(R.id.checkwait);
-        ReservationVO vo = list.get(i);    // 화면에 출력할 데이터를 가져와요!
+        RepairedListVO vo = list.get(i);    // 화면에 출력할 데이터를 가져와요!
 
         try {
             tv1.setText(" " + vo.getReservation_no());

@@ -197,6 +197,7 @@ public class StatusFragment extends Fragment {
         StringBuffer response = new StringBuffer();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
+            Log.i("receive", response.toString());
         }
         receivedata = response.toString();
         in.close();
