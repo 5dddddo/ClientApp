@@ -166,7 +166,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:textColor="#03A9F4"
+                            android:textColor="@android:color/black"
                             android:textSize="15sp"
                             />
                     </LinearLayout>
@@ -183,7 +183,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:textColor="#03A9F4"
+                            android:textColor="@color/progressgreen"
                             android:textSize="15sp"
                             />
                     </LinearLayout>
@@ -201,8 +201,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:textColor="#03A9F4"
-                            android:textSize="15sp"
+                            android:textColor="@color/progressgreen"                            android:textSize="15sp"
                             />
                     </LinearLayout>
 
@@ -220,8 +219,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:textColor="#03A9F4"
-                            android:textSize="15sp"
+                            android:textColor="@color/progressgreen"                            android:textSize="15sp"
                             />
                     </LinearLayout>
 
@@ -239,8 +237,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:textColor="#03A9F4"
-                            android:textSize="15sp"
+                            android:textColor="@color/progressgreen"                            android:textSize="15sp"
                             />
                     </LinearLayout>
 
@@ -261,7 +258,7 @@
                         android:layout_weight="2"
                         android:gravity="center_vertical"
                         android:padding="5dp"
-                        android:textColor="#03A9F4"
+                        android:textColor="@android:color/black"
                         android:textSize="15sp"
 
                         />

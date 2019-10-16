@@ -471,41 +471,39 @@
             android:background="@drawable/listview_outline"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
                 android:id="@+id/myname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="이름"
-                android:inputType="textPersonName"
+                android:text="이름"
                 android:padding="5dp"
                 android:textSize="14sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/myphonenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="휴대전화"
-                android:inputType="phone"
+                android:text="휴대전화"
                 android:padding="5dp"
                 android:textSize="15sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/mycartype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="차종"
+                android:text="차종"
                 android:padding="5dp"
                 android:textSize="15sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/mycarnumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="차량 번호"
+                android:text="차량 번호"
                 android:padding="5dp"
                 android:scrollbarSize="50sp"
                 android:textSize="15sp" />

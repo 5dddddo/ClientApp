@@ -91,7 +91,7 @@ public class RealService extends Service {
                     Log.i("keyValue", alram.length() + "");
                     alram = alram.substring(0, alram.length() - 2);
                     alram += " 정비요망";
-                    builder.setSmallIcon(R.mipmap.ic_launcher);
+                    builder.setSmallIcon(R.mipmap.appicon1_round);
                     builder.setContentTitle("Chavis 알림");
                     builder.setContentText(alram);
 
@@ -134,6 +134,7 @@ public class RealService extends Service {
 
             ObjectMapper mapper = new ObjectMapper();
             vo = mapper.readValue(json, MemberVO.class);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -156,7 +157,7 @@ public class RealService extends Service {
 
     public void initializeNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1");
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.appicon1_round);
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle();
         style.bigText("설정을 보려면 누르세요.");
         style.setBigContentTitle(null);

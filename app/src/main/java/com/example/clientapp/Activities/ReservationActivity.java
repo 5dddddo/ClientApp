@@ -1,6 +1,5 @@
 package com.example.clientapp.Activities;
 
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -19,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.BodyshopVO;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.VO.ReservationVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -53,6 +50,7 @@ public class ReservationActivity extends AppCompatActivity {
     CheckBox checkBox;
     String[] receive;
     int[] bnolist;
+    String result;
 
     //    String member_id = "111";     // 가상의 클라이언트 ID
     String date = "", time = "", otpkey = "", reserve_time = "", day = "";
@@ -160,7 +158,7 @@ public class ReservationActivity extends AppCompatActivity {
         mycartype.setText(vo.getCar_type());
         mycarnumber.setText(vo.getCar_id());
 
-        final Handler handler = new Handler(){
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
@@ -169,12 +167,12 @@ public class ReservationActivity extends AppCompatActivity {
 
                 receive = new String[result.size()];
                 bnolist = new int[result.size()];
-                for(int i=0; i<receive.length; i++){
+                for (int i = 0; i < receive.length; i++) {
                     receive[i] = result.get(i).getBodyshop_name();
                     bnolist[i] = result.get(i).getBodyshop_no();
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_spinner_item,receive);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_spinner_item, receive);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                 spinner.setAdapter(adapter);
@@ -233,7 +231,9 @@ public class ReservationActivity extends AppCompatActivity {
                         Thread wThread = new Thread() {      // UI 관련작업 아니면 Thread를 생성해서 처리해야 하는듯... main thread는 ui작업(손님접대느낌) 하느라 바쁨
                             public void run() {
                                 try {
-                                    sendPost(vo.getMember_id());
+                                    result = sendPost(vo.getMember_id());
+                                    Log.i("result", result);
+
                                 } catch (Exception e) {
                                     Log.i("msi", e.toString());
                                 }
@@ -247,11 +247,19 @@ public class ReservationActivity extends AppCompatActivity {
                             Log.i("msi", "이상이상22");
                         }
                     } catch (Exception e) {
-                        Log.i("msi", e.toString());
+                        Log.i("reservation_error", e.toString());
                     }
 
-                    reserve_ok_dialog();
+
                 }
+                if (result.equals("\"SUCCESS\"")) {
+                    Log.i("reservation_error", "예약 성공");
+                    reserve_ok_dialog();
+                } else {     //
+                    Log.i("reservation_error", "예약 실패");
+                    reserve_fail_dialog();
+                }
+
 
             }
         });
@@ -264,7 +272,7 @@ public class ReservationActivity extends AppCompatActivity {
 
 //        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
 //        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
-        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add.do");    // 한석햄22
+        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add2.do");    // 한석햄22
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -286,7 +294,7 @@ public class ReservationActivity extends AppCompatActivity {
         map.put("reservation_time", day + reserve_time);
         map.put("key", otpkey);
 
-        map.put("bodyshop_no",Integer.toString(body_no));
+        map.put("bodyshop_no", Integer.toString(body_no));
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(map);
@@ -301,17 +309,19 @@ public class ReservationActivity extends AppCompatActivity {
         StringBuffer response = new StringBuffer();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
+            Log.i("receive response", inputLine);
         }
         receivedata = response.toString();
         in.close();
-        Log.i("receivedata", receivedata);
+        Log.i("안녕", receivedata);
 
-        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
-        });
-        for (ReservationVO v : myObject)
-            Log.i("##@@@", v.getReservation_no() + "");
-
-        reserokdata = receivedata;
+//
+//        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
+//        });
+//        for (ReservationVO v : myObject)
+//            Log.i("##@@@",  ";';'';';;';';'';';");
+//
+//        reserokdata = receivedata;
 
         return receivedata;
     }
@@ -350,6 +360,19 @@ public class ReservationActivity extends AppCompatActivity {
             }
         };
 
+    }
+
+    void reserve_fail_dialog() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//        alert.setTitle("Error");
+        alert.setMessage("예 약 실 패");
+        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();
     }
 
     void reserve_ok_dialog() {

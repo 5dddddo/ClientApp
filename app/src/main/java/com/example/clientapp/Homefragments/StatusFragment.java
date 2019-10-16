@@ -103,12 +103,15 @@ public class StatusFragment extends Fragment {
         progressBar.setMax(100);
         progressBar.setProgress(f_tire);
         if (f_tire <= 20) {
-            per_tire.setTextColor(Color.RED);
+            per_tire.setTextColor(getResources().getColor(R.color.progressred));
             progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         } else if (20 < f_tire && f_tire <= 40) {
-            per_tire.setTextColor(Color.YELLOW);
+            per_tire.setTextColor(getResources().getColor(R.color.progressyellow));
             progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
 
+        }
+        if(f_tire <=0){
+            f_tire = 0;
         }
         per_tire.setText(f_tire + "%");
 
@@ -116,12 +119,15 @@ public class StatusFragment extends Fragment {
         progressBar2.setMax(100);
         progressBar2.setProgress((int) cooler);
         if (cooler <= 20) {
-            per_cool.setTextColor(Color.RED);
+            per_cool.setTextColor(getResources().getColor(R.color.progressred));
             progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         } else if (20 < cooler && cooler <= 40) {
-            per_cool.setTextColor(Color.YELLOW);
+            per_cool.setTextColor(getResources().getColor(R.color.progressyellow));
             progressBar2.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
 
+        }
+        if(cooler <= 0){
+            cooler = 0;
         }
         per_cool.setText((int) cooler + "%");
 
@@ -129,12 +135,15 @@ public class StatusFragment extends Fragment {
         progressBar3.setMax(100);
         progressBar3.setProgress((int) engineoil);
         if (engineoil <= 20) {
-            per_oil.setTextColor(Color.RED);
+            per_oil.setTextColor(getResources().getColor(R.color.progressred));
             progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         } else if (20 < engineoil && engineoil <= 40) {
-            per_oil.setTextColor(Color.YELLOW);
+            per_oil.setTextColor(getResources().getColor(R.color.progressyellow));
             progressBar3.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
 
+        }
+        if(engineoil <=0){
+            engineoil = 0;
         }
         per_oil.setText((int) engineoil + "%");
 
@@ -145,12 +154,15 @@ public class StatusFragment extends Fragment {
         progressBar5.setMax(100);
         progressBar5.setProgress(f_wiper);
         if (f_wiper <= 20) {
-            per_wiper.setTextColor(Color.RED);
+            per_wiper.setTextColor(getResources().getColor(R.color.progressred));
             progressBar5.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar2));
         } else if (20 < f_wiper && f_wiper <= 40) {
-            per_wiper.setTextColor(Color.YELLOW);
+            per_wiper.setTextColor(getResources().getColor(R.color.progressyellow));
             progressBar5.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_progressbar3));
 
+        }
+        if(f_wiper <= 0){
+            f_wiper = 0;
         }
         per_wiper.setText(f_wiper + "%");
 
@@ -198,7 +210,7 @@ public class StatusFragment extends Fragment {
         StringBuffer response = new StringBuffer();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
-            Log.i("receive", response.toString());
+            Log.i("StatusFra_receive", response.toString());
         }
         receivedata = response.toString();
         in.close();
