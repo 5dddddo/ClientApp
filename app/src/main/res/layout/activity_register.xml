@@ -31,7 +31,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/vid"
@@ -82,7 +82,7 @@
                 android:password="true"
                 android:singleLine="true"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <Space
                 android:layout_width="10dp"
@@ -107,7 +107,7 @@
                     android:password="true"
                     android:singleLine="true"
                     android:textIsSelectable="true"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <ImageView
                     android:id="@+id/checkPw"
@@ -165,7 +165,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/vname"
@@ -191,7 +191,7 @@
             android:phoneNumber="true"
             android:singleLine="true"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/vtel"
@@ -243,7 +243,7 @@
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
 
             <Space
                 android:layout_width="10dp"
@@ -259,7 +259,7 @@
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textIsSelectable="true"
-                android:textSize="18sp" />
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -306,7 +306,7 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/vcarid"
@@ -321,7 +321,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#42A5F5"
-            android:text="가입하기" />
+            android:text="가입하기"
+            android:textSize="15sp" />
 
 
     </LinearLayout>

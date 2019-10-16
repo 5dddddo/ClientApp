@@ -1,7 +1,6 @@
 package com.example.clientapp.Activities;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                             i.putExtra("vo", vo);
                             i.putExtra("fragment", "login");
                             startActivity(i);
+                            MainActivity.this.finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                         }
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 //  ID/PW 찾기
                 Intent i = new Intent(
                         getApplicationContext(),// Activiey Context
-                        HomeActivity.class);
+                        FindIdPwActivity.class);
                 startActivity(i);
             }
         });

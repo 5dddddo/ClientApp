@@ -1,4 +1,4 @@
-package com.example.clientapp;
+package com.example.clientapp.Service;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -6,18 +6,17 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.clientapp.Activities.Main2Activity;
+import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 import com.google.gson.Gson;
 
@@ -40,8 +39,7 @@ public class RealService extends Service {
     BlockingQueue blockingQueue = new ArrayBlockingQueue(10);
 
     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default");
-    String alram ="";
-
+    String alram = "";
 
 
     class ClientReceiveRunnable implements Runnable {
@@ -62,7 +60,7 @@ public class RealService extends Service {
                 }
 
                 out.println(msg);
-                Log.i("ads",msg);
+                Log.i("ads", msg);
                 out.flush();
                 String s = "";
 
@@ -70,26 +68,26 @@ public class RealService extends Service {
                     alram = "";
                     Log.i("service", "서버로부터 받는 데이터 : " + s);
                     response.append(s);
-                    if(s.contains("Key")){
+                    if (s.contains("Key")) {
                         out.println(s);
                         out.flush();
                         Log.i("keyValue", s);
-                    }else if(s.equals("RequestChangeTire")){
-                        Log.i("RealService",s);
+                    } else if (s.equals("RequestChangeTire")) {
+                        Log.i("RealService", s);
                         alram += "타이어, ";
-                    }else if(s.equals("RequestChangeWiper")){
-                        Log.i("RealService",s);
+                    } else if (s.equals("RequestChangeWiper")) {
+                        Log.i("RealService", s);
                         alram += "와이퍼, ";
-                    }else if(s.equals("RequestChangeCooler")){
-                        Log.i("RealService",s);
+                    } else if (s.equals("RequestChangeCooler")) {
+                        Log.i("RealService", s);
                         alram += "냉각수, ";
-                    }else if(s.equals("RequestChangeEngineOil")){
-                        Log.i("RealService",s);
+                    } else if (s.equals("RequestChangeEngineOil")) {
+                        Log.i("RealService", s);
                         alram += "엔진오일, ";
                     }
 
-                    Log.i("keyValue", alram.length()+"");
-                    alram = alram.substring(0, alram.length()-2);
+                    Log.i("keyValue", alram.length() + "");
+                    alram = alram.substring(0, alram.length() - 2);
                     alram += " 정비요망";
                     builder.setSmallIcon(R.mipmap.ic_launcher);
                     builder.setContentTitle("Chavis 알림");
@@ -108,9 +106,12 @@ public class RealService extends Service {
             }
         }
     }
+
     public RealService() {
     }
-    @Override public int onStartCommand(Intent intent, int flags, int startId) {
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         serviceIntent = intent;
         initializeNotification();
 
@@ -121,9 +122,9 @@ public class RealService extends Service {
 //        if(msg!=null) {
 //            msg = intent.getExtras().getString("mNo");
 //        }
-        Log.i("service","service실행");
+        Log.i("service", "service실행");
 
-        logoutIntent.putExtra("key","0");
+        logoutIntent.putExtra("key", "0");
 
         SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 
@@ -131,11 +132,11 @@ public class RealService extends Service {
         String json = preferences.getString("myObject", "");
         MemberVO memberVO = gson.fromJson(json, MemberVO.class);
 
-        Log.i("Service_SharedPref", memberVO.getMember_no()+"");
+        Log.i("Service_SharedPref", memberVO.getMember_no() + "");
         Log.i("Service_SharedPref", "로그인 객체 저장 성공34343");
 
-        Log.i("service",memberVO.getMember_no()+"");
-        msg = "MemberNO#" +memberVO.getMember_no()+"";
+        Log.i("service", memberVO.getMember_no() + "");
+        msg = "MemberNO#" + memberVO.getMember_no() + "";
 
 
         ClientReceiveRunnable receiveRunnable = new ClientReceiveRunnable();
@@ -146,6 +147,7 @@ public class RealService extends Service {
 //        thread2.start();
         return START_STICKY;
     }
+
     public void initializeNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1");
         builder.setSmallIcon(R.mipmap.ic_launcher);
@@ -177,28 +179,30 @@ public class RealService extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    @Override public void onDestroy() {
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
         final Calendar calendar = Calendar.getInstance();
 
-        if(logoutIntent.getExtras().get("key").toString().equals("1")){
-            try{
+        if (logoutIntent.getExtras().get("key").toString().equals("1")) {
+            try {
                 out.close();
                 br.close();
                 socket.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             serviceIntent = null;
 
-        }else if(logoutIntent.getExtras().get("key").toString().equals("0")) {
+        } else if (logoutIntent.getExtras().get("key").toString().equals("0")) {
 
             serviceIntent = null;
-            try{
+            try {
                 out.close();
                 br.close();
                 socket.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             calendar.setTimeInMillis(System.currentTimeMillis());

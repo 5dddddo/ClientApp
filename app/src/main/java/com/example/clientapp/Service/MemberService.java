@@ -1,4 +1,4 @@
-package com.example.clientapp;
+package com.example.clientapp.Service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,14 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-
-import com.example.clientapp.VO.MemberVO;
-
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 public class MemberService extends Service {
     public MemberService() {

@@ -18,16 +18,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clientapp.BackPressCloseHandler;
+import com.example.clientapp.Homefragments.HistoryFragment;
+import com.example.clientapp.Homefragments.NotificationFragment;
+import com.example.clientapp.Homefragments.SettingFragment;
 import com.example.clientapp.R;
 import com.example.clientapp.RealService;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.fragments.HistoryFragment;
-import com.example.clientapp.fragments.NotificationFragment;
-import com.example.clientapp.fragments.SettingFragment;
 import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import static com.example.clientapp.RealService.serviceIntent;
 
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -49,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
 
-        if (RealService.serviceIntent==null) {
+        if (RealService.serviceIntent == null) {
             serviceIntent = new Intent(HomeActivity.this, RealService.class);
             startService(serviceIntent);
         } else {
@@ -64,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
             actionbar_text.setText(vo.getCar_id());
             loadFragmentClass(new HistoryFragment());
         } else {
-            actionbar_text.setText("차량 상태 정보");
+            actionbar_text.setText("내차현황");
             loadFragmentClass(new StatusFragment());
         }
 
@@ -89,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.clear();
                         editor.commit();
-                        RealService.logoutIntent.putExtra("key","1");
+                        RealService.logoutIntent.putExtra("key", "1");
                         startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                         HomeActivity.this.finish();
                     }
@@ -107,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
             Fragment fragment;
             switch (menuItem.getItemId()) {
                 case R.id.car:
-                    actionbar_text.setText(vo.getCar_id());
+                    actionbar_text.setText("내차현황");
                     fragment = new StatusFragment();
                     loadFragmentClass(fragment);
                     return true;
@@ -150,7 +148,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (serviceIntent!=null) {
+        if (serviceIntent != null) {
             stopService(serviceIntent);
             serviceIntent = null;
         }

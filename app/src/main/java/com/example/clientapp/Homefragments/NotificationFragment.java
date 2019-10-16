@@ -1,4 +1,4 @@
-package com.example.clientapp.fragments;
+package com.example.clientapp.Homefragments;
 
 
 import android.os.Bundle;

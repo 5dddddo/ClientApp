@@ -92,7 +92,7 @@ public class NotificationListViewAdapter extends BaseExpandableListAdapter {
         mContents = ((NotificationVO) getChild(i, 0)).getContents();
         TextView contentsTv = (TextView) view.findViewById(R.id.contentsTv);
 
-        view.setBackgroundColor(Color.LTGRAY);
+//        view.setBackgroundColor(Color.LTGRAY);
         contentsTv.setText(mContents);
         return view;
     }

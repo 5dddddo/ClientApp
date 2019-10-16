@@ -1,4 +1,4 @@
-package com.example.clientapp.fragments;
+package com.example.clientapp.Homefragments;
 
 
 import android.content.DialogInterface;
@@ -19,12 +19,12 @@ import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +56,6 @@ public class SettingFragment extends Fragment {
     private TextView colorTv;
     private TextView cidTv;
 
-    private TextView vid;
     private TextView vpw;
     private TextView vcpw;
     private TextView vname;
@@ -126,9 +125,7 @@ public class SettingFragment extends Fragment {
         colorTv = (TextView) rootView.findViewById(R.id.colorTv);
         cidTv = (TextView) rootView.findViewById(R.id.cidTv);
 
-        vid = (TextView) rootView.findViewById(R.id.vid);
         vpw = (TextView) rootView.findViewById(R.id.vpw);
-        vcpw = (TextView) rootView.findViewById(R.id.vcpw);
         vname = (TextView) rootView.findViewById(R.id.vname);
         vtel = (TextView) rootView.findViewById(R.id.vtel);
         vtype = (TextView) rootView.findViewById(R.id.vtype);
@@ -143,7 +140,7 @@ public class SettingFragment extends Fragment {
         cidBtn = (ToggleButton) rootView.findViewById(R.id.cidBtn);
 
         cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
-        modifyBtn = (Button) rootView.findViewById(R.id.modifyBtn);
+        modifyBtn = (Button) rootView.findViewById(R.id.findIdBtn);
 
         Bundle b = getArguments();
         if (b != null)
@@ -159,7 +156,6 @@ public class SettingFragment extends Fragment {
                     pwEt.setVisibility(View.VISIBLE);
                     r.setVisibility(View.VISIBLE);
                     cpwtv.setVisibility(View.VISIBLE);
-                    pwEt.setText("");
                 } else {
                     pwTv.setText(mPw);
                     pwTv.setVisibility(View.VISIBLE);
@@ -362,7 +358,7 @@ public class SettingFragment extends Fragment {
                     mCarColor = input;
                     colorTv.setText(mCarColor);
                     vcolor.setTextColor(GREEN);
-                    vcolor.setText("  사용 가능합니다.");
+                    vcolor.setText("사용 가능합니다.");
                 }
             }
         });
@@ -421,8 +417,6 @@ public class SettingFragment extends Fragment {
                                 map.put("car_type", mCarType);
                                 map.put("car_color", mCarColor);
                                 map.put("car_id", mCarId);
-
-//                                map.put("vo", tmp);
                                 String url = "http://70.12.115.73:9090/Chavis/Member/update.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getContext());
                                 res = http.request();
@@ -434,9 +428,12 @@ public class SettingFragment extends Fragment {
                     t.start();
                     try {
                         t.join();
-                        if (Integer.parseInt(res) == 1)
-                            Toast.makeText(getContext(), "회원정보가 수정 성공", Toast.LENGTH_SHORT).show();
-                        else
+                        if (Integer.parseInt(res) == 1) {
+                            Toast.makeText(getContext(), "회원정보 수정 성공", Toast.LENGTH_SHORT).show();
+                            FragmentTransaction f = getFragmentManager().beginTransaction();
+                            f.detach(SettingFragment.this).attach(SettingFragment.this).commit();
+
+                        } else
                             Toast.makeText(getContext(), "회원정보 수정 실패", Toast.LENGTH_SHORT).show();
 
                     } catch (InterruptedException e) {
@@ -453,23 +450,22 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
                 AlertDialog.Builder dialog =
                         new androidx.appcompat.app.AlertDialog.Builder(getContext());
-
                 dialog.setTitle("수정을 취소하시겠습니까?");
-                dialog.setPositiveButton("네!", new DialogInterface.OnClickListener() {
+                dialog.setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        initMemberInfo();
                         return;
                     }
                 });
-                dialog.setNegativeButton("아니요!", new DialogInterface.OnClickListener() {
+                dialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        FragmentTransaction f = getFragmentManager().beginTransaction();
+                        f.detach(SettingFragment.this).attach(SettingFragment.this).commit();
                         return;
                     }
                 });
                 dialog.show();
-
             }
         });
 
@@ -499,6 +495,14 @@ public class SettingFragment extends Fragment {
         carColorEt.setText(mCarColor);
         cidTv.setText(mCarId);
         carIdEt.setText(mCarId);
+
+
+        vpw.setText("");
+        vname.setText("");
+        vtel.setText("");
+        vtype.setText("");
+        vcolor.setText("");
+        vcarid.setText("");
     }
 
     public boolean isInputComplete() {

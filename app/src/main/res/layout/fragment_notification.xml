@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".fragments.NotificationFragment">
+    tools:context=".Homefragments.NotificationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
 
         <ExpandableListView
             android:id="@+id/notification_lv"
@@ -19,7 +18,8 @@
             android:layout_margin="5dp"
             android:childIndicator="@null"
             android:groupIndicator="@null"
-            android:indicatorLeft="0dip" />
+            android:indicatorLeft="0dip"
+            android:listSelector="@android:color/transparent" />
 
     </LinearLayout>
 
