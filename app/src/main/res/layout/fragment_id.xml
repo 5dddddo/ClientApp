@@ -19,21 +19,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="아이디"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/fidEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edge_gray"
-            android:padding="10dp"
-            android:textSize="17sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="이름"
             android:textColor="#000000" />
 
@@ -46,12 +31,27 @@
             android:padding="10dp"
             android:textSize="17sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="휴대전화"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/fTelEt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edge_gray"
+            android:padding="10dp"
+            android:textSize="17sp" />
+
         <Button
-            android:id="@+id/findPwBtn"
+            android:id="@+id/findIdBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#558ed5"
-            android:text="PW 찾기"
+            android:text="ID 찾기"
             android:textSize="15sp" />
 
     </LinearLayout>

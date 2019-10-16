@@ -38,14 +38,14 @@ public class LoadingActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
             LoadingActivity.this.finish();
 
             SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
             String data = preferences.getString("myObject", "NO");
 
             if (data.equals("NO")) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                 LoadingActivity.this.finish();
             } else {
                 try {

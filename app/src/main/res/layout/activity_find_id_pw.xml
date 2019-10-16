@@ -25,8 +25,7 @@
             android:elevation="1dp"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="#303F9F"
-            app:tabTextColor="#303F9F">
+            app:tabSelectedTextColor="#303F9F">
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>

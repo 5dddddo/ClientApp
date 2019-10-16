@@ -119,13 +119,14 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+
         findIdPwBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //  ID/PW 찾기
                 Intent i = new Intent(
                         getApplicationContext(),// Activiey Context
-                        HomeActivity.class);
+                        FindIdPwActivity.class);
                 startActivity(i);
             }
         });
