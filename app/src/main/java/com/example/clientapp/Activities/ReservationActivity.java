@@ -22,6 +22,7 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clientapp.HttpUtils;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.BodyshopVO;
 import com.example.clientapp.VO.MemberVO;
@@ -67,43 +68,15 @@ public class ReservationActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            String receivedata = "";
-            URL url = null;
+            String res = "";
             try {
-                url = new URL("http://70.12.115.73:9090/Chavis/Bodyshop/list.do");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setRequestProperty("Connection", "Keep-Alive");
-                conn.setRequestProperty("charset", "utf-8");
-//                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-//
-//                Map<String, String> map = new HashMap<String, String>();
-//
-//                map.put("Bodyshop", "Bodyshop");
-//
-//                ObjectMapper mapper = new ObjectMapper();
-//                String json = mapper.writeValueAsString(map);
-//
-//                Log.i("FIRST", "가랏 데이터 : " + json);
-//
-//                osw.write(json);
-//                osw.flush();
-
-                Log.i("FIRST", "데이터 받기 ");
-                int responseCode = conn.getResponseCode();
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
+                String url = "http://70.12.115.73:9090/Chavis/Bodyshop/list.do";
+                Map<String, String> map = new HashMap<String, String>();
+                HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+                res = http.request();
                 ObjectMapper mapper = new ObjectMapper();
-                receivedata = response.toString();
-                ArrayList<BodyshopVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<BodyshopVO>>() {
+                ArrayList<BodyshopVO> myObject = mapper.readValue(res, new TypeReference<ArrayList<BodyshopVO>>() {
                 });
-                in.close();
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("Bodyshop_list", myObject);
@@ -267,22 +240,9 @@ public class ReservationActivity extends AppCompatActivity {
 
     private String sendPost(String parameters) throws Exception {
 
-        String receivedata;
-        String sendMsg;
-
-//        // 접속할 서버 주소 (이클립스에서 android.jsp 실행시 웹브라우저 주소)
-//        URL url = new URL("http://70.12.115.57:9090/TestProject/reserve.do");
-        URL url = new URL("http://70.12.115.73:9090/Chavis/Reservation/add2.do");    // 한석햄22
-
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-//        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        conn.setRequestProperty("Content-Type", "application/JSON");      // 한석햄..
-        conn.setRequestProperty("Connection", "Keep-Alive");
-        conn.setRequestProperty("charset", "utf-8");
-        OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-
+        String res ="";
         Map<String, String> map = new HashMap<String, String>();
+        String url = "http://70.12.115.73:9090/Chavis/Reservation/add2.do";    // 한석햄22
 
         if (checkBox.isChecked()) {
             otpkey = "YES";
@@ -293,37 +253,11 @@ public class ReservationActivity extends AppCompatActivity {
         map.put("member_id", vo.getMember_id());
         map.put("reservation_time", day + reserve_time);
         map.put("key", otpkey);
-
         map.put("bodyshop_no", Integer.toString(body_no));
 
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(map);
-        Log.i("msi", "송신하는 데이터 : " + json);
-
-        osw.write(json);
-        osw.flush();
-
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-            Log.i("receive response", inputLine);
-        }
-        receivedata = response.toString();
-        in.close();
-        Log.i("안녕", receivedata);
-
-//
-//        ArrayList<ReservationVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<ReservationVO>>() {
-//        });
-//        for (ReservationVO v : myObject)
-//            Log.i("##@@@",  ";';'';';;';';'';';");
-//
-//        reserokdata = receivedata;
-
-        return receivedata;
+        HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
+        res = http.request();
+        return res;
     }
 
 
