@@ -364,8 +364,8 @@ public class ReservationActivity extends AppCompatActivity {
 
     void reserve_fail_dialog() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-//        alert.setTitle("Error");
-        alert.setMessage("예 약 실 패");
+        alert.setTitle("예약실패");
+        alert.setMessage("이미 예약이 완료된 시간입니다.");
         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
