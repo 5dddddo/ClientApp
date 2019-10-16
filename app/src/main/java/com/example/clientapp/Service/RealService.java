@@ -18,9 +18,10 @@ import androidx.core.app.NotificationCompat;
 import com.example.clientapp.Activities.Main2Activity;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -35,6 +36,7 @@ public class RealService extends Service {
     PrintWriter out;
     StringBuffer response = new StringBuffer();
     String msg;
+    private MemberVO vo;
     public static Intent logoutIntent = new Intent();
     BlockingQueue blockingQueue = new ArrayBlockingQueue(10);
 
@@ -127,16 +129,20 @@ public class RealService extends Service {
         logoutIntent.putExtra("key", "0");
 
         SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
-
-        Gson gson = new Gson();
         String json = preferences.getString("myObject", "");
-        MemberVO memberVO = gson.fromJson(json, MemberVO.class);
+        try {
 
-        Log.i("Service_SharedPref", memberVO.getMember_no() + "");
+            ObjectMapper mapper = new ObjectMapper();
+            vo = mapper.readValue(json, MemberVO.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("Service_SharedPref", vo.getMember_no() + "");
         Log.i("Service_SharedPref", "로그인 객체 저장 성공34343");
 
-        Log.i("service", memberVO.getMember_no() + "");
-        msg = "MemberNO#" + memberVO.getMember_no() + "";
+        Log.i("service", vo.getMember_no() + "");
+        msg = "MemberNO#" + vo.getMember_no() + "";
 
 
         ClientReceiveRunnable receiveRunnable = new ClientReceiveRunnable();
