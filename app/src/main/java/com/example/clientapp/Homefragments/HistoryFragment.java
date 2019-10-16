@@ -1,4 +1,4 @@
-package com.example.clientapp.fragments;
+package com.example.clientapp.Homefragments;
 
 
 import android.content.DialogInterface;
@@ -60,12 +60,7 @@ public class HistoryFragment extends Fragment {
                 }
             };
             t.start();
-
-            try {
-                t.join();
-            } catch (Exception e) {
-                Log.i("msi", "이상이상22");
-            }
+            t.join();
         } catch (Exception e) {
             Log.i("msi", "여기가안댐?" + e.toString());
         }

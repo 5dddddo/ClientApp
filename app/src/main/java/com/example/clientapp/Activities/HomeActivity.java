@@ -20,10 +20,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
 import com.example.clientapp.VO.MemberVO;
-import com.example.clientapp.fragments.HistoryFragment;
-import com.example.clientapp.fragments.NotificationFragment;
-import com.example.clientapp.fragments.SettingFragment;
-import com.example.clientapp.fragments.StatusFragment;
+import com.example.clientapp.Homefragments.HistoryFragment;
+import com.example.clientapp.Homefragments.NotificationFragment;
+import com.example.clientapp.Homefragments.SettingFragment;
+import com.example.clientapp.Homefragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {

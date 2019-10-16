@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,82 +10,104 @@
     android:paddingTop="50dp"
     android:paddingRight="20dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="95dp"
-        android:paddingBottom="30dp"
-        app:srcCompat="@drawable/chavis" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/idEditView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edge_gray"
-            android:focusable="auto"
-            android:hint="가입한 아이디 입력"
-            android:padding="15dp"
-            android:inputType=""
-            android:singleLine="true"
-            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="30dp"
+            app:srcCompat="@drawable/chavis" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <EditText
-            android:id="@+id/pwEditView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edge_gray"
-            android:focusable="auto"
-            android:hint="비밀번호 입력"
-            android:padding="15dp"
-            android:password="true"
-            android:singleLine="true"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#42A5F5"
-            android:shadowColor="#00FF0000"
-            android:text="로그인"
-            android:textColor="#000000" />
-
-        <Button
-            android:id="@+id/findIdPwBtn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:text="ID/PW 찾기" />
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <EditText
+                android:id="@+id/idEditView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edge_gray"
+                android:focusable="auto"
+                android:hint="가입한 아이디 입력"
+                android:inputType=""
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/pwEditView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/edge_gray"
+                android:focusable="auto"
+                android:hint="비밀번호 입력"
+                android:padding="15dp"
+                android:password="true"
+                android:singleLine="true"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/loginBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#42A5F5"
+                        android:shadowColor="#00FF0000"
+                        android:text="로그인"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/findIdPwBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="ID/PW 찾기"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addUserBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#0048A7"
+                android:text="회원 가입"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/addUserBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#0048A7"
-        android:text="회원 가입"
-        android:textColor="#ffffff" />
-
-</LinearLayout>
+</RelativeLayout>

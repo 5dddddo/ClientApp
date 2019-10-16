@@ -1,4 +1,4 @@
-package com.example.clientapp;
+package com.example.clientapp.Service;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -6,18 +6,17 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.clientapp.Activities.Main2Activity;
+import com.example.clientapp.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

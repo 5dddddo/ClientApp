@@ -1,8 +1,6 @@
-package com.example.clientapp.fragments;
+package com.example.clientapp.Homefragments;
 
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.clientapp.Activities.ReservationActivity;
 import com.example.clientapp.R;
-import com.example.clientapp.RestartService;
 import com.example.clientapp.VO.CarVO;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.type.TypeReference;

@@ -1,4 +1,4 @@
-package com.example.clientapp.fragments;
+package com.example.clientapp.Homefragments;
 
 
 import android.content.DialogInterface;
@@ -56,7 +56,6 @@ public class SettingFragment extends Fragment {
     private TextView colorTv;
     private TextView cidTv;
 
-    private TextView vid;
     private TextView vpw;
     private TextView vcpw;
     private TextView vname;
@@ -126,9 +125,7 @@ public class SettingFragment extends Fragment {
         colorTv = (TextView) rootView.findViewById(R.id.colorTv);
         cidTv = (TextView) rootView.findViewById(R.id.cidTv);
 
-        vid = (TextView) rootView.findViewById(R.id.vid);
         vpw = (TextView) rootView.findViewById(R.id.vpw);
-        vcpw = (TextView) rootView.findViewById(R.id.vcpw);
         vname = (TextView) rootView.findViewById(R.id.vname);
         vtel = (TextView) rootView.findViewById(R.id.vtel);
         vtype = (TextView) rootView.findViewById(R.id.vtype);
@@ -143,7 +140,7 @@ public class SettingFragment extends Fragment {
         cidBtn = (ToggleButton) rootView.findViewById(R.id.cidBtn);
 
         cancelBtn = (Button) rootView.findViewById(R.id.cancelBtn);
-        modifyBtn = (Button) rootView.findViewById(R.id.modifyBtn);
+        modifyBtn = (Button) rootView.findViewById(R.id.findIdBtn);
 
         Bundle b = getArguments();
         if (b != null)
@@ -469,7 +466,6 @@ public class SettingFragment extends Fragment {
                     }
                 });
                 dialog.show();
-
             }
         });
 
@@ -499,6 +495,14 @@ public class SettingFragment extends Fragment {
         carColorEt.setText(mCarColor);
         cidTv.setText(mCarId);
         carIdEt.setText(mCarId);
+
+
+        vpw.setText("");
+        vname.setText("");
+        vtel.setText("");
+        vtype.setText("");
+        vcolor.setText("");
+        vcarid.setText("");
     }
 
     public boolean isInputComplete() {

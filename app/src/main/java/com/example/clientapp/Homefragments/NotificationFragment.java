@@ -1,4 +1,4 @@
-package com.example.clientapp.fragments;
+package com.example.clientapp.Homefragments;
 
 
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 

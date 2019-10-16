@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.HttpUtils;
-import com.example.clientapp.PersistentService;
+import com.example.clientapp.Service.PersistentService;
 import com.example.clientapp.R;
-import com.example.clientapp.RestartService;
+import com.example.clientapp.Service.RestartService;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 //  ID/PW 찾기
                 Intent i = new Intent(
                         getApplicationContext(),// Activiey Context
-                        HomeActivity.class);
+                        FindIdPwActivity.class);
                 startActivity(i);
             }
         });
@@ -141,8 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         intent.putExtra("mNo", vo.getMember_no() + "");
 
-
-        IntentFilter intentFilter = new IntentFilter("com.example.clientapp.PersistentService");
+        IntentFilter intentFilter = new IntentFilter("com.example.clientapp.Service.PersistentService");
         //브로드 캐스트에 등록
         registerReceiver(restartService, intentFilter);
         // 서비스 시작

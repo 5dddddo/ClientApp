@@ -1,4 +1,4 @@
-package com.example.clientapp;
+package com.example.clientapp.Service;
 
 import android.annotation.TargetApi;
 import android.app.AlarmManager;

@@ -6,28 +6,29 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!--<uses-permission android:name="android.permission.BOOT_COMPLETED" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />-->
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/appicon"
+        android:icon="@mipmap/appicon"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/appicon"
+        android:roundIcon="@mipmap/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.FindIdPwActivity"
+            android:theme="@style/NoActionBar" ></activity>
+
         <service
-            android:name=".RealService"
+            android:name=".Service.RealService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".Activities.Main2Activity"
             android:theme="@style/NoActionBar" />
 
         <service
-            android:name=".ClientService"
+            android:name=".Service.ClientService"
             android:enabled="true"
             android:exported="true" />
 
@@ -44,17 +45,17 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity
             android:name=".Activities.MainActivity"
             android:theme="@style/NoActionBar" />
-        <receiver android:name=".AlarmReceiver">
+
+        <receiver android:name=".Service.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
