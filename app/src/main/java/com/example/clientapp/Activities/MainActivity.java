@@ -14,9 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.HttpUtils;
-import com.example.clientapp.PersistentService;
 import com.example.clientapp.R;
-import com.example.clientapp.RestartService;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -30,7 +28,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
     private Intent intent;
-    private RestartService restartService;
 
     String member_id;
     String member_pw;
@@ -130,22 +127,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-    private void initData() {
-
-        //리스타트 서비스 생성
-        restartService = new RestartService();
-        intent = new Intent(MainActivity.this, PersistentService.class);
-
-        intent.putExtra("mNo", vo.getMember_no() + "");
-
-
-        IntentFilter intentFilter = new IntentFilter("com.example.clientapp.PersistentService");
-        //브로드 캐스트에 등록
-        registerReceiver(restartService, intentFilter);
-        // 서비스 시작
-        startService(intent);
     }
 
     @Override

@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.clientapp.Activities.ReservationActivity;
 import com.example.clientapp.R;
-import com.example.clientapp.RestartService;
 import com.example.clientapp.VO.CarVO;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -37,9 +36,9 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class StatusFragment extends Fragment {
-    private MemberVO vo;
 
-    private RestartService restartService;
+
+    private MemberVO vo;
 
     public StatusFragment() {
     }
@@ -82,7 +81,7 @@ public class StatusFragment extends Fragment {
                     try {
                         sendPost(vo.getMember_id());
                     } catch (Exception e) {
-                        Log.i("ErroR", e.toString());
+                        Log.i("Status Error", e.toString());
                     }
                 }
             };
@@ -91,10 +90,10 @@ public class StatusFragment extends Fragment {
             try {
                 wThread.join();
             } catch (Exception e) {
-                Log.i("msi", "이상이상22");
+                Log.i("Status Error", e.toString());
             }
         } catch (Exception e) {
-            Log.i("msi", e.toString());
+            Log.i("Status Error", e.toString());
         }
 
         double tire = Double.parseDouble(TIRE_CHANGE_DISTANCE);
@@ -174,7 +173,6 @@ public class StatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ReservationActivity.class);
-                Log.i("이름이름: ", vo.getMember_mname());
                 intent.putExtra("vo", vo);
                 startActivity(intent);
             }
@@ -219,9 +217,6 @@ public class StatusFragment extends Fragment {
         receivedata = response.toString();
         in.close();
 
-
-//        ArrayList<CarVO> myObject = mapper.readValue(receivedata, new TypeReference<ArrayList<CarVO>>() {
-//        });
         CarVO myObject = mapper.readValue(receivedata, new TypeReference<CarVO>() {
         });
 
@@ -233,7 +228,5 @@ public class StatusFragment extends Fragment {
 
         reserokdata = receivedata;
     }
-
-
 
 }

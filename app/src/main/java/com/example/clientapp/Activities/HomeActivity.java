@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clientapp.BackPressCloseHandler;
 import com.example.clientapp.R;
+import com.example.clientapp.RealService;
 import com.example.clientapp.VO.MemberVO;
 import com.example.clientapp.fragments.HistoryFragment;
 import com.example.clientapp.fragments.NotificationFragment;
@@ -26,12 +27,15 @@ import com.example.clientapp.fragments.SettingFragment;
 import com.example.clientapp.fragments.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.example.clientapp.RealService.serviceIntent;
+
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private BackPressCloseHandler backPressCloseHandler;
     private TextView actionbar_text;
     private MemberVO vo;
     private ImageButton logoutBtn;
+    private Intent serviceIntent = RealService.serviceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,14 @@ public class HomeActivity extends AppCompatActivity {
         logoutBtn = (ImageButton) findViewById(R.id.logoutBtn);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(listener);
+
+        if (RealService.serviceIntent==null) {
+            serviceIntent = new Intent(HomeActivity.this, RealService.class);
+            startService(serviceIntent);
+        } else {
+            serviceIntent = RealService.serviceIntent;
+//            Toast.makeText(getApplicationContext(), "already", Toast.LENGTH_LONG).show();
+        }
 
         Intent i = getIntent();
         vo = i.getExtras().getParcelable("vo");
@@ -75,9 +87,10 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("myObject", "NO");
+                        editor.clear();
                         editor.commit();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        RealService.logoutIntent.putExtra("key","1");
+                        startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                         HomeActivity.this.finish();
                     }
                 });
@@ -131,5 +144,16 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (serviceIntent!=null) {
+            stopService(serviceIntent);
+            serviceIntent = null;
+        }
+
     }
 }

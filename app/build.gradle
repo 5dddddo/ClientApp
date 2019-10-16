@@ -36,4 +36,5 @@ dependencies {
     implementation files('libs/mysql-connector-java-5.1.29-bin.jar')
     implementation 'com.roughike:bottom-bar:2.3.1'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.google.code.gson:gson:2.3.1'
 }

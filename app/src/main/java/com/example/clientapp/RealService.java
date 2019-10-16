@@ -18,6 +18,8 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.example.clientapp.Activities.Main2Activity;
+import com.example.clientapp.VO.MemberVO;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -34,13 +36,21 @@ public class RealService extends Service {
     PrintWriter out;
     StringBuffer response = new StringBuffer();
     String msg;
+    public static Intent logoutIntent = new Intent();
     BlockingQueue blockingQueue = new ArrayBlockingQueue(10);
+
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default");
+    String alram ="";
+
+
+
     class ClientReceiveRunnable implements Runnable {
 
         Intent receiveIntent = new Intent();
 
         @Override
         public void run() {
+
             try {
                 try {
                     socket = new Socket("70.12.115.63", 6767);
@@ -51,12 +61,13 @@ public class RealService extends Service {
                     Log.i("service", "서버 연결 실패 : " + e.toString());
                 }
 
-                out.println("MemberNO#" + msg);
+                out.println(msg);
                 Log.i("ads",msg);
                 out.flush();
                 String s = "";
 
                 while ((s = br.readLine()) != null) {
+                    alram = "";
                     Log.i("service", "서버로부터 받는 데이터 : " + s);
                     response.append(s);
                     if(s.contains("Key")){
@@ -65,13 +76,31 @@ public class RealService extends Service {
                         Log.i("keyValue", s);
                     }else if(s.equals("RequestChangeTire")){
                         Log.i("RealService",s);
+                        alram += "타이어, ";
                     }else if(s.equals("RequestChangeWiper")){
                         Log.i("RealService",s);
+                        alram += "와이퍼, ";
                     }else if(s.equals("RequestChangeCooler")){
                         Log.i("RealService",s);
+                        alram += "냉각수, ";
                     }else if(s.equals("RequestChangeEngineOil")){
                         Log.i("RealService",s);
+                        alram += "엔진오일, ";
                     }
+
+                    Log.i("keyValue", alram.length()+"");
+                    alram = alram.substring(0, alram.length()-2);
+                    alram += " 정비요망";
+                    builder.setSmallIcon(R.mipmap.ic_launcher);
+                    builder.setContentTitle("Chavis 알림");
+                    builder.setContentText(alram);
+
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                    }
+
+                    notificationManager.notify(1, builder.build());
                 }
             } catch (
                     Exception e) {
@@ -92,8 +121,21 @@ public class RealService extends Service {
 //        if(msg!=null) {
 //            msg = intent.getExtras().getString("mNo");
 //        }
+        Log.i("service","service실행");
+
+        logoutIntent.putExtra("key","0");
+
         SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
-        msg = preferences.getString("member_no", "");
+
+        Gson gson = new Gson();
+        String json = preferences.getString("myObject", "");
+        MemberVO memberVO = gson.fromJson(json, MemberVO.class);
+
+        Log.i("Service_SharedPref", memberVO.getMember_no()+"");
+        Log.i("Service_SharedPref", "로그인 객체 저장 성공34343");
+
+        Log.i("service",memberVO.getMember_no()+"");
+        msg = "MemberNO#" +memberVO.getMember_no()+"";
 
 
         ClientReceiveRunnable receiveRunnable = new ClientReceiveRunnable();
@@ -138,11 +180,33 @@ public class RealService extends Service {
     @Override public void onDestroy() {
         super.onDestroy();
         final Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, 3);
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent sender = PendingIntent.getBroadcast(this, 0,intent,0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+
+        if(logoutIntent.getExtras().get("key").toString().equals("1")){
+            try{
+                out.close();
+                br.close();
+                socket.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            serviceIntent = null;
+
+        }else if(logoutIntent.getExtras().get("key").toString().equals("0")) {
+
+            serviceIntent = null;
+            try{
+                out.close();
+                br.close();
+                socket.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.add(Calendar.SECOND, 3);
+            Intent intent = new Intent(this, AlarmReceiver.class);
+            PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, 0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+        }
     }
 }

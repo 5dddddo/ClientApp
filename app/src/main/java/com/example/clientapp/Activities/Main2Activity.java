@@ -1,6 +1,5 @@
 package com.example.clientapp.Activities;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -14,10 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clientapp.HttpUtils;
-import com.example.clientapp.PersistentService;
 import com.example.clientapp.R;
 import com.example.clientapp.RealService;
-import com.example.clientapp.RestartService;
 import com.example.clientapp.VO.MemberVO;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,8 +28,7 @@ import java.util.Map;
 public class Main2Activity extends AppCompatActivity {
 
     private Intent intent;
-    private RestartService restartService;
-    private Intent serviceIntent;
+
     String member_id;
     String member_pw;
     String res = null;
@@ -65,7 +61,7 @@ public class Main2Activity extends AppCompatActivity {
                                 String url = "http://70.12.115.73:9090/Chavis/Member/login.do";
                                 HttpUtils http = new HttpUtils(HttpUtils.POST, map, url, getApplicationContext());
                                 res = http.request();
-                                Log.i("dlakfjalekjf;qiwejf", res);
+                                Log.i("dlakfjalekjf", res);
                             } catch (Exception e) {
                                 Log.i("MemberLoginError", e.toString());
                             }
@@ -80,24 +76,14 @@ public class Main2Activity extends AppCompatActivity {
                         if (vo.getCode().equals("200")) {
 
 
-                            if (RealService.serviceIntent==null) {
-                                serviceIntent = new Intent(Main2Activity.this, RealService.class);
-//                                serviceIntent.putExtra("mNo",vo.getMember_no()+"");
-                                startService(serviceIntent);
-                            } else {
-                                serviceIntent = RealService.serviceIntent;//getInstance().getApplication();
-                                Toast.makeText(getApplicationContext(), "already", Toast.LENGTH_LONG).show();
-                            }
-
                             // 자동 로그인 등록
                             SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();
 
                             editor.putString("myObject", res);
-                            editor.putString("member_no", Integer.toString(vo.getMember_no()));
-                            editor.commit();
-                            Log.i("LOGIN_ADD_SharedPref", "로그인 객체 저장 성공");
+//                            editor.putString("member_no", Integer.toString(vo.getMember_no()));
 
+                            editor.commit();
 
 
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
@@ -151,24 +137,8 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (serviceIntent!=null) {
-            stopService(serviceIntent);
-            serviceIntent = null;
-        }
 
-    }
 
-    private void initData() {
-
-        //리스타트 서비스 생성
-        restartService = new RestartService();
-        intent = new Intent(Main2Activity.this, RealService.class);
-        intent.putExtra("mNo", vo.getMember_no() + "");
-        IntentFilter intentFilter = new IntentFilter("com.example.clientapp.RealService");
-        //브로드 캐스트에 등록
-        registerReceiver(restartService, intentFilter);
-        // 서비스 시작
-        startService(intent);
     }
 
 }
