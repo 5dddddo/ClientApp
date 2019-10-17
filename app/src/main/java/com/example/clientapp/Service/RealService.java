@@ -74,33 +74,50 @@ public class RealService extends Service {
                         out.println(s);
                         out.flush();
                         Log.i("keyValue", s);
-                    } else if (s.equals("RequestChangeTire")) {
-                        Log.i("RealService", s);
-                        alram += "타이어, ";
-                    } else if (s.equals("RequestChangeWiper")) {
-                        Log.i("RealService", s);
-                        alram += "와이퍼, ";
-                    } else if (s.equals("RequestChangeCooler")) {
-                        Log.i("RealService", s);
-                        alram += "냉각수, ";
-                    } else if (s.equals("RequestChangeEngineOil")) {
-                        Log.i("RealService", s);
-                        alram += "엔진오일, ";
+                    } else if(s.contains("Request")) {
+                        if (s.equals("RequestChangeTire")) {
+                            Log.i("RealService", s);
+                            alram += "타이어, ";
+                        }
+                        if (s.equals("RequestChangeWiper")) {
+                            Log.i("RealService", s);
+                            alram += "와이퍼, ";
+                        }
+                        if (s.equals("RequestChangeCooler")) {
+                            Log.i("RealService", s);
+                            alram += "냉각수, ";
+                        }
+                        if (s.equals("RequestChangeEngineOil")) {
+                            Log.i("RealService", s);
+                            alram += "엔진오일, ";
+                        }
+
+                        Log.i("keyValue", alram.length() + "");
+                        alram = alram.substring(0, alram.length() - 2);
+                        alram += " 정비요망";
+                        builder.setSmallIcon(R.mipmap.appicon1_round);
+                        builder.setContentTitle("Chavis 알림");
+                        builder.setContentText(alram);
+
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        }
+
+                        notificationManager.notify(1, builder.build());
                     }
+                    else if(s.equals("RepairSuccess")){
 
-                    Log.i("keyValue", alram.length() + "");
-                    alram = alram.substring(0, alram.length() - 2);
-                    alram += " 정비요망";
-                    builder.setSmallIcon(R.mipmap.appicon1_round);
-                    builder.setContentTitle("Chavis 알림");
-                    builder.setContentText(alram);
+                        builder.setContentTitle("Chavis 알림");
+                        builder.setContentText("정비가 완료 되었습니다.");
 
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        }
+
+                        notificationManager.notify(1, builder.build());
                     }
-
-                    notificationManager.notify(1, builder.build());
                 }
             } catch (
                     Exception e) {

@@ -242,7 +242,7 @@ public class ReservationActivity extends AppCompatActivity {
 
         String res ="";
         Map<String, String> map = new HashMap<String, String>();
-        String url = "http://70.12.115.73:9090/Chavis/Reservation/add2.do";    // 한석햄22
+        String url = "http://70.12.115.73:9090/Chavis/Reservation/add.do";    // 한석햄22
 
         if (checkBox.isChecked()) {
             otpkey = "YES";

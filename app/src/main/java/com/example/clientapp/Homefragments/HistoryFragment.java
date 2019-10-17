@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -83,33 +84,42 @@ public class HistoryFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
                     RepairedListVO vo = data.get(position);
-                    List<String> ListItems = new ArrayList<>();
 
+                    LayoutInflater inflater=getLayoutInflater();
+                    final View dialogView= inflater.inflate(R.layout.dialog_item, null);
                     androidx.appcompat.app.AlertDialog.Builder dialog =
                             new androidx.appcompat.app.AlertDialog.Builder(getContext());
                     dialog.setTitle("정비 예약 세부 내역");
-                    ListItems.add("예약 번호  :  " + vo.getReservation_no());
-                    ListItems.add("정비소 이름  :  " + vo.getBodyshop_name());
-                    ListItems.add("정비 예약 시간  :  " + vo.getReservation_time());
-                    ListItems.add("KEY 동의 여부  :  " + (vo.getKey().equals("1") ? "O" : "X"));
+                    dialog.setIcon(R.drawable.repaird_list);
+
+                    dialog.setView(dialogView);
+
+                    TextView d_reser_bname = (TextView) dialogView.findViewById(R.id.d_reser_bname);
+                    TextView d_reser_time = (TextView) dialogView.findViewById(R.id.d_reser_time);
+                    TextView d_reser_key = (TextView) dialogView.findViewById(R.id.d_reser_key);
+                    TextView d_repaired_time = (TextView) dialogView.findViewById(R.id.d_repaired_time);
+                    TextView d_person = (TextView) dialogView.findViewById(R.id.d_person);
+                    TextView d_list = (TextView) dialogView.findViewById(R.id.d_list);
+
+                    d_reser_bname.setText("정비소 이름  :  " + vo.getBodyshop_name());
+                    d_reser_time.setText("정비 예약 시간  :  " + vo.getReservation_time() );
+                    d_reser_key.setText("KEY 동의 여부  :  " + vo.getKey());
+
 
                     if (vo.getTire() == null) {
-                        ListItems.add("정비 중");
+                        d_repaired_time.setText("정비 중");
+                        d_repaired_time.setTextColor(getResources().getColor(R.color.progressred));
+                        d_person.setVisibility(View.GONE);
+                        d_list.setVisibility(View.GONE);
                     } else {
+                        String aaaaaaa = vo.getRepaired_time();
+                        Log.i("asdasasdas", aaaaaaa);
+                        d_repaired_time.setText("정비 완료 시간  :  " + aaaaaaa);
+                        d_person.setText("담당 정비사  :  " + vo.getRepaired_person());
                         String a[] = {vo.getTire(), vo.getCooler(), vo.getEngine_oil(), vo.getWiper()};
-                        ListItems.add("정비 완료 시간  :  " + vo.getRepaired_time());
-                        ListItems.add("담당 정비사  :  " + vo.getRepaired_person());
                         String s = CheckRepairedList(a);
-                        ListItems.add("정비 내역 : " + s);
+                        d_list.setText("정비 내역  :  " + s);
                     }
-
-                    final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
-
-                    dialog.setItems(items, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int pos) {
-                            return;
-                        }
-                    });
 
                     dialog.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
                         @Override

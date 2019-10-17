@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="정비소 이름"
+            android:id="@+id/d_reser_bname"
+            android:textSize="14sp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="정비예약시간"
+            android:id="@+id/d_reser_time"
+            android:textSize="14sp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="키 동의"
+            android:id="@+id/d_reser_key"
+            android:textSize="14sp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="정비완료시간"
+            android:id="@+id/d_repaired_time"
+            android:textSize="14sp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="담당정비사"
+            android:id="@+id/d_person"
+            android:textSize="14sp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="정비 내역"
+            android:lineSpacingMultiplier="1.5"
+            android:id="@+id/d_list"
+            android:textSize="14sp"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

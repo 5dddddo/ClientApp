@@ -60,7 +60,7 @@ public class HistoryListViewAdapter extends BaseAdapter {
         RepairedListVO vo = list.get(i);    // 화면에 출력할 데이터를 가져와요!
 
         try {
-            tv1.setText(" " + vo.getReservation_no());
+            tv1.setText(" " + vo.getBodyshop_name());
             tv2.setText(" " + vo.getReservation_time().substring(0, 11));
 
             if (vo.getRepaired_time() == null || vo.getRepaired_time().equals("0") || vo.getRepaired_time().equals("NO")) {
